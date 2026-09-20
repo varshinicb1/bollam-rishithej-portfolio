@@ -24,3 +24,7 @@ venv/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Personal Executive PDF Dossiers (Confidential)
+*.pdf
+

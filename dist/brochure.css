@@ -543,11 +543,19 @@ body {
   font-weight: 600;
 }
 
-/* Print Styles for Billionaire-Grade PDF Monograph */
+/* Print Styles — Preserves the Exact Dark Obsidian Website Design */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
   body {
-    background: #ffffff !important;
-    color: #05070a !important;
+    background: #05070a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .dossier-bar,
@@ -566,13 +574,17 @@ body {
     min-height: 100vh !important;
     height: 100vh !important;
     padding: 3rem 4vw !important;
-    background: #ffffff !important;
-    color: #05070a !important;
+    background: #05070a !important;
+    color: #ffffff !important;
     border-bottom: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .dossier-page:nth-child(even) {
-    background: #ffffff !important;
+    background: #07090f !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .page-primary-content h2,
@@ -580,52 +592,64 @@ body {
   .company-title-meta h3,
   .spec-card h4,
   .profile-overview-quote {
-    color: #05070a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .cover-title-wrap h1 em {
-    color: #05070a !important;
-    -webkit-text-stroke: 0 !important;
+    color: transparent !important;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85) !important;
   }
 
   .cover-subtitle,
   .page-primary-content .lead-thesis,
   .prose-block,
   .spec-card p {
-    color: #334155 !important;
+    color: #cbd5e1 !important;
   }
 
   .page-serial,
   .spec-card-num,
   .company-title-meta span {
-    color: #047857 !important;
+    color: #c6ff35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .spec-card,
   .institutional-panel {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
+    background: #090c12 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .cover-callout-box {
-    background: #f1f5f9 !important;
-    border-left-color: #047857 !important;
+    background: rgba(198, 255, 53, 0.05) !important;
+    border-left: 3px solid #c6ff35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .cover-callout-box p {
-    color: #05070a !important;
+    color: #ffffff !important;
   }
 
   .dossier-pill {
-    background: #f1f5f9 !important;
-    border-color: #cbd5e1 !important;
-    color: #0f172a !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #e2e8f0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .dossier-pill.highlight {
-    background: #ecfdf5 !important;
-    border-color: #a7f3d0 !important;
-    color: #065f46 !important;
+    background: rgba(198, 255, 53, 0.08) !important;
+    border-color: rgba(198, 255, 53, 0.35) !important;
+    color: #c6ff35 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
 

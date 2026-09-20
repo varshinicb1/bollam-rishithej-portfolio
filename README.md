@@ -4,7 +4,6 @@ Institutional personal portfolio, venture platform, and executive monograph for 
 
 🌐 **Live Portfolio:** [https://bollam-rishithej.pages.dev/](https://bollam-rishithej.pages.dev/)  
 📑 **Executive Monograph (Web):** [https://bollam-rishithej.pages.dev/brochure.html](https://bollam-rishithej.pages.dev/brochure.html)  
-📄 **Executive Monograph (PDF):** [https://bollam-rishithej.pages.dev/bollam-rishithej-executive-dossier.pdf](https://bollam-rishithej.pages.dev/bollam-rishithej-executive-dossier.pdf)  
 💼 **Verified LinkedIn:** [https://www.linkedin.com/in/rishithej-bollam-5b7638362/](https://www.linkedin.com/in/rishithej-bollam-5b7638362/)
 
 ---
@@ -72,7 +71,7 @@ python -m http.server 8080 --directory dist
 npx serve dist
 ```
 
-### Regenerate 10-Page Monograph PDF
+### Regenerate Personal Executive Brochure PDF
 ```bash
 python -c "
 import os
@@ -83,8 +82,8 @@ with sync_playwright() as p:
     page = browser.new_page()
     file_uri = 'file:///' + os.path.abspath('dist/brochure.html').replace('\\', '/')
     page.goto(file_uri, wait_until='networkidle')
-    page.pdf(path='dist/bollam-rishithej-executive-dossier.pdf', format='A4', print_background=True)
-    print('PDF compiled successfully')
+    page.pdf(path='Bollam_Rishithej_Executive_Brochure.pdf', format='A4', print_background=True)
+    print('Personal PDF compiled successfully')
     browser.close()
 "
 ```

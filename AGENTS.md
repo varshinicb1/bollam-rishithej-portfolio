@@ -14,7 +14,6 @@ This project is the flagship institutional web presence, venture portfolio, and 
 - **Overarching Vision:** *"Build the best startup ecosystem in India and build for the world from India."*
 - **Official Portfolio URL:** `https://bollam-rishithej.pages.dev/`
 - **Official Brochure / Dossier URL:** `https://bollam-rishithej.pages.dev/brochure.html`
-- **Compiled PDF URL:** `https://bollam-rishithej.pages.dev/bollam-rishithej-executive-dossier.pdf`
 - **Verified LinkedIn Profile:** `https://www.linkedin.com/in/rishithej-bollam-5b7638362/`
 - **Official Communications:** `rishi@mldynamic.com` &bull; `rishithej@firstsecure.ai`
 
@@ -94,9 +93,9 @@ When referencing or modifying any company details, **ALWAYS** preserve these exa
 │   ├── script.js                  # Accessible animations, Command Palette (CMD K), acoustics
 │   ├── brochure.html              # 10-page Institutional Executive Dossier & Monograph
 │   ├── brochure.css               # Brochure styling and print/PDF layout rules (@media print)
-│   ├── bollam-rishithej-executive-dossier.pdf # Pre-compiled 10-page PDF
 │   ├── robots.txt                 # Search engine directives
 │   └── sitemap.xml                # Canonical sitemap
+├── Bollam_Rishithej_Executive_Brochure.pdf # Personal compiled executive brochure (not public)
 ├── AGENTS.md                      # This specification file for AI coding agents
 ├── CLAUDE.md                      # Instructions for Claude Code / Anthropic agents
 ├── .cursorrules                   # Rules file for Cursor IDE
@@ -158,7 +157,7 @@ with sync_playwright() as p:
 "
 ```
 
-### Regenerating the 10-Page PDF Monograph
+### Regenerating the Personal Executive Brochure PDF
 ```bash
 python -c "
 import os
@@ -169,8 +168,8 @@ with sync_playwright() as p:
     page = browser.new_page()
     file_uri = 'file:///' + os.path.abspath('dist/brochure.html').replace('\\', '/')
     page.goto(file_uri, wait_until='networkidle')
-    page.pdf(path='dist/bollam-rishithej-executive-dossier.pdf', format='A4', print_background=True)
-    print('PDF compiled successfully')
+    page.pdf(path='Bollam_Rishithej_Executive_Brochure.pdf', format='A4', print_background=True)
+    print('Personal brochure PDF compiled successfully')
     browser.close()
 "
 ```
