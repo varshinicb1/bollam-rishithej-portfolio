@@ -122,75 +122,179 @@ body.nav-open {
   box-shadow: 0 0 6px var(--acid);
 }
 
-/* Nav HUD: Live IST Time & Location */
+/* Nav HUD: Removed from header per executive design */
 .nav-hud {
+  display: none !important;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.menu:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.menu span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: white;
+  margin: 3px 0;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav.open .menu {
+  background: rgba(198, 255, 53, 0.15);
+  border-color: var(--acid);
+}
+
+/* Full-Screen Luxury Architectural Drawer (Unified Desktop & Mobile) */
+.nav nav {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  background: rgba(5, 7, 10, 0.97);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  padding: 24px 5vw max(24px, env(safe-area-inset-bottom));
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 9999;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: mobileNavFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav.open nav {
+  display: flex;
+}
+
+@keyframes mobileNavFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.mobile-nav-top {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font: 400 11px/1 'DM Mono', monospace;
-  letter-spacing: 0.12em;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mobile-nav-hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 11px 'DM Mono', monospace;
+  letter-spacing: 0.08em;
   color: #94a3b8;
 }
 
-.pulse-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--acid);
+.mobile-hud-time {
+  color: var(--acid);
+}
+
+.mobile-close-btn {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--acid);
-  animation: pulseGlow 2s ease-in-out infinite;
-  vertical-align: middle;
-  margin-right: 5px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.8); }
+.mobile-close-btn:hover {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--acid);
 }
 
-.nav nav {
+.mobile-nav-links {
   display: flex;
-  gap: 32px;
+  flex-direction: column;
+  gap: 8px;
+  margin: 24px auto;
+  max-width: 960px;
+  width: 100%;
 }
 
-.mobile-nav-top,
-.mobile-nav-actions,
-.mobile-nav-footer {
-  display: none;
-}
-
-.nav nav a,
-.contact-link,
-.secondary-link,
-footer a {
-  color: inherit;
+.mobile-nav-links .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 700 clamp(1.4rem, 4vw, 2.4rem) 'Syne', sans-serif;
+  color: #f1efe9;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  text-transform: none;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
-.nav nav a {
-  font: 400 12px 'DM Mono', monospace;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #94a3b8;
-  position: relative;
-  padding: 4px 0;
-  transition: color 0.2s;
+.mobile-nav-links .nav-link:hover,
+.mobile-nav-links .nav-link.active {
+  background: rgba(198, 255, 53, 0.08);
+  border-color: rgba(198, 255, 53, 0.25);
+  color: var(--acid);
 }
 
-.nav nav a:hover,
-.nav nav a.active {
-  color: #fff;
+.nav-idx {
+  font: 400 11px 'DM Mono', monospace;
+  color: var(--acid);
+  background: rgba(198, 255, 53, 0.1);
+  border: 1px solid rgba(198, 255, 53, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
 }
 
-.nav nav a.active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 1.5px;
-  background: var(--acid);
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mobile-nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font: 400 11px 'DM Mono', monospace;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .nav-actions {
@@ -199,34 +303,8 @@ footer a {
   gap: 10px;
 }
 
-/* Command Menu Trigger Button (Desktop) */
 .cmd-trigger {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #cbd5e1;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font: 500 11px 'DM Mono', monospace;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
-}
-
-.cmd-trigger:hover {
-  background: rgba(198, 255, 53, 0.12);
-  border-color: var(--acid);
-  color: var(--acid);
-  transform: translateY(-1px);
-}
-
-.cmd-badge {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 5px;
-  border-radius: 3px;
-  font-size: 10px;
+  display: none !important;
 }
 
 /* Sound Experience Toggle */
@@ -279,20 +357,7 @@ footer a {
 }
 
 .menu {
-  display: none;
-  background: none;
-  border: 0;
-  padding: 12px;
-  cursor: pointer;
-}
-
-.menu span {
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: white;
-  margin: 6px;
-  transition: transform 0.2s;
+  display: flex;
 }
 
 /* Hero Section */
