@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Aditya Trading Global Commerce Mark -->
+  <defs>
+    <linearGradient id="adityaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7e5f"/>
+      <stop offset="100%" stop-color="#feb47b"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" fill="rgba(255, 126, 95, 0.05)"/>
+  <circle cx="50" cy="46" r="24" stroke="url(#adityaGrad)" stroke-width="2.5"/>
+  <ellipse cx="50" cy="46" rx="12" ry="24" stroke="url(#adityaGrad)" stroke-width="1.8"/>
+  <line x1="26" y1="46" x2="74" y2="46" stroke="url(#adityaGrad)" stroke-width="1.8"/>
+  <path d="M40 38 L50 28 L60 38 M60 54 L50 64 L40 54" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="50" y="88" font-family="'DM Mono', monospace" font-size="8.5" fill="#feb47b" text-anchor="middle" letter-spacing="1">ADITYA</text>
+</svg>

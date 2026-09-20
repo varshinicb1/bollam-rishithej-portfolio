@@ -1,0 +1,649 @@
+/* ==========================================================================
+   BOLLAM RISHITHEJ — EXECUTIVE DOSSIER & VENTURE MONOGRAPH
+   Design System: Syne Display + DM Mono + Manrope Executive
+   Palette: #05070a / #c6ff35 / #ffffff / #0e121c / #161b26
+   ========================================================================== */
+
+:root {
+  --ink: #05070a;
+  --ink-card: #090c12;
+  --ink-surface: #0f131d;
+  --paper: #f1efe9;
+  --acid: #c6ff35;
+  --blue: #071b44;
+  --cyan: #00f2fe;
+  --orange: #f07818;
+  --red: #e53e0e;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --muted: #8e95a5;
+  --body-text: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+  color: #fff;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--ink);
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Subtle Film Grain */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Institutional Dossier Top Bar */
+.dossier-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(5, 7, 10, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4vw;
+  z-index: 1000;
+}
+
+.bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.bar-mark {
+  font: 800 16px 'Syne', sans-serif;
+  letter-spacing: -0.04em;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bar-tag {
+  font: 500 11px 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-dossier {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font: 500 12px 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-dossier:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-dossier.primary {
+  background: var(--acid);
+  color: var(--ink);
+  font-weight: 700;
+  border-color: var(--acid);
+}
+
+.btn-dossier.primary:hover {
+  background: #d4ff59;
+  transform: translateY(-1px);
+}
+
+/* Dossier Main Container */
+.dossier-main {
+  margin-top: 64px;
+}
+
+/* Monograph Page Unit */
+.dossier-page {
+  min-height: 100vh;
+  padding: 7rem 6vw 6rem;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.dossier-page:nth-child(even) {
+  background: #07090f;
+}
+
+/* Page Header Meta */
+.page-meta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.2rem;
+  margin-bottom: 3.5rem;
+}
+
+.page-serial {
+  font: 500 12px 'DM Mono', monospace;
+  letter-spacing: 0.16em;
+  color: var(--acid);
+  text-transform: uppercase;
+}
+
+.page-classification {
+  font: 400 11px 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Page Footer Meta */
+.page-meta-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 1.2rem;
+  margin-top: 4rem;
+  font: 400 11px 'DM Mono', monospace;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* Page 1: Cover Dossier */
+.cover-hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+.cover-title-wrap h1 {
+  font: 800 clamp(3.8rem, 8vw, 8.5rem)/0.88 'Syne', sans-serif;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.cover-title-wrap h1 em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.cover-subtitle {
+  font: 400 clamp(1.1rem, 1.8vw, 1.45rem)/1.5 'Manrope', sans-serif;
+  color: #cbd5e1;
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.cover-callout-box {
+  background: rgba(198, 255, 53, 0.05);
+  border-left: 3px solid var(--acid);
+  padding: 1.4rem 1.8rem;
+  border-radius: 0 4px 4px 0;
+  max-width: 620px;
+}
+
+.cover-callout-box p {
+  font: 600 1.15rem/1.55 'Syne', sans-serif;
+  color: #fff;
+}
+
+.cover-callout-box span {
+  display: block;
+  margin-top: 6px;
+  font: 400 11px 'DM Mono', monospace;
+  color: var(--acid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cover-portrait-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.cover-portrait-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.cover-portrait-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.cover-portrait-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(5, 7, 10, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: 500 10px 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  color: var(--acid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-dot-green {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 8px var(--acid);
+}
+
+/* Monograph Page Body Grids */
+.page-body-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 5vw;
+  align-items: start;
+  flex: 1;
+}
+
+.page-body-grid.reverse {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+
+.page-primary-content h2 {
+  font: 700 clamp(2.8rem, 5vw, 4.8rem)/0.96 'Syne', sans-serif;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.page-primary-content .lead-thesis {
+  font: 500 clamp(1.15rem, 1.6vw, 1.35rem)/1.6 'Manrope', sans-serif;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.company-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 1.5rem;
+}
+
+.company-emblem {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.company-emblem.wide {
+  width: auto;
+  height: 38px;
+  max-width: 220px;
+}
+
+.company-title-meta h3 {
+  font: 700 1.8rem 'Syne', sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #fff;
+}
+
+.company-title-meta span {
+  font: 500 12px 'DM Mono', monospace;
+  color: var(--acid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dossier-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.dossier-pill {
+  font: 500 11px 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+}
+
+.dossier-pill.highlight {
+  background: rgba(198, 255, 53, 0.08);
+  border-color: rgba(198, 255, 53, 0.35);
+  color: var(--acid);
+}
+
+/* Structured Spec Cards */
+.spec-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.spec-card {
+  background: var(--ink-card);
+  border: 1px solid var(--line);
+  padding: 1.6rem;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spec-card-num {
+  font: 700 11px 'DM Mono', monospace;
+  color: var(--acid);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.spec-card h4 {
+  font: 600 1.15rem 'Syne', sans-serif;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+
+.spec-card p {
+  font: 400 0.92rem/1.6 'Manrope', sans-serif;
+  color: var(--muted);
+}
+
+/* Institutional Side Panel */
+.institutional-panel {
+  background: var(--ink-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 2.2rem;
+}
+
+.institutional-panel h4 {
+  font: 700 13px 'DM Mono', monospace;
+  letter-spacing: 0.16em;
+  color: var(--acid);
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.8rem;
+}
+
+.meta-spec-list {
+  list-style: none;
+}
+
+.meta-spec-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.92rem;
+}
+
+.meta-spec-list li:last-child {
+  border-bottom: none;
+}
+
+.meta-spec-list .spec-label {
+  color: var(--muted);
+  font: 400 12px 'DM Mono', monospace;
+}
+
+.meta-spec-list .spec-value {
+  color: #fff;
+  font-weight: 600;
+  text-align: right;
+}
+
+.panel-highlight-box {
+  margin-top: 1.8rem;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.panel-highlight-box strong {
+  font: 600 12px 'DM Mono', monospace;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.panel-highlight-box p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Table of Industrial Ventures */
+.industrial-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.industrial-table th {
+  text-align: left;
+  font: 500 11px 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  color: var(--acid);
+  text-transform: uppercase;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.industrial-table td {
+  padding: 1.4rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.industrial-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-brand-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 600 1.05rem 'Syne', sans-serif;
+  color: #fff;
+}
+
+.table-brand-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Page 2: Executive Profile & Mindset */
+.profile-overview-quote {
+  font: italic 700 clamp(1.4rem, 2.2vw, 2.1rem)/1.4 'Syne', sans-serif;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  border-left: 3px solid var(--acid);
+  padding-left: 1.5rem;
+}
+
+.prose-block {
+  font: 400 1.05rem/1.8 'Manrope', sans-serif;
+  color: var(--body-text);
+  margin-bottom: 1.8rem;
+}
+
+.prose-block strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Print Styles for Billionaire-Grade PDF Monograph */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #05070a !important;
+  }
+
+  .dossier-bar,
+  .grain,
+  .no-print {
+    display: none !important;
+  }
+
+  .dossier-main {
+    margin-top: 0 !important;
+  }
+
+  .dossier-page {
+    page-break-after: always !important;
+    break-after: page !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding: 3rem 4vw !important;
+    background: #ffffff !important;
+    color: #05070a !important;
+    border-bottom: none !important;
+  }
+
+  .dossier-page:nth-child(even) {
+    background: #ffffff !important;
+  }
+
+  .page-primary-content h2,
+  .cover-title-wrap h1,
+  .company-title-meta h3,
+  .spec-card h4,
+  .profile-overview-quote {
+    color: #05070a !important;
+  }
+
+  .cover-title-wrap h1 em {
+    color: #05070a !important;
+    -webkit-text-stroke: 0 !important;
+  }
+
+  .cover-subtitle,
+  .page-primary-content .lead-thesis,
+  .prose-block,
+  .spec-card p {
+    color: #334155 !important;
+  }
+
+  .page-serial,
+  .spec-card-num,
+  .company-title-meta span {
+    color: #047857 !important;
+  }
+
+  .spec-card,
+  .institutional-panel {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .cover-callout-box {
+    background: #f1f5f9 !important;
+    border-left-color: #047857 !important;
+  }
+
+  .cover-callout-box p {
+    color: #05070a !important;
+  }
+
+  .dossier-pill {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  .dossier-pill.highlight {
+    background: #ecfdf5 !important;
+    border-color: #a7f3d0 !important;
+    color: #065f46 !important;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .page-body-grid,
+  .cover-hero {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .dossier-page {
+    padding: 6rem 5vw 4rem;
+    height: auto;
+    min-height: auto;
+  }
+
+  .spec-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

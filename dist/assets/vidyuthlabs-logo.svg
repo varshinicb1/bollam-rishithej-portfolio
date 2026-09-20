@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="vArmLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+    <linearGradient id="vArmRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6a11cb"/>
+      <stop offset="100%" stop-color="#2575fc"/>
+    </linearGradient>
+    <linearGradient id="vCoreNode" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <filter id="vGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00f2fe" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Left Precision Electrode Arm -->
+  <path d="M7 10L21 38H27L13 10H7Z" fill="url(#vArmLeft)" filter="url(#vGlow)"/>
+
+  <!-- Right Geometric Sensing Arm (interlocking cantilever) -->
+  <path d="M41 10L27 38H21L35 10H41Z" fill="url(#vArmRight)"/>
+
+  <!-- Center Floating Electrochemical Pulse Point (Analytic Core) -->
+  <circle cx="24" cy="20" r="3.2" fill="url(#vCoreNode)"/>
+
+  <!-- Precision Sensor Wave Arc -->
+  <path d="M18 16C21.5 13 26.5 13 30 16" stroke="#00f2fe" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+</svg>

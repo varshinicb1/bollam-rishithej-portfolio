@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler Cache & Build Artifacts
+.wrangler/
+
+# Temporary frame extraction & test logs
+temp_3d_frames/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Local Environment & Secrets
+.env
+.env.local
+.env.*.local
+
+# Operating System Metadata
+.DS_Store
+Thumbs.db
+desktop.ini

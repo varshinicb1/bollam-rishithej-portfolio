@@ -1,0 +1,17 @@
+# Cursor Rules for Bollam Rishithej Portfolio & Executive Monograph
+
+Always refer to `AGENTS.md` for full project architecture and entity details.
+
+## Quick Guardrails:
+1. **NO EMOJIS:** Do not use emoji glyphs in the UI (no ⚡, 📋, ✉, ✓, etc.). Use SVGs or typographic glyphs (`↗`, `//`, `CMD K`).
+2. **Roles & Entities:**
+   - DenyFix.ai: Co-Founder (not venture).
+   - FirstSecure.ai: Co-Founder & CEO.
+   - Predictera: Co-Founder (DPIIT Recognized Startup).
+   - Vidyuthlabs: Co-Founder.
+   - ML Group / ML Dynamic: Founder & Managing Director (DPIIT Recognized Startup).
+   - CXOera: CEO.
+3. **LinkedIn URL:** Must remain `https://www.linkedin.com/in/rishithej-bollam-5b7638362/`.
+4. **Vision:** "Build the best startup ecosystem in India and build for the world from India."
+5. **Brochure Company Sequence:** Vidyuthlabs Technologies (Page 1 of companies), then Predictera (Page 2 of companies), FirstSecure.ai, DenyFix.ai, ML Group, CXOera.
+6. **Deployment:** Always deploy from `dist/` using `npx wrangler pages deploy dist --project-name=bollam-rishithej --branch=main`.
