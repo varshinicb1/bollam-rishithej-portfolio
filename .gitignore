@@ -28,3 +28,6 @@ desktop.ini
 # Personal Executive PDF Dossiers (Confidential)
 *.pdf
 
+
+# Responsive audit output (screenshots, reports, pre-redesign backups)
+.audit/

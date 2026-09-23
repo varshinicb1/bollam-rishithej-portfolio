@@ -35,17 +35,26 @@ Bollam Rishithej holds a **Master of Science in Advanced Mechanical Engineering 
 
 ## 🎨 Design System & Visual Architecture
 
-- **Color Palette:**
-  - Obsidian Ink: `#05070a`
-  - Card Surface: `#090c12`
-  - Editorial Paper: `#f1efe9`
-  - Volt Accent: `#c6ff35`
+The system is **"Monograph"** — light-first and editorial, modelled on a printed
+executive monograph rather than a dark product site. See `AGENTS.md` §2 for the
+binding specification.
+
+- **Color Palette** (semantic tokens; never hard-code a hex in a component):
+  - Monograph Paper: `#f4f2ec` — the default canvas
+  - Recessed Panel: `#e9e6dd` &bull; Raised Card: `#fbfaf7`
+  - Ink: `#0b0d11` &bull; Secondary: `#3f4550` &bull; Metadata: `#737a87`
+  - Volt Accent: `#c6ff35` — **dark contexts only**; on paper use `#46610d`
+  - Plate / Deep Ink: `#05070a` — dark blocks and photographic plates
+- **Dark blocks** opt in with `class="tone-dark"`, which re-declares the same
+  token names inverted. Components carry no dark-specific rules.
 - **Typography:**
-  - Display: `Syne` (600, 700, 800)
+  - Display: `Bodoni Moda` (400–900, italic) — headlines, numerals, pull-quotes
+  - Body & UI: `Archivo` (400, 500, 600, 700)
   - Monospace / Serials: `DM Mono` (400, 500)
-  - Editorial Prose: `Manrope` (400, 500, 600)
+  - No text computes below 12px at any viewport.
 - **Zero Informal Emojis:** The entire web presence strictly enforces zero emoji glyphs, utilizing clean inline vector SVGs or typographic marks (`↗`, `//`, `CMD K`).
-- **Seamless Blending:** Mathematical background blending ensuring studio photography integrates seamlessly into dark and light editorial backgrounds with zero visible border artifacts.
+- **Protected Photography:** Headlines never overprint a face. Every art-directed image anchors the subject with `object-position`; white-bordered plates multiply into paper and black-bordered plates sit on deep ink, so no border artifact is ever visible.
+- **Responsive:** Verified at 320–1920px with zero horizontal overflow and 44px minimum touch targets.
 
 ---
 

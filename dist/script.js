@@ -19,7 +19,20 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+      // A fast flick can move the viewport past an element between two
+      // observer callbacks. Because unobserve() runs on first intersection,
+      // anything skipped that way stays hidden for good — so sweep for
+      // stragglers that are already above the fold and reveal them.
+      reveals.forEach((el) => {
+        if (el.classList.contains('in')) return;
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('in');
+          observer.unobserve(el);
+        }
+      });
+      // threshold 0 so a single intersecting pixel counts; the negative bottom
+      // margin preserves the "rises into view" timing that 0.12 gave us.
+    }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
 
     reveals.forEach((el, index) => {
       el.style.transitionDelay = `${Math.min(index % 4, 3) * 80}ms`;

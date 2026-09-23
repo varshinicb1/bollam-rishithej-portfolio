@@ -33,39 +33,115 @@ When referencing or modifying any company details, **ALWAYS** preserve these exa
 
 ---
 
-## 2. Strict Design System & Brand Guardrails
+## 2. Strict Design System & Brand Guardrails — "MONOGRAPH"
 
-### Color Palette (Tokens)
+The system is **light-first and editorial**: a printed executive monograph, not a
+dark product site. Reference points are Pentagram annual reports and serious
+print monographs — large asymmetric display type, generous margins, hairline
+rules, and photography that is given room and never overprinted.
+
+### 2.1 Colour — semantic tokens only
+
+Colour is expressed as semantic tokens. **Never hard-code a hex inside a
+component.** Both `dist/styles.css` and `dist/brochure.css` declare this set.
+
 ```css
---ink: #05070a;          /* Deepest obsidian black */
---ink-card: #090c12;     /* Surface card tier 1 */
---ink-surface: #0f131d;  /* Surface card tier 2 */
---paper: #f1efe9;        /* Warm cream editorial paper */
---acid: #c6ff35;         /* Electric volt acid accent */
---line: rgba(255, 255, 255, 0.12);
---muted: #8e95a5;
---body-text: #cbd5e1;
+:root {
+  --paper:        #f4f2ec;   /* warm monograph paper — the default canvas */
+  --paper-sunk:   #e9e6dd;   /* recessed panel / alternating page stock */
+  --paper-raised: #fbfaf7;   /* raised card */
+  --ink:          #0b0d11;   /* primary text */
+  --ink-2:        #3f4550;   /* secondary text */
+  --ink-3:        #737a87;   /* metadata, captions */
+  --rule:         rgba(11, 13, 17, 0.16);
+  --rule-soft:    rgba(11, 13, 17, 0.08);
+
+  --acid:     #c6ff35;  /* accent — DARK CONTEXT ONLY */
+  --acid-ink: #46610d;  /* the accent, darkened for use on paper */
+  --ink-deep: #05070a;  /* canonical dark block / photographic plate */
+}
 ```
 
-### Typography System
-1. **Headings & Display:** `'Syne', sans-serif` (600, 700, 800) — Bold, architectural, authoritative.
-2. **Technical Accents, Metadata, Serials:** `'DM Mono', monospace` (400, 500) — High precision, terminal grade.
-3. **Body Copy & Longform Prose:** `'Manrope', sans-serif` (400, 500, 600) — Ultra-legible institutional editorial style.
+**The `.tone-dark` contract.** Dark blocks opt in with `class="tone-dark"`,
+which re-declares the *same token names* inverted (and resets `--acid-ink` back
+to full `--acid`). Components therefore need **no dark-specific rules of their
+own** — write one rule set against the tokens and it renders correctly on both
+grounds. In `brochure.css` the photographic plate classes
+(`.panel-photo-hero`, `.cover-portrait-frame`, `.panoramic-header-banner`)
+inherit the same inversion.
 
-### Non-Negotiable Styling Rules
-1. **ZERO INFORMAL EMOJIS:**
-   - **Never** introduce emojis (such as ⚡, 📋, ✉, 🚀, ✓, ✕, etc.) anywhere in user-facing code or templates.
-   - Use clean, inline SVG icons or precise typography symbols (`↗`, `//`, `•`, `CMD K`).
-2. **Studio Image Blending:**
-   - On `#story` / `.statement` (`--paper: #f1efe9`): Studio portrait backgrounds must blend seamlessly with `mix-blend-mode: multiply;`. The outer borders of `editorial-bw-*.webp` must be calibrated to pure white `rgb(255, 255, 255)` so multiplying against `#f1efe9` results in zero visible rectangular border.
-   - On `.closing` (`#000000` / `--ink`): Studio portrait borders for `portrait-navy-*.webp` must have their ambient background noise subtracted so edges reach absolute zero `rgb(0, 0, 0)`, eliminating any box cutoff on desktop and mobile.
-3. **Responsive Standards:**
-   - Desktop standard: 1440px+ viewport.
-   - Mobile standard: 390px / 412px / 480px.
-   - Zero horizontal scroll (`overflow-x: hidden`).
-   - Touch targets must be at least 44px on mobile viewports.
+**Accent discipline.** `--acid` on `--paper` measures roughly 1.5:1 and is
+unreadable. On paper the accent role is carried by ink, hairline rules, and
+`--acid-ink`. Reach for `--acid` only inside a dark block.
 
----
+### 2.2 Typography
+
+1. **Display — `'Bodoni Moda', serif`** (400–900, italic available). Headlines,
+   metric numerals, pull-quotes, the wordmark. Use `font-optical-sizing: auto`.
+   The italic is the emphasis device — never outline or hollow type.
+2. **Body & UI — `'Archivo', sans-serif`** (400/500/600/700). Prose, subheads,
+   buttons, labels.
+3. **Metadata & serials — `'DM Mono', monospace`** (400/500). Section slugs,
+   folios, reference codes, captions, pills, keyboard hints.
+
+Type is fluid via `clamp()` on tokens (`--t-display` … `--t-meta`). **No text
+may compute below 12px at any viewport** — `--t-meta` (13px) is the floor.
+
+### 2.3 Non-negotiable styling rules
+
+1. **ZERO INFORMAL EMOJIS.** Never introduce emojis (⚡ 📋 ✉ 🚀 ✓ ✕ etc.) into
+   user-facing code or templates. Use inline SVG or precise typographic
+   symbols (`↗`, `↑`, `↓`, `//`, `•`, `—`).
+2. **Photography is protected.**
+   - Headlines and badges never sit across a face. Copy goes beside or beneath
+     the image; overlay badges are confined to a corner clear of the subject.
+   - Every art-directed image sets `object-position` to anchor the face.
+     Brochure anchors are calibrated per asset (`.photo-ceremonial`,
+     `.photo-hero-half`, …) — do not retune them casually.
+   - `hero-half.*` is a **half portrait**: the subject occupies the right ~30%
+     of the frame. Narrow viewports crop horizontally to the face
+     (`aspect-ratio: 5/8; object-position: 100% 16%`); ≥900px restores the full
+     composition at 3/4.
+   - `editorial-bw-*` has pure-white borders and blends into paper with
+     `mix-blend-mode: multiply`. `portrait-navy-*` has pure-black borders and
+     must sit on `--ink-deep` (a `.tone-dark` block or a plate), never on paper.
+3. **`img { height: auto }` is mandatory.** Every `<img>` carries `width`/
+   `height` attributes, which map to presentational `height` declarations, and
+   `aspect-ratio` is ignored unless one axis is `auto`. Omit it and every
+   art-directed crop silently reverts to the intrinsic pixel height.
+4. **Global anchor reset required.** `a { color: inherit; text-decoration: none }`.
+   Without it, any link whose component rule omits `color` falls through to the
+   user-agent blue — this shipped previously on `.contact-link` and `footer a`.
+5. **`backdrop-filter` creates a containing block** for `position: fixed`
+   descendants. The header blur therefore lives on `.nav::before`, not on
+   `.nav`; putting it on `.nav` traps the mobile drawer inside the 76px bar.
+6. **State classes belong to specific elements.** `script.js` toggles `.open` on
+   the **header** (`.nav`), not on the inner `<nav>` — the drawer selector is
+   `.nav.open nav`.
+
+### 2.4 Responsive standards
+
+- Breakpoints: **560 / 620 / 720 / 768 / 900 / 1024 / 1280**. Layout is fluid
+  between them via `clamp()`; `--gutter: clamp(22px, 5.2vw, 88px)`.
+- Verified widths: **320, 360, 375, 390, 414, 480, 640, 768, 834, 1024, 1180,
+  1280, 1440, 1920**.
+- **Zero horizontal overflow** at every width. Verify with `overflow-x` forced
+  to `visible` — `overflow-x: hidden` on `body` clamps `scrollWidth` and will
+  hide genuine offenders from a naive check.
+- **Touch targets ≥ 44×44px.** Inline links inside running prose are the only
+  exemption (WCAG 2.5.8); a link that is a row's sole control is not.
+- Long URLs and handles must never break mid-token. Shorten the visible label
+  and keep the full `href`.
+- Data tables collapse to labelled records below 768px via `td[data-label]`.
+- `prefers-reduced-motion: reduce` must disable transforms, clip-path wipes and
+  the rotating seal, and force all `.reveal` content visible.
+
+### 2.5 Motion
+
+One restrained gesture per element. Content rises and fades in once; images
+wipe open with `clip-path` — a print-plate gesture. No parallax, no bouncing,
+no scattered micro-interactions. Hover translations are suppressed under
+`(hover: none), (pointer: coarse)` so they cannot stick after a tap.
 
 ## 3. Project Directory Structure
 

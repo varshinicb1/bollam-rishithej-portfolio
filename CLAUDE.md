@@ -20,5 +20,10 @@ This repository houses the personal portfolio, venture platform, and executive m
   - Company Page 5: ML Group & Capital
   - Company Page 6: CXOera
   - Followed by Industrial Assets (Akshara Bullion, Jenani Infra, Aditya Trading, RS Foods) and Executive Office.
-- **Design System:** Palette `#05070a`, `#c6ff35`, `#f1efe9`, `#cbd5e1`. Fonts: `Syne`, `DM Mono`, `Manrope`.
+- **Design System — "Monograph" (light-first, editorial):**
+  - Canvas is **paper**, not ink. `--paper #f4f2ec` / `--ink #0b0d11`. See `AGENTS.md` §2 for the full token set.
+  - `--acid #c6ff35` is a **dark-context accent only**. On paper it fails contrast (~1.5:1); use `--acid-ink #46610d` there. Never hard-code either — go through the token.
+  - Dark blocks are opted in with `class="tone-dark"`, which re-declares the same semantic tokens inverted. Do **not** write dark-specific component rules.
+  - Fonts: `Bodoni Moda` (display), `Archivo` (body/UI), `DM Mono` (metadata, serials).
+  - Photography is never overprinted with text, and faces are anchored with `object-position`.
 - **Deploy:** `npx wrangler pages deploy dist --project-name=bollam-rishithej --branch=main`.
