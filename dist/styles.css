@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ============================================================================
    BOLLAM RISHITHEJ — MONOGRAPH DESIGN SYSTEM
    Light-first editorial monograph. Warm paper, didone display, hairline rules,
@@ -321,7 +322,8 @@ p { text-wrap: pretty; }
 /* Long unbreakable strings (URLs, handles) must never spill the measure. */
 .contact-email-text,
 .timeline-body h3,
-.venture-card p {
+.venture-row h3,
+.row-detail p {
   overflow-wrap: break-word;
 }
 
@@ -1098,119 +1100,6 @@ p { text-wrap: pretty; }
   .venture-image img { aspect-ratio: 4 / 5; }
 }
 
-/* ---------------------------------------------------------------------------
-   12  VENTURE CARDS
-   ------------------------------------------------------------------------ */
-
-.venture-list {
-  padding-block: var(--section-y);
-  background: var(--ink-deep);
-}
-
-.venture-intro { margin-bottom: var(--stack-4); }
-
-.venture-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: clamp(16px, 2vw, 28px);
-}
-
-.venture-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--stack-2);
-  padding: clamp(24px, 3vw, 40px);
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 0.5s var(--ease-soft), transform 0.5s var(--ease),
-    background 0.5s var(--ease-soft);
-}
-
-.venture-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--acid);
-  background: var(--paper-sunk);
-}
-
-/* Retired as a coloured blob; kept as a hairline sweep so the markup hook and
-   the JS pointer tracking still work. */
-.card-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  /* script.js publishes --mouse-x / --mouse-y (px, card-relative). These names
-     must match it exactly or the spotlight silently pins to the card centre. */
-  background: radial-gradient(
-    260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(198, 255, 53, 0.13),
-    transparent 62%
-  );
-  transition: opacity 0.5s var(--ease-soft);
-}
-
-.venture-card:hover .card-glow { opacity: 1; }
-
-.card-top-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-}
-
-.card-top-meta span {
-  font: 400 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.14em;
-  color: var(--acid);
-}
-
-.venture-brand-logo {
-  width: auto;
-  height: 34px;
-  max-width: 140px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.card-gov-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 13px;
-  border: 1px solid rgba(198, 255, 53, 0.3);
-  border-radius: var(--radius-pill);
-  font: 400 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.1em;
-  color: var(--acid);
-}
-
-.gov-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--acid);
-}
-
-.venture-card h3 { color: var(--ink); }
-
-.venture-card p {
-  font-size: var(--t-small);
-  line-height: 1.65;
-  color: var(--ink-2);
-}
-
-.venture-card strong {
-  font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
 /* Visually hidden, still announced. Gives each repeated "Read dossier" link a
    unique accessible name instead of eight identical ones. */
 .sr-only {
@@ -1225,54 +1114,212 @@ p { text-wrap: pretty; }
   border: 0;
 }
 
-/* Dossier drill-down. The arrow travels on hover; the rule draws in from the
-   left rather than simply switching colour. */
-.venture-card .card-dossier-link {
+/* ---------------------------------------------------------------------------
+   12  VENTURE REGISTER
+   A register of holdings, not a grid of cards. A 3-column grid of bordered
+   boxes is the most templated pattern on the web, and it also abandoned the
+   monograph: company names fell back to the UI sans, the accent was spent on
+   every small label, and ragged card heights left dead voids. Here each
+   holding is a ruled row — display numeral, identity, then the account — which
+   is how an annual report sets the same information.
+   ------------------------------------------------------------------------ */
+
+.venture-list {
+  padding-block: var(--section-y);
+  background: var(--ink-deep);
+}
+
+.venture-intro { margin-bottom: var(--stack-4); }
+
+.venture-register {
+  border-top: 1px solid var(--rule);
+}
+
+.venture-row {
+  display: grid;
+  gap: var(--stack-2);
+  padding-block: clamp(26px, 3.6vw, 52px);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.5s var(--ease-soft);
+}
+
+/* --- Ledger numeral --- */
+.row-index {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink-3);
+  transition: color 0.4s var(--ease-soft);
+}
+
+/* --- Identity --- */
+.row-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Unboxed. The emblem-in-a-rounded-square was part of the templated look. */
+.row-logo {
+  width: auto;
+  height: 30px;
+  max-width: 132px;
+  margin-bottom: 4px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* The company name carries the monograph's display face, at size. This is the
+   single biggest reason the section now reads as designed rather than built. */
+.venture-row h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  transition: color 0.4s var(--ease-soft);
+}
+
+.row-role {
+  font: 500 var(--t-meta) / 1.4 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.row-sector {
+  font: 400 var(--t-meta) / 1.4 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* The accent is spent once per row, and only where it means something: a
+   government recognition. */
+.row-gov {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font: 400 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--acid);
+}
+
+.row-gov::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--acid);
+}
+
+/* --- Account --- */
+.row-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-2);
+  min-width: 0;
+}
+
+.row-detail p {
+  max-width: 54ch;
+  font-size: var(--t-body);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+}
+
+/* Rule draws in from the left on intent, rather than a colour swap. */
+.row-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: var(--tap);
-  margin-top: auto;
   font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--ink-3);
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
-  background-position: 0 calc(100% - 10px);
+  background-position: 0 calc(100% - 12px);
   background-size: 0% 1px;
-  transition: background-size 0.45s var(--ease), color 0.3s;
+  transition: background-size 0.45s var(--ease), color 0.35s var(--ease-soft);
 }
 
-.venture-card .card-dossier-link span[aria-hidden] {
-  transition: transform 0.45s var(--ease);
+.row-link.is-primary { color: var(--ink); }
+
+.row-link::after {
+  content: '→';
+  transition: transform 0.4s var(--ease);
 }
 
-.venture-card .card-dossier-link:hover,
-.venture-card .card-dossier-link:focus-visible {
+.row-link[target='_blank']::after { content: '↗'; }
+
+.row-link:hover,
+.row-link:focus-visible {
   color: var(--acid);
   background-size: 100% 1px;
 }
 
-.venture-card .card-dossier-link:hover span[aria-hidden] { transform: translateX(5px); }
+.row-link:hover::after { transform: translateX(4px); }
 
-/* Card link — padded to a full tap target and underlined on its own baseline. */
-.venture-card a:not(.card-dossier-link) {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: var(--tap);
-  margin-top: auto;
-  padding-top: 4px;
-  font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--acid);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
+/* --- Row state --- */
+@media (hover: hover) and (pointer: fine) {
+  .venture-row:hover { background: rgba(244, 242, 236, 0.03); }
+  .venture-row:hover .row-index { color: var(--acid); }
 }
 
-.venture-card a:not(.card-dossier-link):hover { border-bottom-color: var(--acid); }
+/* The sole s.203 KMP office is the one holding with statutory weight, so it is
+   the only row given any promotion — a rule, not a colour. */
+.venture-row.is-principal { border-left: 2px solid var(--acid); }
+
+@media (min-width: 720px) {
+  .venture-row.is-principal {
+    border-left: none;
+    box-shadow: inset 2px 0 0 var(--acid);
+  }
+}
+
+/* --- Register grid --- */
+@media (min-width: 720px) {
+  .venture-row {
+    grid-template-columns: clamp(46px, 5vw, 78px) minmax(0, 1fr);
+    column-gap: clamp(16px, 2.4vw, 32px);
+    padding-left: clamp(14px, 1.6vw, 24px);
+  }
+
+}
+
+/* Three children, two columns. Without this the account auto-places into row 2
+   COLUMN 1 — the 46px numeral gutter — and renders as a 46px-wide ribbon of
+   text roughly 600px tall. Scoped to the two-column band only: at 1024 there
+   is a real third column and this rule would drag the account back out of it. */
+@media (min-width: 720px) and (max-width: 1023.98px) {
+  .row-detail { grid-column: 2; }
+}
+
+@media (min-width: 1024px) {
+  .venture-row {
+    grid-template-columns:
+      clamp(46px, 5vw, 78px)
+      minmax(0, 0.92fr)
+      minmax(0, 1.08fr);
+    column-gap: clamp(24px, 3.4vw, 64px);
+    align-items: start;
+  }
+}
 
 /* ---------------------------------------------------------------------------
    13  JOURNEY
@@ -1968,7 +2015,7 @@ footer a:hover { border-bottom-color: var(--ink); }
 /* Coarse pointers get no hover translation — it only ever fires as a sticky
    stuck state after a tap. */
 @media (hover: none), (pointer: coarse) {
-  .venture-card:hover { transform: none; }
+  .venture-row:hover { background: transparent; }
   .contact-link:hover,
   .contact-link:focus-visible { padding-left: 0; }
   .nav-link:hover { padding-left: 0; }

@@ -194,51 +194,12 @@
   }
 
   // -------------------------------------------------------------
-  // 6. Interactive Specular Spotlight & 3D Tilt on Venture Cards
+  // 6. Venture Register
+  // The card spotlight and 3D perspective tilt that lived here were
+  // removed with the card grid. Both belonged to the templated look,
+  // and the register expresses its hover state in CSS — a ruled row
+  // and a drawn underline, no per-frame JavaScript.
   // -------------------------------------------------------------
-  const ventureCards = document.querySelectorAll('.venture-card');
-  if (isFinePointer && !reduceMotion) {
-    ventureCards.forEach((card) => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transition = 'transform 0.12s ease-out, border-color 0.3s, background 0.3s';
-      });
-
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-
-        // 3D Perspective Tilt (-4deg to +4deg)
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const tiltY = ((x - centerX) / centerX) * 4.5;
-        const tiltX = -((y - centerY) / centerY) * 4.5;
-
-        card.style.transform = `perspective(900px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-4px)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.removeProperty('--mouse-x');
-        card.style.removeProperty('--mouse-y');
-        card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s';
-        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-      });
-    });
-  } else if (isFinePointer) {
-    ventureCards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.removeProperty('--mouse-x');
-        card.style.removeProperty('--mouse-y');
-      });
-    });
-  }
 
   // -------------------------------------------------------------
   // 7. Toast Notification & Copy Direct Email
@@ -350,7 +311,7 @@
   }
 
   // Play subtle acoustic tones on key interactions if sound enabled
-  document.querySelectorAll('a, button, .venture-card').forEach((interactive) => {
+  document.querySelectorAll('a, button, .venture-row').forEach((interactive) => {
     interactive.addEventListener('mouseenter', () => {
       if (soundEnabled) playAcousticTone(380, 0.04);
     });
@@ -522,7 +483,7 @@
     requestAnimationFrame(renderCursor);
 
     // Hover magnification on interactive elements
-    const hoverTargets = document.querySelectorAll('a, button, .venture-card, .metric-card, input, .round-link');
+    const hoverTargets = document.querySelectorAll('a, button, .venture-row, .metric-card, input, .round-link');
     hoverTargets.forEach((el) => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));

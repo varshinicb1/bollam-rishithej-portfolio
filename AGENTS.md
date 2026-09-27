@@ -177,6 +177,36 @@ may compute below 12px at any viewport** — `--t-meta` (13px) is the floor.
    the **header** (`.nav`), not on the inner `<nav>` — the drawer selector is
    `.nav.open nav`.
 
+### 2.35 The venture register — do not rebuild it as cards
+
+The eight holdings are set as a **register**: ruled rows of
+`[display numeral | identity | account]`, not a grid of bordered cards. The
+card grid was removed because it read as templated — a 3-column set of rounded
+boxes, company names in the UI sans rather than the display face, the accent
+spent on every small label, and ragged card heights leaving dead voids.
+
+Rules for this section:
+
+- Company names use **`--font-display` at `clamp(1.6rem, 3.4vw, 2.6rem)`**. This
+  is the single thing that makes the section read as designed. Never let them
+  fall back to the UI sans.
+- **One accent per row, and only where it carries meaning** — the DPIIT
+  recognition. Not on sector labels, not on every link.
+- The sole s.203 KMP office (`.is-principal`, ML Dynamic Solutions) is the only
+  row given visual promotion, and it is promoted with a **rule, not a colour
+  fill**.
+- Hover state is **CSS only**: a ruled row and a drawn underline. The former
+  3D perspective tilt and per-frame cursor spotlight were removed with the
+  cards; do not reintroduce per-frame JavaScript here.
+- Logos are **unboxed** and inline at 30px. The emblem-in-a-rounded-square was
+  part of the templated look.
+- **Grid placement must be explicit.** Each row has three children. In the
+  720–1023px band the grid has only two columns, so `.row-detail` needs
+  `grid-column: 2` — otherwise it auto-places into row 2 **column 1**, the
+  46px numeral gutter, and renders as a 46px-wide ribbon ~600px tall. That
+  rule must stay scoped to `max-width: 1023.98px`, or it drags the account out
+  of the real third column on desktop.
+
 ### 2.4 Responsive standards
 
 - Breakpoints: **560 / 620 / 720 / 768 / 900 / 1024 / 1280**. Layout is fluid
