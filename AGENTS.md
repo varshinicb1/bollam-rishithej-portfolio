@@ -125,6 +125,30 @@ unreadable. On paper the accent role is carried by ink, hairline rules, and
    SFMono-Regular, Menlo, 'Cascadia Mono', 'Roboto Mono', …`. Section slugs,
    folios, reference codes, captions, pills, keyboard hints.
 
+**Legibility rules — these were all measured failures, not preferences.**
+
+- **Bodoni is a didone with an `opsz` axis (6–96).** Under
+  `font-optical-sizing: auto` the browser feeds it the rendered size, so a 40px
+  numeral gets the ~30pt *display* cut, whose hairlines are drawn for poster
+  scale and drop out at UI sizes — "4" lost its crossbar, "MSc" looked damaged.
+  Every mid-size display use therefore pins `font-variation-settings: 'opsz' 14`
+  with `font-optical-sizing: none`. Only the hero `h1` and section `h2` keep the
+  automatic display cut. **Do not remove those pins.**
+- **`--ink-3` must clear 4.5:1 on `--paper-sunk`**, the worst-case surface. The
+  previous `#737a87` measured 3.86:1 on paper and 3.46:1 on the sunk panel and
+  failed AA everywhere it appeared. `#5a616d` gives 5.57:1 / 5.00:1.
+- **Metadata floor is 14px** (`--t-meta`). 13px monospace uppercase was below
+  comfortable reading size for the share of the page set that way.
+- **Tracking on reading metadata stays at or below 0.08em.** Monospace is
+  already wide, uppercase removes word-shape cues, and heavy tracking breaks
+  word cohesion; all three at once is unreadable. Wide tracking (0.22–0.34em)
+  is reserved for decorative, non-reading type: the vertical marginalia, the
+  rotating seal, one display eyebrow.
+- **Descriptive phrases belong in the reading face, not tracked uppercase
+  mono.** The serial faces are for serials, folios and reference codes.
+- Run `node type_audit.js` after any type or colour change. It reports every
+  WCAG AA contrast failure with the measured ratio.
+
 > **Apple fonts cannot be self-hosted.** Apple's licence covers interface design
 > on Apple platforms, not webfont embedding. Referencing the installed face
 > through `-apple-system` / `BlinkMacSystemFont` is the supported route and is

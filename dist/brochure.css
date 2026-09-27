@@ -37,7 +37,7 @@
   --paper-raised: #fbfaf7;
   --ink: #0b0d11;
   --ink-2: #3f4550;
-  --ink-3: #737a87;
+  --ink-3: #5a616d;
   --rule: rgba(11, 13, 17, 0.16);
   --rule-soft: rgba(11, 13, 17, 0.08);
   --shadow: rgba(11, 13, 17, 0.12);
@@ -66,7 +66,7 @@
   --t-lead: clamp(1.05rem, 1.7vw, 1.4rem);
   --t-body: clamp(0.975rem, 1vw, 1.0625rem);
   --t-small: 0.9375rem;  /* 15px */
-  --t-meta: 0.8125rem;   /* 13px — the floor */
+  --t-meta: 0.875rem;    /* 14px — metadata floor; 13px mono uppercase read poorly */
 
   --gutter: clamp(20px, 5.5vw, 92px);
   --page-y: clamp(64px, 8vw, 128px);
@@ -198,7 +198,7 @@ button:focus-visible {
 
 .bar-tag {
   font: 400 var(--t-meta) / 1.3 var(--font-mono);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
   /* On a phone the volume line is noise next to the return action. */
@@ -230,7 +230,7 @@ button:focus-visible {
   border: 1px solid var(--ink);
   border-radius: var(--radius);
   font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
   transition: background 0.35s var(--ease-soft), color 0.35s var(--ease-soft);
@@ -272,7 +272,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 8px 22px;
   font: 400 var(--t-meta) / 1.5 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -342,6 +342,18 @@ h2 em {
   color: var(--ink);
 }
 
+/* Contact addresses. Previously inline `color:#fff` from the dark theme, which
+   on the light stock measured 1.04:1 — invisible. */
+.channel-address {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
 .lead-thesis {
   margin-bottom: clamp(20px, 2.6vw, 34px);
   padding-bottom: clamp(16px, 2vw, 26px);
@@ -380,7 +392,7 @@ h2 em {
   border: 1px solid var(--rule);
   border-radius: var(--radius-pill);
   font: 400 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
@@ -468,7 +480,7 @@ h2 em {
   background: var(--plate);
   border-top: 1px solid rgba(244, 242, 236, 0.12);
   font: 400 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(244, 242, 236, 0.66);
 }
@@ -505,7 +517,7 @@ h2 em {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   font: 400 var(--t-meta) / 1.3 var(--font-mono);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #f4f2ec;
 }
@@ -545,7 +557,7 @@ h2 em {
   padding-top: 12px;
   border-top: 1px solid var(--rule);
   font: 400 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -598,7 +610,7 @@ h2 em {
   padding-top: 12px;
   border-top: 1px solid rgba(244, 242, 236, 0.2);
   font: 400 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--acid);
 }
@@ -634,7 +646,7 @@ h2 em {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--rule);
   font: 500 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink);
 }
@@ -662,7 +674,7 @@ h2 em {
   display: block;
   margin-bottom: 6px;
   font: 500 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -700,7 +712,7 @@ h2 em {
 
 .spec-card-num {
   font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -727,7 +739,7 @@ h2 em {
 .meta-spec-list .spec-label {
   flex: 0 0 auto;
   font: 400 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -815,7 +827,7 @@ h2 em {
   display: block;
   margin-top: 8px;
   font: 400 var(--t-meta) / 1.5 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -838,7 +850,7 @@ h2 em {
   border-bottom: 1px solid var(--ink);
   background: var(--paper-sunk);
   font: 500 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink);
 }
@@ -900,7 +912,7 @@ h2 em {
     display: block;
     margin-bottom: 5px;
     font: 400 var(--t-meta) / 1.4 var(--font-mono);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-3);
   }
