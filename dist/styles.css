@@ -349,9 +349,9 @@ p { text-wrap: pretty; }
   left: 0;
   width: 0;
   max-width: 100%;
-  height: 2px;
+  height: 3px;
   z-index: 9999;
-  background: var(--ink);
+  background: linear-gradient(90deg, var(--ink) 0%, var(--acid-ink) 100%);
   pointer-events: none;
   transition: width 0.1s linear;
 }
@@ -1537,7 +1537,7 @@ p { text-wrap: pretty; }
 }
 
 @media (min-width: 620px) and (max-width: 899px) {
-  .closing picture { display: block; max-width: 470px; margin-inline: auto; }
+  .closing picture { max-width: 470px; margin-inline: auto; }
 }
 
 .closing-copy {
@@ -2109,8 +2109,8 @@ footer a:hover { border-bottom-color: var(--ink); }
 }
 
 @keyframes plate-drift {
-  from { scale: 1.07; }
-  to { scale: 1; }
+  from { scale: 1.16; translate: 0 -3.2%; }
+  to   { scale: 1.16; translate: 0 3.2%; }
 }
 
 @keyframes rule-advance {
@@ -2442,9 +2442,20 @@ h2 {
    dissolve into the ink on their own.
    ------------------------------------------------------------------------ */
 
-.bw-frame img,
-.venture-image img,
-.spotlight-frame img {
+.bw-frame,
+.venture-image,
+.spotlight-frame,
+.closing picture {
+  /* Clip is mandatory, not cosmetic: the parallax scales the image past its
+     frame, and without this it spills into the page and creates real
+     horizontal overflow at narrow widths. */
+  display: block;
+  overflow: hidden;
+}
+
+.bw-frame,
+.venture-image,
+.spotlight-frame {
   -webkit-mask-image:
     linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
     linear-gradient(to bottom, transparent 0%, #000 5%, #000 95%, transparent 100%);
@@ -2453,8 +2464,13 @@ h2 {
     linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
     linear-gradient(to bottom, transparent 0%, #000 5%, #000 95%, transparent 100%);
   mask-composite: intersect;
-  /* The mask replaces the plate edge, so the fill behind it must go too or it
-     reappears as a rectangle under the feather. */
+}
+
+.bw-frame img,
+.venture-image img,
+.spotlight-frame img {
+  /* The frame owns the edge now, so the image must not paint a fill of its
+     own or it reappears as a rectangle beneath the feather. */
   background: transparent;
 }
 
@@ -2462,4 +2478,100 @@ h2 {
 .spotlight-badge {
   left: clamp(20px, 4vw, 40px);
   bottom: clamp(20px, 4vw, 40px);
+}
+
+/* ---------------------------------------------------------------------------
+   29  MOTION, TURNED UP
+   The first pass was tuned so low it read as no motion at all. These are the
+   same techniques at amplitudes that actually register, still entirely behind
+   `prefers-reduced-motion` and still costing nothing on the main thread —
+   every one runs on the compositor or on a native scroll timeline.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --- Register rows deal in, one after another ------------------------- */
+  @supports (animation-timeline: view()) {
+    .venture-row {
+      animation: row-deal linear both;
+      animation-timeline: view();
+      animation-range: entry 8% entry 46%;
+    }
+
+    /* --- Hero copy rises out as the plate holds, so the two layers separate */
+    .hero-copy {
+      animation: hero-lift linear both;
+      animation-timeline: view(block);
+      animation-range: exit 0% exit 100%;
+    }
+
+    /* --- Section headlines track in from their own margin ----------------- */
+    .statement h2,
+    .venture-intro h2,
+    .journey-heading h2,
+    .contact h2 {
+      animation: headline-track linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 52%;
+    }
+
+    /* --- Metric tiles stagger by column ----------------------------------- */
+    .metric-card {
+      animation: tile-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 6% entry 50%;
+    }
+  }
+
+  /* --- Timeline entries sweep their rule ---------------------------------- */
+  .timeline article { position: relative; }
+
+  .timeline article::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.9s var(--ease);
+  }
+
+  .timeline article.in::after { transform: scaleX(1); }
+}
+
+@keyframes row-deal {
+  from { opacity: 0; transform: translateY(34px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes hero-lift {
+  from { transform: none; opacity: 1; }
+  to   { transform: translateY(-64px); opacity: 0.25; }
+}
+
+@keyframes headline-track {
+  from { opacity: 0; transform: translateY(40px); letter-spacing: 0.04em; }
+  to   { opacity: 1; transform: none; letter-spacing: -0.025em; }
+}
+
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venture-row,
+  .hero-copy,
+  .metric-card,
+  .statement h2,
+  .venture-intro h2,
+  .journey-heading h2,
+  .contact h2 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline article::after { transform: scaleX(1) !important; }
 }
