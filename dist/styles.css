@@ -55,8 +55,15 @@
 
   /* --- Type families --- */
   --font-display: 'Bodoni Moda', 'Times New Roman', serif;
-  --font-text: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', monospace;
+  /* Native system stack: SF Pro on Apple, Segoe UI on Windows, Roboto on
+     Android. Apple's licence does not permit shipping SF as a webfont, and
+     referencing the installed face is both legal and faster — it paints on
+     the first frame with no download and no layout shift. */
+  --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+    'Segoe UI Variable Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', 'Liberation Sans', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'Cascadia Mono',
+    'Segoe UI Mono', 'Roboto Mono', 'Liberation Mono', 'Courier New', monospace;
 
   /* --- Fluid type scale ---
      Every step is clamped so nothing drops below a readable floor on a 320px
@@ -671,30 +678,70 @@ p { text-wrap: pretty; }
 
 /* ---------------------------------------------------------------------------
    07  HERO
-   Copy and portrait occupy separate territory. The face is never overprinted.
+   A full-bleed cinematic plate. The photograph is a 16:9 night-office frame
+   with the subject in the right third and deliberate negative space on the
+   left; the type occupies that space and never crosses him. Because the
+   photograph is dark, the section is a `.tone-dark` scope, so the same token
+   names resolve to paper-on-ink here and the accent returns to full acid.
    ------------------------------------------------------------------------ */
 
 .hero {
   position: relative;
-  display: grid;
-  gap: var(--stack-4);
-  align-items: end;
-  padding-top: calc(var(--nav-h) + clamp(36px, 8vw, 92px));
-  padding-bottom: clamp(48px, 7vw, 96px);
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + clamp(28px, 6vw, 64px));
+  padding-bottom: clamp(36px, 6vw, 88px);
+  overflow: hidden;
 }
 
+/* --- The plate itself --- */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  margin: 0;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Phones: hold the subject's head in the upper right of the frame so the
+     copy, which sits at the bottom, never reaches him. */
+  object-position: 76% 22%;
+}
+
+/* The caption belongs to the composition, not to a corner of the photo. */
+.hero-image figcaption {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--nav-h) + clamp(16px, 2.5vw, 30px));
+  display: none;
+  gap: 14px;
+  font: 400 var(--t-meta) / 1.4 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 242, 236, 0.5);
+}
+
+/* --- Legibility scrim ---
+   Vertical on phones (type at the bottom), horizontal on wide screens (type
+   on the left). Tuned to lift contrast without flattening the photograph. */
 .hero-light-rig {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(70% 55% at 22% 12%, rgba(11, 13, 17, 0.07), transparent 70%),
-    radial-gradient(50% 40% at 88% 78%, rgba(11, 13, 17, 0.05), transparent 70%);
+    linear-gradient(to top, rgba(5, 7, 10, 0.94) 0%, rgba(5, 7, 10, 0.72) 32%,
+                    rgba(5, 7, 10, 0.28) 62%, rgba(5, 7, 10, 0.35) 100%);
 }
 
 .hero-copy {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--stack-3);
@@ -702,15 +749,17 @@ p { text-wrap: pretty; }
 }
 
 .hero h1 {
-  /* The didone wants tighter leading at display size. */
   line-height: 0.86;
   letter-spacing: -0.035em;
+  color: var(--ink);
 }
 
 .hero h1 em {
   display: inline-block;
-  color: var(--ink-2);
+  color: rgba(244, 242, 236, 0.62);
 }
+
+.hero .eyebrow { color: var(--acid); }
 
 .hero-foot {
   display: flex;
@@ -744,89 +793,52 @@ p { text-wrap: pretty; }
 }
 
 .round-link:hover {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
-  transform: translateY(4px);
+  background: var(--acid);
+  border-color: var(--acid);
+  color: var(--ink-deep);
 }
 
-/* --- Hero portrait --- */
-.hero-image {
-  position: relative;
-  min-width: 0;
-  margin: 0;
-}
-
-.hero-image img {
-  width: 100%;
-  /* This asset is a HALF portrait: the subject occupies roughly the right 30%
-     of the frame, the rest is empty studio dark. On a phone that emptiness is
-     dead weight, so the mobile crop is narrower than the source (5:8 < 3:4),
-     which forces a horizontal crop, and the origin is pinned right onto the
-     face. Desktop restores the full composition as shot. */
-  aspect-ratio: 5 / 8;
-  object-fit: cover;
-  object-position: 100% 16%;
-  background: var(--ink-deep);
-  filter: saturate(0.94) contrast(1.02);
-}
-
-.hero-image figcaption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 12px;
-  font: 400 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
-/* Vertical marginalia — a print device. Hidden until there is margin to put it
-   in, so it never competes with the measure on small screens. */
+/* Vertical marginalia — only once there is margin to put it in. */
 .side-type {
   display: none;
   position: absolute;
-  right: calc(var(--gutter) * 0.28);
-  bottom: clamp(48px, 7vw, 96px);
+  left: calc(var(--gutter) * 0.3);
+  top: 50%;
+  translate: 0 -50%;
   writing-mode: vertical-rl;
   font: 400 var(--t-meta) / 1 var(--font-mono);
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: rgba(244, 242, 236, 0.42);
+}
+
+/* --- Wide screens: type moves into the photograph's negative space --- */
+@media (min-width: 900px) {
+  .hero { min-height: min(94svh, 940px); }
+
+  .hero-image img { object-position: 82% center; }
+
+  .hero-light-rig {
+    background:
+      linear-gradient(to right, rgba(5, 7, 10, 0.92) 0%, rgba(5, 7, 10, 0.78) 38%,
+                      rgba(5, 7, 10, 0.3) 62%, rgba(5, 7, 10, 0.12) 100%),
+      linear-gradient(to top, rgba(5, 7, 10, 0.5), transparent 42%);
+  }
+
+  /* Capped so the headline can never run under the subject. */
+  .hero-copy { max-width: min(56%, 46rem); }
+
+  .hero-image figcaption { display: flex; }
 }
 
 @media (min-width: 1280px) {
+  .hero-copy { max-width: min(52%, 50rem); }
   .side-type { display: block; }
 }
 
-/* Tablet band: still one column, but a full-width portrait crop here is over
-   1200px tall and reads as a corridor. Cap the plate and centre it. */
-@media (min-width: 620px) and (max-width: 899px) {
-  .hero-image,
-  .bw-frame {
-    max-width: 470px;
-    margin-inline: auto;
-  }
-}
-
-@media (min-width: 900px) {
-  .hero {
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    align-items: end;
-    gap: clamp(36px, 4.5vw, 72px);
-  }
-  /* 3:4 matches the source exactly — no crop, the negative space on the left
-     is the composition and it balances the headline column. */
-  .hero-image img {
-    aspect-ratio: 3 / 4;
-    object-position: 50% 50%;
-  }
-}
-
-@media (min-width: 1280px) {
-  .hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+/* Very wide screens crop a 16:9 frame hard; ease the subject back inward. */
+@media (min-width: 1600px) {
+  .hero-image img { object-position: 78% center; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -887,12 +899,14 @@ p { text-wrap: pretty; }
 
 .bw-frame img {
   width: 100%;
+  /* Native 4:5 — the frame is used as shot, so nothing is cropped away. */
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 30%;
-  /* The source art has pure-white borders, so multiply against the paper
-     dissolves the rectangle edge entirely. */
-  mix-blend-mode: multiply;
+  background: var(--paper-sunk);
+  /* NOT multiply. This frame carries a real dark-grey ground rather than the
+     pure-white border the previous asset had; multiplying it against paper
+     leaves a visible rectangle rather than dissolving one. */
 }
 
 @media (min-width: 900px) {
@@ -900,7 +914,14 @@ p { text-wrap: pretty; }
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(40px, 5vw, 96px);
   }
-  .bw-frame img { aspect-ratio: 16 / 10; object-position: 50% 26%; }
+  /* A 4:5 plate run to the full measure is over 1600px tall on a desktop and
+     swamps the spread. Cap it and sit it under the headline column, which is
+     the short one, so the section balances. */
+  .bw-frame {
+    max-width: min(44%, 560px);
+    margin-right: auto;
+  }
+  .bw-frame img { aspect-ratio: 4 / 5; object-position: 50% 28%; }
 }
 
 @media (min-width: 1280px) {
@@ -1031,9 +1052,9 @@ p { text-wrap: pretty; }
 
 .venture-image img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 50% 40%;
+  object-position: 50% 30%;
   background: var(--paper-sunk);
 }
 
@@ -1074,7 +1095,7 @@ p { text-wrap: pretty; }
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     gap: clamp(40px, 5vw, 88px);
   }
-  .venture-image img { aspect-ratio: 5 / 4; }
+  .venture-image img { aspect-ratio: 4 / 5; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -1122,9 +1143,11 @@ p { text-wrap: pretty; }
   inset: 0;
   pointer-events: none;
   opacity: 0;
+  /* script.js publishes --mouse-x / --mouse-y (px, card-relative). These names
+     must match it exactly or the spotlight silently pins to the card centre. */
   background: radial-gradient(
-    240px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(198, 255, 53, 0.1),
+    260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(198, 255, 53, 0.13),
     transparent 62%
   );
   transition: opacity 0.5s var(--ease-soft);
@@ -1188,8 +1211,53 @@ p { text-wrap: pretty; }
   color: var(--ink-3);
 }
 
+/* Visually hidden, still announced. Gives each repeated "Read dossier" link a
+   unique accessible name instead of eight identical ones. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Dossier drill-down. The arrow travels on hover; the rule draws in from the
+   left rather than simply switching colour. */
+.venture-card .card-dossier-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--tap);
+  margin-top: auto;
+  font: 500 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 10px);
+  background-size: 0% 1px;
+  transition: background-size 0.45s var(--ease), color 0.3s;
+}
+
+.venture-card .card-dossier-link span[aria-hidden] {
+  transition: transform 0.45s var(--ease);
+}
+
+.venture-card .card-dossier-link:hover,
+.venture-card .card-dossier-link:focus-visible {
+  color: var(--acid);
+  background-size: 100% 1px;
+}
+
+.venture-card .card-dossier-link:hover span[aria-hidden] { transform: translateX(5px); }
+
 /* Card link — padded to a full tap target and underlined on its own baseline. */
-.venture-card a {
+.venture-card a:not(.card-dossier-link) {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -1204,7 +1272,7 @@ p { text-wrap: pretty; }
   transition: border-color 0.3s;
 }
 
-.venture-card a:hover { border-bottom-color: var(--acid); }
+.venture-card a:not(.card-dossier-link):hover { border-bottom-color: var(--acid); }
 
 /* ---------------------------------------------------------------------------
    13  JOURNEY
@@ -1860,7 +1928,6 @@ footer a:hover { border-bottom-color: var(--ink); }
 }
 
 /* Images wipe open rather than fading — a print-plate gesture. */
-.js .hero-image,
 .js .bw-frame,
 .js .venture-image,
 .js .spotlight-frame {
@@ -1869,7 +1936,6 @@ footer a:hover { border-bottom-color: var(--ink); }
     transform 1s var(--ease);
 }
 
-.js .hero-image.in,
 .js .bw-frame.in,
 .js .venture-image.in,
 .js .spotlight-frame.in {
@@ -1888,7 +1954,6 @@ footer a:hover { border-bottom-color: var(--ink); }
   }
 
   .js .reveal,
-  .js .hero-image,
   .js .bw-frame,
   .js .venture-image,
   .js .spotlight-frame {
@@ -1930,7 +1995,6 @@ footer a:hover { border-bottom-color: var(--ink); }
   main > section { break-inside: avoid; padding-block: 24pt; }
 
   .js .reveal,
-  .js .hero-image,
   .js .bw-frame,
   .js .venture-image,
   .js .spotlight-frame {
@@ -1939,3 +2003,333 @@ footer a:hover { border-bottom-color: var(--ink); }
     clip-path: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   21  MOTION LAYER
+   Contemporary interaction on editorial bones. Every effect here is additive
+   and progressively enhanced: if the feature is unsupported, or the visitor
+   prefers reduced motion, the page degrades to the static monograph with no
+   content left in a hidden state.
+   ------------------------------------------------------------------------ */
+
+/* --- Cross-document view transitions -------------------------------------
+   Portfolio <-> dossier navigations cross-fade instead of hard-cutting.
+   Chrome/Edge honour this; everywhere else it is simply ignored. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: vt-out 0.28s var(--ease-soft) both; }
+  ::view-transition-new(root) { animation: vt-in 0.38s var(--ease) both; }
+}
+
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* The wordmark is the one element common to both documents, so it is the
+   natural anchor to morph between them. */
+.mark { view-transition-name: brand-mark; }
+
+/* --- Scroll-linked photography -------------------------------------------
+   A slow drift as each plate travels the viewport. Deliberately NOT tied to
+   opacity: a failed or unsupported timeline can never hide an image. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-image img,
+    .bw-frame img,
+    .venture-image img,
+    .spotlight-frame img,
+    .closing-image {
+      animation: plate-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+      will-change: scale;
+    }
+
+    /* The reading rule under the nav tracks scroll natively, no JS tick. */
+    .scroll-progress {
+      animation: rule-advance linear both;
+      animation-timeline: scroll(root block);
+      width: 100%;
+      transform-origin: 0 50%;
+      transition: none;
+    }
+  }
+}
+
+@keyframes plate-drift {
+  from { scale: 1.07; }
+  to { scale: 1; }
+}
+
+@keyframes rule-advance {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* --- Running section label ------------------------------------------------
+   Deliberately NOT sticky. Pinning the slug inside the content column makes
+   the display headline scroll straight through it — a running head has to
+   live in the margin, and there is no margin to spare at these measures. */
+
+/* --- Magnetic targets -----------------------------------------------------
+   script.js writes --mag-x / --mag-y from the pointer offset. The element
+   leans toward the cursor and settles back on exit. */
+.round-link,
+.copy-email-btn,
+.menu {
+  --mag-x: 0px;
+  --mag-y: 0px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .round-link,
+  .copy-email-btn,
+  .menu {
+    translate: var(--mag-x) var(--mag-y);
+    transition: translate 0.45s var(--ease), background 0.35s var(--ease-soft),
+      color 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft);
+  }
+
+  .round-link.magnetic-active,
+  .copy-email-btn.magnetic-active,
+  .menu.magnetic-active {
+    /* While tracking, follow the pointer almost immediately. */
+    transition: translate 0.12s linear, background 0.35s var(--ease-soft),
+      color 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft);
+  }
+
+  /* The round link already translates on hover; magnetism replaces that so the
+     two transforms cannot fight. */
+  .round-link:hover { transform: none; }
+}
+
+/* --- Nav retreat ----------------------------------------------------------
+   The bar withdraws while reading downward and returns on any upward
+   intention, giving the page its full height back. */
+.nav {
+  transition: height 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft),
+    translate 0.45s var(--ease);
+}
+
+.nav.nav-retreat { translate: 0 calc(-1 * var(--nav-h) - 2px); }
+
+/* Never retreat while the drawer is open — the close button lives in there. */
+.nav.open.nav-retreat { translate: 0; }
+
+/* --- Reduced motion ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-image img,
+  .bw-frame img,
+  .venture-image img,
+  .spotlight-frame img,
+  .closing-image { animation: none !important; scale: 1 !important; }
+
+  .nav.nav-retreat { translate: 0; }
+
+  .round-link,
+  .copy-email-btn,
+  .menu { translate: 0 !important; }
+
+  .scroll-progress { animation: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   22  HERO ENTRANCE
+   The plate is the LCP element, so it is never hidden behind a JS class. It
+   is painted immediately and settles from a slight over-scale — the motion
+   reads as a camera coming to rest rather than as content loading in.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero-image img {
+    animation: hero-settle 1.8s var(--ease) both;
+  }
+
+  .js .hero-light-rig {
+    animation: scrim-in 1.4s var(--ease-soft) both;
+  }
+}
+
+@keyframes hero-settle {
+  from { scale: 1.06; }
+  to { scale: 1; }
+}
+
+@keyframes scrim-in {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+
+/* The scroll-driven plate drift would otherwise fight the entrance, and a
+   full-bleed backdrop has no "travel through the viewport" to track anyway. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-image img { animation-timeline: auto; }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   23  NAVIGATION OVER THE DARK HERO
+   The bar sits on a near-black photograph until the page scrolls past the
+   hero. A paper-tinted blur there reads as a grey band across the image, so
+   while it overlaps the hero the bar goes fully transparent and inverts its
+   own foreground. script.js owns the toggle because the switch depends on the
+   hero's measured height, not on a fixed scroll offset.
+   ------------------------------------------------------------------------ */
+
+.nav.nav-on-dark::before {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav.nav-on-dark {
+  border-bottom-color: transparent;
+  color: #f4f2ec;
+}
+
+.nav.nav-on-dark .mark i { background: var(--acid); }
+
+.nav.nav-on-dark .menu,
+.nav.nav-on-dark .sound-toggle {
+  border-color: rgba(244, 242, 236, 0.32);
+}
+
+.nav.nav-on-dark .menu span { background: #f4f2ec; }
+
+.nav.nav-on-dark .menu:hover,
+.nav.nav-on-dark .sound-toggle:hover { border-color: var(--acid); }
+
+.nav.nav-on-dark .sound-bars span { background: rgba(244, 242, 236, 0.7); }
+
+/* Once the drawer is open the bar is over the drawer, not the photograph. */
+.nav.open.nav-on-dark { color: inherit; }
+
+/* ---------------------------------------------------------------------------
+   24  DISPLAY HEADLINE REVEAL
+   Headlines wipe upward from their own baseline rather than fading, which is
+   how type behaves on a press sheet. The overshoot on the bottom inset keeps
+   descenders (g, y, j) from being shaved during the wipe.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js h1.reveal,
+  .js h2.reveal {
+    clip-path: inset(-0.12em 0 100% 0);
+    transition: clip-path 1.05s var(--ease), opacity 0.9s var(--ease-soft),
+      transform 1s var(--ease);
+  }
+
+  .js h1.reveal.in,
+  .js h2.reveal.in {
+    clip-path: inset(-0.12em 0 -0.28em 0);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   25  SCREEN EDGE CASES
+   ------------------------------------------------------------------------ */
+
+/* Landscape phones: 100svh leaves no room for a display headline beside a
+   portrait, so the hero stops trying to fill the viewport. */
+@media (orientation: landscape) and (max-height: 560px) {
+  .hero {
+    min-height: 0;
+    padding-top: calc(var(--nav-h) + 24px);
+    padding-bottom: 32px;
+  }
+
+  .hero h1 { font-size: clamp(2rem, 7vh, 3.4rem); }
+  .hero-image img { object-position: 84% 26%; }
+  .side-type { display: none; }
+}
+
+/* Ultra-wide: hold the measure and let the margins grow, rather than letting
+   lines run to an unreadable length. */
+@media (min-width: 1800px) {
+  :root { --gutter: clamp(88px, 7vw, 180px); }
+  .statement-copy,
+  .spotlight-lead,
+  .contact-note { max-width: 58ch; }
+}
+
+/* Very short viewports of any width (split-screen, small laptops). */
+@media (max-height: 700px) and (min-width: 900px) {
+  .hero { min-height: min(96svh, 760px); }
+}
+
+/* ---------------------------------------------------------------------------
+   26  SECTION INDEX
+   A fixed marginal readout of where you are in the document. Desktop only —
+   it lives in the gutter, and on a phone there is no gutter to live in.
+   ------------------------------------------------------------------------ */
+
+.section-index {
+  display: none;
+  position: fixed;
+  right: calc(var(--gutter) * 0.34);
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 40;
+  flex-direction: column;
+  /* No gap: each mark carries its own padding instead, so the hit area is a
+     full 44px while the marks still read as 14px apart. A 1280px viewport can
+     still be a touch device (Surface, iPad Pro in landscape). */
+  gap: 0;
+  pointer-events: auto;
+}
+
+@media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
+  .section-index { display: flex; }
+}
+
+.section-index a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: var(--tap);
+  padding-block: 7px;
+  font: 400 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  opacity: 0.55;
+  transition: opacity 0.35s var(--ease-soft), color 0.35s var(--ease-soft);
+}
+
+.section-index a::after {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s var(--ease);
+}
+
+.section-index a span {
+  opacity: 0;
+  translate: 6px 0;
+  transition: opacity 0.35s var(--ease-soft), translate 0.4s var(--ease);
+}
+
+.section-index a:hover,
+.section-index a:focus-visible,
+.section-index a.active {
+  opacity: 1;
+  color: var(--ink);
+}
+
+.section-index a.active::after { width: 30px; }
+
+/* The label appears on intent only. Showing it for `.active` too meant a word
+   sat over the content column during ordinary scrolling; the active mark is
+   already distinguished by its longer rule and full opacity. */
+.section-index a:hover span,
+.section-index a:focus-visible span {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Over the dark hero and the dark venture block the index inverts with it. */
+.section-index.on-dark a { color: rgba(244, 242, 236, 0.75); }
+.section-index.on-dark a:hover,
+.section-index.on-dark a.active { color: var(--acid); }

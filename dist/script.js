@@ -73,6 +73,17 @@
   // -------------------------------------------------------------
   const progressBar = document.getElementById('scrollProgress');
   const mainNav = document.getElementById('mainNav');
+  // When the browser can run the reading rule off a native scroll timeline we
+  // hand that job entirely to CSS.
+  const nativeScrollTimeline =
+    typeof CSS !== 'undefined' &&
+    CSS.supports &&
+    CSS.supports('animation-timeline: scroll()') &&
+    !reduceMotion;
+  let lastScrollTop = 0;
+  // Declared here, not reused from the hero-parallax block further down: that
+  // one is a `const` in the temporal dead zone when handleScroll() first runs.
+  const heroPlate = document.getElementById('hero');
   const navLinks = document.querySelectorAll('.nav nav a');
   const spySections = ['story', 'ventures', 'journey', 'contact']
     .map(id => document.getElementById(id))
@@ -82,10 +93,26 @@
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
-    // Progress Bar
-    if (progressBar && docHeight > 0) {
+    // Progress Bar.
+    // Where CSS scroll-driven animations exist the stylesheet drives this off
+    // a native scroll timeline (width:100% + scaleX), which runs on the
+    // compositor. Writing an inline width here would override that and leave
+    // the bar scaling a variable-width element, so stand down.
+    if (progressBar && docHeight > 0 && !nativeScrollTimeline) {
       const progress = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
       progressBar.style.width = `${progress}%`;
+    }
+
+    // Nav retreat: withdraw while reading downward, return on upward intent.
+    if (mainNav && !reduceMotion) {
+      const delta = scrollTop - lastScrollTop;
+      if (scrollTop > 240 && delta > 4 && !mainNav.classList.contains('open')) {
+        mainNav.classList.add('nav-retreat');
+      } else if (delta < -4 || scrollTop <= 240) {
+        mainNav.classList.remove('nav-retreat');
+      }
+      // Ignore sub-pixel jitter so the bar does not flicker at rest.
+      if (Math.abs(delta) > 4) lastScrollTop = scrollTop;
     }
 
     // Nav scrolled style
@@ -94,6 +121,15 @@
         mainNav.classList.add('scrolled');
       } else {
         mainNav.classList.remove('scrolled');
+      }
+
+      // The hero is a near-black photograph, so the bar stays transparent and
+      // light-on-dark for as long as it overlaps the hero. Measured rather
+      // than hard-coded, because the hero height is viewport-relative.
+      if (heroPlate) {
+        const overHero =
+          heroPlate.getBoundingClientRect().bottom > mainNav.offsetHeight;
+        mainNav.classList.toggle('nav-on-dark', overHero);
       }
     }
 
@@ -632,4 +668,99 @@
 
     animId = requestAnimationFrame(updateHeroSpatial);
   }
+  // -------------------------------------------------------------
+  // 12. Magnetic Targets
+  // The primary controls lean toward the pointer as it approaches and
+  // settle back on exit. Fine pointers only, and never under reduced
+  // motion. The offset is published as CSS custom properties so the
+  // stylesheet owns the easing and can disable the whole effect with a
+  // media query.
+  // -------------------------------------------------------------
+  if (isFinePointer && !reduceMotion) {
+    const MAGNETS = '.round-link, .copy-email-btn, .menu';
+    const STRENGTH = 0.32;   // fraction of the offset the element travels
+    const RADIUS = 1.6;      // activation distance, in element half-widths
+
+    document.querySelectorAll(MAGNETS).forEach((el) => {
+      let frame = null;
+
+      const release = () => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = null;
+        el.classList.remove('magnetic-active');
+        el.style.setProperty('--mag-x', '0px');
+        el.style.setProperty('--mag-y', '0px');
+      };
+
+      const track = (e) => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const b = el.getBoundingClientRect();
+          const dx = e.clientX - (b.left + b.width / 2);
+          const dy = e.clientY - (b.top + b.height / 2);
+          const reach = Math.max(b.width, b.height) * RADIUS;
+          if (Math.hypot(dx, dy) > reach) { release(); return; }
+          el.classList.add('magnetic-active');
+          el.style.setProperty('--mag-x', (dx * STRENGTH).toFixed(2) + 'px');
+          el.style.setProperty('--mag-y', (dy * STRENGTH).toFixed(2) + 'px');
+        });
+      };
+
+      // Listen on the document so the pull begins before the cursor actually
+      // reaches the element, which is what makes it read as magnetism.
+      document.addEventListener('mousemove', track, { passive: true });
+      el.addEventListener('mouseleave', release);
+      el.addEventListener('blur', release);
+      window.addEventListener('blur', release);
+    });
+  }
+
+  // -------------------------------------------------------------
+  // 13. Marginal Section Index
+  // Tracks the section currently under the reading line and inverts
+  // itself while it overlaps a dark block, so the marks stay legible
+  // against both paper and ink.
+  // -------------------------------------------------------------
+  const sectionIndex = document.getElementById('sectionIndex');
+
+  if (sectionIndex) {
+    const marks = [...sectionIndex.querySelectorAll('a')];
+    const targets = marks
+      .map((a) => ({ mark: a, el: document.getElementById(a.dataset.section) }))
+      .filter((t) => t.el);
+
+    const syncIndex = () => {
+      // The reading line sits a third of the way down the viewport; whichever
+      // section crosses it is the one being read.
+      const line = window.innerHeight * 0.34;
+      let current = targets[0];
+      targets.forEach((t) => {
+        if (t.el.getBoundingClientRect().top <= line) current = t;
+      });
+      marks.forEach((m) => m.classList.toggle('active', current && m === current.mark));
+
+      // Invert over dark blocks. Probe what is behind the index rather than
+      // maintaining a list of which sections are dark — but the index is
+      // itself painted at that point, so walk the hit list past its own nodes
+      // (elementFromPoint, singular, just returns the index every time).
+      const box = sectionIndex.getBoundingClientRect();
+      const stack = document.elementsFromPoint(
+        Math.min(window.innerWidth - 8, Math.max(0, box.left + box.width / 2)),
+        window.innerHeight / 2
+      );
+      const behind = stack.find((el) => !sectionIndex.contains(el) && el !== sectionIndex);
+      sectionIndex.classList.toggle('on-dark', Boolean(behind && behind.closest('.tone-dark')));
+    };
+
+    let indexFrame = null;
+    const queueSync = () => {
+      if (indexFrame) return;
+      indexFrame = requestAnimationFrame(() => { indexFrame = null; syncIndex(); });
+    };
+
+    window.addEventListener('scroll', queueSync, { passive: true });
+    window.addEventListener('resize', queueSync, { passive: true });
+    syncIndex();
+  }
+
 })();

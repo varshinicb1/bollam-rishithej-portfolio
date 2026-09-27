@@ -9,7 +9,7 @@ const TILE = parseInt(process.argv[4] || '900', 10);
   const b = await chromium.launch({ channel: 'chrome' });
   const ctx = await b.newContext({ viewport: { width: W, height: TILE }, deviceScaleFactor: 1, isMobile: W < 768, hasTouch: W < 768 });
   const p = await ctx.newPage();
-  await p.goto('http://localhost:4321/' + PAGE, { waitUntil: 'load' });
+  await p.goto('' + (process.env.BASE || 'http://localhost:4399') + '/' + PAGE, { waitUntil: 'domcontentloaded' });
   await p.waitForTimeout(900);
   await p.evaluate(() => { document.querySelectorAll('.reveal').forEach(e => e.classList.add('in')); document.documentElement.style.scrollBehavior='auto'; });
   await p.waitForTimeout(1600);

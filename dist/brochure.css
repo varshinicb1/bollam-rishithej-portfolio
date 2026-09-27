@@ -48,8 +48,15 @@
   --plate-2: #0c1017;
 
   --font-display: 'Bodoni Moda', 'Times New Roman', serif;
-  --font-text: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'DM Mono', ui-monospace, monospace;
+  /* Native system stack: SF Pro on Apple, Segoe UI on Windows, Roboto on
+     Android. Apple's licence does not permit shipping SF as a webfont, and
+     referencing the installed face is both legal and faster — it paints on
+     the first frame with no download and no layout shift. */
+  --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+    'Segoe UI Variable Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', 'Liberation Sans', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'Cascadia Mono',
+    'Segoe UI Mono', 'Roboto Mono', 'Liberation Mono', 'Courier New', monospace;
 
   --t-h1: clamp(2.9rem, 10vw, 7.5rem);
   --t-h2: clamp(1.95rem, 5vw, 3.9rem);
@@ -642,6 +649,27 @@ h2 em {
   font-size: var(--t-small);
   line-height: 1.6;
   color: var(--ink-2);
+}
+
+/* Statutory basis note — reads as a footnote in the register, not a callout. */
+.governance-note {
+  background: transparent;
+  border-left-color: var(--ink-3);
+}
+
+.governance-note strong {
+  display: block;
+  margin-bottom: 6px;
+  font: 500 var(--t-meta) / 1.4 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.governance-note p {
+  font-size: var(--t-meta);
+  line-height: 1.65;
+  color: var(--ink-3);
 }
 
 @media (min-width: 1024px) {

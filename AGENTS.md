@@ -17,19 +17,55 @@ This project is the flagship institutional web presence, venture portfolio, and 
 - **Verified LinkedIn Profile:** `https://www.linkedin.com/in/rishithej-bollam-5b7638362/`
 - **Official Communications:** `rishi@mldynamic.com` &bull; `rishithej@firstsecure.ai`
 
-### Venture Portfolio & Roles (Strict Entity Mapping)
-When referencing or modifying any company details, **ALWAYS** preserve these exact roles and designations:
-1. **Vidyuthlabs Technologies** (`vidyuthlabs.co.in`): Co-Founder. Deep-tech electrochemical sensing instrumentation, micro-electrode arrays, and portable analytical chemistry platforms.
-2. **Predictera** (`predictera.com`): Co-Founder. **DPIIT Recognized Startup (Govt. of India)**. Edge computer vision, camera-to-cognition AI, and real-time spatial video intelligence.
-3. **FirstSecure.ai** (`firstsecure.ai`): Co-Founder & Chief Executive Officer (CEO). Autonomous agentic AI cybersecurity and self-healing SOC defense systems.
-4. **DenyFix.ai**: Co-Founder. Touchless healthcare revenue cycle intelligence and algorithmic insurance claim denial recovery. *(Note: He is Co-Founder of DenyFix.ai, NOT a venture partner or employee).*
-5. **ML Group of Companies / ML Dynamic / ML Capital**: Founder & Managing Director. **DPIIT Recognized Startup (Govt. of India)**. Enterprise digital backbones, sovereign cloud architectures, and proprietary venture capital compounding.
-6. **CXOera**: Chief Executive Officer (CEO). Global executive leadership consortium, board advisory, and sovereign venture syndicates.
-7. **Industrial Assets & Operations**:
-   - **Akshara Groups Bullion:** Precious metals spot bullion trading, vaulting, and wholesale liquidity.
-   - **Jenani Infra:** Heavy civil infrastructure contracting, logistics hubs, and EPC.
-   - **Aditya Trading Company:** Wholesale agricultural commodity supply chain arbitrage.
-   - **RS Food Products:** High-throughput staple milling, packaged consumer foods, and regional distribution.
+### Venture Portfolio & Statutory Roles (MCA / Companies Act, 2013)
+
+Designations on this site are written to withstand a CA/CS review against the
+public MCA21 register. Two rules govern everything:
+
+1. **Section 203(1)** — a whole-time Key Managerial Person (Managing Director,
+   Whole-Time Director, CEO, CFO, Company Secretary) **may not hold office in
+   more than one company at a time**, except in that company's own subsidiary.
+   The single KMP office is **ML Dynamic Solutions**. No other entity on this
+   site may be labelled CEO or Managing Director.
+2. **Section 165** — a person may hold at most 20 directorships (max 10 public).
+   The matrix below is 12, comfortably compliant.
+
+| # | Entity | Statutory designation | Domain |
+|---|---|---|---|
+| 1 | **ML Dynamic Solutions** | **Founder & Managing Director** — *sole s.203 KMP office*. DPIIT Recognized. | Enterprise digital backbones, sovereign cloud architecture |
+| 2 | ML Group of Companies | Promoter & Director | Diversified holding group |
+| 3 | ML Capital | Director — *subsidiary of the KMP company* | Proprietary venture capital compounding |
+| 4 | Vidyuthlabs Technologies (`vidyuthlabs.co.in`) | Co-Founder & Director | Electrochemical sensing, micro-electrode arrays |
+| 5 | Predictera (`predictera.com`) | Co-Founder & Director. DPIIT Recognized. | Edge computer vision, spatial video intelligence |
+| 6 | FirstSecure.ai (`firstsecure.ai`) | Co-Founder & Director | Autonomous agentic AI cyber defence |
+| 7 | DenyFix.ai | Co-Founder & Director *(Co-Founder — NOT a venture partner or employee)* | Touchless healthcare revenue cycle, claim denial recovery |
+| 8 | CXOera | Director | Executive leadership consortium, board advisory |
+| 9 | Akshara Groups Bullion | Director | Spot bullion trading, vaulting, wholesale liquidity |
+| 10 | Jenani Infra | Director | Heavy civil infrastructure, logistics hubs, EPC |
+| 11 | Aditya Trading Company | Director | Wholesale agricultural commodity supply chain |
+| 12 | RS Food Products | Director | Staple milling, packaged consumer foods, distribution |
+
+**Vocabulary discipline**
+
+- **"Founder" / "Co-Founder" are business descriptors, not MCA designations.**
+  Never let one stand alone as the statutory role — always pair it with
+  Director, Managing Director or Promoter.
+- **"Promoter"** is the s.2(69) term for a person who caused the company to be
+  formed. Use it where there is no board seat to claim.
+- An **LLP** takes **Designated Partner** (identifier: LLPIN), never Director.
+  A **proprietorship** takes Proprietor; a **partnership firm** takes Partner or
+  Managing Partner. Neither is a company, and neither has a CIN.
+- **CEO** is only a lawful label where the company has actually designated one
+  under s.2(18) and filed it. Because that office is taken by ML Dynamic
+  Solutions, it must not appear against any other entity — including in `alt`
+  text, image captions, JSON-LD `roleName`, meta descriptions or the brochure.
+- **DIN / CIN / LLPIN are withheld** by the principal's instruction. Do not add
+  them without explicit approval.
+
+**When changing any designation,** update all five surfaces together: the
+venture card in `dist/index.html`, the JSON-LD `worksFor` graph in the same
+file, the company page and spec list in `dist/brochure.html`, any `alt` text
+that names a role, and this table.
 
 ---
 
@@ -78,11 +114,22 @@ unreadable. On paper the accent role is carried by ink, hairline rules, and
 
 1. **Display — `'Bodoni Moda', serif`** (400–900, italic available). Headlines,
    metric numerals, pull-quotes, the wordmark. Use `font-optical-sizing: auto`.
-   The italic is the emphasis device — never outline or hollow type.
-2. **Body & UI — `'Archivo', sans-serif`** (400/500/600/700). Prose, subheads,
-   buttons, labels.
-3. **Metadata & serials — `'DM Mono', monospace`** (400/500). Section slugs,
+   The italic is the emphasis device — never outline or hollow type. This is the
+   **only webfont the site loads**.
+2. **Body & UI — the native system stack.** `-apple-system, BlinkMacSystemFont,
+   'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', Roboto, …` — SF Pro on
+   Apple, Segoe UI on Windows, Roboto on Android. Every reader gets the face
+   their OS hints and renders best, it paints on the first frame, and there is
+   no download and no swap-in shift.
+3. **Metadata & serials — the native mono stack.** `ui-monospace, 'SF Mono',
+   SFMono-Regular, Menlo, 'Cascadia Mono', 'Roboto Mono', …`. Section slugs,
    folios, reference codes, captions, pills, keyboard hints.
+
+> **Apple fonts cannot be self-hosted.** Apple's licence covers interface design
+> on Apple platforms, not webfont embedding. Referencing the installed face
+> through `-apple-system` / `BlinkMacSystemFont` is the supported route and is
+> what this site does. Do not add SF Pro `@font-face` files.
+> Archivo and DM Mono were removed in favour of this stack — do not reinstate them.
 
 Type is fluid via `clamp()` on tokens (`--t-display` … `--t-meta`). **No text
 may compute below 12px at any viewport** — `--t-meta` (13px) is the floor.
@@ -98,10 +145,21 @@ may compute below 12px at any viewport** — `--t-meta` (13px) is the floor.
    - Every art-directed image sets `object-position` to anchor the face.
      Brochure anchors are calibrated per asset (`.photo-ceremonial`,
      `.photo-hero-half`, …) — do not retune them casually.
-   - `hero-half.*` is a **half portrait**: the subject occupies the right ~30%
-     of the frame. Narrow viewports crop horizontally to the face
-     (`aspect-ratio: 5/8; object-position: 100% 16%`); ≥900px restores the full
-     composition at 3/4.
+   - **Overprinting the subject is forbidden; overprinting deliberate negative
+     space is the point.** `hero-exec.*` is composed with the subject in the
+     right third precisely so the headline can occupy the left. Type must never
+     cross him at any width.
+   - **Current portfolio imagery**
+     | Asset | Ratio | Placement | Anchor |
+     |---|---|---|---|
+     | `hero-exec-*` | 16:9 | Hero, full-bleed on a `.tone-dark` block | `76% 22%` phone / `82% center` desktop |
+     | `portrait-seated-*` | 4:5 | Statement (#story), B&W plate | `50% 28%`, capped to 44% on desktop |
+     | `portrait-lobby-*` | 4:5 | Ventures, full-body | `50% 30%` |
+     | `portrait-navy-*` | 4:5 | Closing, on ink | `50% 16%` |
+     | `ml-dynamic-background-*` | 4:3 | Leadership spotlight | `50% 32%` |
+   - `portrait-seated-*` carries a **real dark-grey ground, not a white border** —
+     it must NOT use `mix-blend-mode: multiply`. Multiply is only correct for art
+     whose border is pure white. Check the asset before applying it.
    - `editorial-bw-*` has pure-white borders and blends into paper with
      `mix-blend-mode: multiply`. `portrait-navy-*` has pure-black borders and
      must sit on `--ink-deep` (a `.tone-dark` block or a plate), never on paper.

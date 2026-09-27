@@ -82,7 +82,8 @@ const probe = () => {
         hasTouch: w < 768,
       });
       const page = await ctx.newPage();
-      await page.goto('http://localhost:4321/' + p, { waitUntil: 'load' });
+      // the static server serves clean URLs and 301s away from .html
+      await page.goto('' + (process.env.BASE || 'http://localhost:4399') + '/' + p, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(700);
       // force all reveal animations complete so screenshots show final state
       await page.evaluate(() => {
