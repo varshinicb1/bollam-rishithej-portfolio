@@ -1519,7 +1519,11 @@ p { text-wrap: pretty; }
   gap: var(--stack-4);
   align-items: center;
   padding-block: var(--section-y);
-  background: var(--ink-deep);
+  /* Pure black, NOT --ink-deep. portrait-navy's borders are calibrated to
+     absolute zero rgb(0,0,0); against #05070a that is a measurable delta of
+     22 and the plate reads as a faint rectangle. Matching the image's own
+     ground is what makes the edge disappear. */
+  background: #000;
   overflow: hidden;
 }
 
@@ -2420,4 +2424,42 @@ footer a:hover { border-bottom-color: var(--ink); }
 h2 {
   font-optical-sizing: auto;
   font-variation-settings: normal;
+}
+
+/* ---------------------------------------------------------------------------
+   28  PLATE BLENDING
+   Three plates sat as hard rectangles on the paper. Measured, their edges are
+   busy photographic content (colour spread 38-141) rather than flat studio
+   grounds, so neither `mix-blend-mode: multiply` nor matching a single flat
+   colour can dissolve them — there is no one colour to match.
+
+   What does work regardless of what the edge contains is feathering the plate
+   into the page: the mask fades to transparent, so whatever surface is behind
+   shows through and the join is seamless by construction, on paper or on ink.
+
+   `portrait-navy` in the closing block is deliberately excluded — its edges
+   are already pure black (spread 0, delta 6 from --ink-deep) and calibrated to
+   dissolve into the ink on their own.
+   ------------------------------------------------------------------------ */
+
+.bw-frame img,
+.venture-image img,
+.spotlight-frame img {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  mask-composite: intersect;
+  /* The mask replaces the plate edge, so the fill behind it must go too or it
+     reappears as a rectangle under the feather. */
+  background: transparent;
+}
+
+/* The spotlight badge sits on the image; keep it clear of the feathered edge. */
+.spotlight-badge {
+  left: clamp(20px, 4vw, 40px);
+  bottom: clamp(20px, 4vw, 40px);
 }

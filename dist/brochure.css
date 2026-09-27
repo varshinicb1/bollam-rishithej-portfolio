@@ -425,6 +425,15 @@ h2 em {
   background: var(--plate);
 }
 
+/* The cover carries portrait-navy, whose borders are calibrated to absolute
+   zero rgb(0,0,0). Against --plate (#05070a) that is a delta of 22 and the
+   portrait reads as a rectangle; matching the image's own ground removes it.
+   The other plates hold busy-edged frames and feather via their blend masks. */
+.cover-portrait-frame,
+.cover-portrait-frame img {
+  background: #000;
+}
+
 .panel-photo-hero.portrait-h img,
 .cover-portrait-frame img { aspect-ratio: 4 / 5; }
 

@@ -193,8 +193,16 @@ may compute below 12px at any viewport** — `--t-meta` (13px) is the floor.
      it must NOT use `mix-blend-mode: multiply`. Multiply is only correct for art
      whose border is pure white. Check the asset before applying it.
    - `editorial-bw-*` has pure-white borders and blends into paper with
-     `mix-blend-mode: multiply`. `portrait-navy-*` has pure-black borders and
-     must sit on `--ink-deep` (a `.tone-dark` block or a plate), never on paper.
+     `mix-blend-mode: multiply`. `portrait-navy-*` has borders calibrated to
+     absolute zero `rgb(0,0,0)`, so `.closing` is **pure `#000`, not
+     `--ink-deep`** — at `#05070a` the delta is 22 and the plate reads as a
+     faint rectangle. Never place it on paper.
+   - **The other three plates feather into the page.** Measured, the edges of
+     `portrait-seated`, `portrait-lobby` and `ml-dynamic-background` are busy
+     photographic content (colour spread 38–141), not flat studio grounds, so
+     no blend mode and no single flat colour can dissolve them. They carry a
+     mask that fades to transparent, which matches whatever surface is behind
+     by construction. Do not "simplify" that mask away.
 3. **`img { height: auto }` is mandatory.** Every `<img>` carries `width`/
    `height` attributes, which map to presentational `height` declarations, and
    `aspect-ratio` is ignored unless one axis is `auto`. Omit it and every
