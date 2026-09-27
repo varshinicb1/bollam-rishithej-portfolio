@@ -144,8 +144,16 @@ unreadable. On paper the accent role is carried by ink, hairline rules, and
   word cohesion; all three at once is unreadable. Wide tracking (0.22–0.34em)
   is reserved for decorative, non-reading type: the vertical marginalia, the
   rotating seal, one display eyebrow.
-- **Descriptive phrases belong in the reading face, not tracked uppercase
-  mono.** The serial faces are for serials, folios and reference codes.
+- **Descriptive phrases and designations belong in the reading face, not
+  tracked uppercase mono.** Mono is for serials, folios, reference codes and
+  short taxonomy tags only. Specifically:
+
+  | Element | Face | Why |
+  |---|---|---|
+  | Company name (`.venture-row h3`, `.company-title-meta h3`) | Display (Bodoni, `opsz` pinned) | Primary identifier |
+  | Role line (`.row-role`, `.sign-tag`, `.company-title-meta span`) | Reading face, title case | Read as words, not scanned as a code |
+  | Sector tag (`.row-sector`) | Mono, uppercase | Taxonomy label — the contrast with the role is what gives the row its hierarchy |
+  | Serial / folio / ref (`.section-no`, `.page-serial`, `.row-index`) | Mono, uppercase | Genuine codes |
 - Run `node type_audit.js` after any type or colour change. It reports every
   WCAG AA contrast failure with the measured ratio.
 

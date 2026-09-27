@@ -818,18 +818,25 @@ h2 em {
 
 .company-title-meta { min-width: 0; }
 
-.company-title-meta h2 {
-  font-size: var(--t-h2);
+/* The company name is the primary identifier on a dossier page, so it carries
+   the display face — matching the register on the portfolio. */
+.company-title-meta h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
   color: var(--ink);
 }
 
 .company-title-meta span {
   display: block;
   margin-top: 8px;
-  font: 400 var(--t-meta) / 1.5 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-3);
+  /* Designation line — reading face, title case. Mono uppercase is reserved
+     for serials, folios and reference codes. */
+  font: 500 var(--t-small) / 1.5 var(--font-text);
+  letter-spacing: 0;
+  color: var(--ink-2);
 }
 
 /* ---------------------------------------------------------------------------
@@ -997,4 +1004,27 @@ h2 em {
   .industrial-table tr { break-inside: avoid; }
 
   a { color: #000 !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   14  DIDONE OPTICAL SIZING
+   Same constraint as the portfolio: Bodoni Moda's `opsz` axis means the
+   browser hands a 30px heading the ~22pt DISPLAY cut, whose hairlines are
+   drawn for poster scale and break up at this size. Pin the TEXT cut for
+   every mid-size use; only the cover title and page headlines keep the
+   automatic display cut.
+   ------------------------------------------------------------------------ */
+
+.company-title-meta h3,
+.cover-callout-box p,
+.profile-overview-quote,
+.bar-mark {
+  font-variation-settings: 'opsz' 14;
+  font-optical-sizing: none;
+}
+
+.cover-hero h1,
+.page-primary-content h2 {
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
 }

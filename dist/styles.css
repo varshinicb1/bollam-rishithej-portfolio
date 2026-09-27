@@ -1188,9 +1188,8 @@ p { text-wrap: pretty; }
 }
 
 .row-role {
-  font: 500 var(--t-meta) / 1.4 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 600 var(--t-small) / 1.4 var(--font-text);
+  letter-spacing: 0;
   color: var(--ink-2);
 }
 
@@ -1488,15 +1487,15 @@ p { text-wrap: pretty; }
   margin-top: var(--stack-3);
   padding-top: var(--stack-2);
   border-top: 1px solid var(--rule);
-  font: 500 var(--t-meta) / 1 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 600 var(--t-small) / 1.4 var(--font-text);
+  letter-spacing: 0;
   color: var(--ink);
 }
 
 .sign-tag {
-  font-size: var(--t-meta);
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  font-size: var(--t-small);
+  letter-spacing: 0;
   color: var(--ink-3);
 }
 
