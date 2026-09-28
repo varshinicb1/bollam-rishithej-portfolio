@@ -247,18 +247,50 @@ Rules for this section:
   cards; do not reintroduce per-frame JavaScript here.
 - Logos are **unboxed** and inline at 30px. The emblem-in-a-rounded-square was
   part of the templated look.
-- **Grid placement must be explicit.** Each row has three children. In the
+- **Grid placement must be explicit.** Each row has four children. In the
   720–1023px band the grid has only two columns, so `.row-detail` needs
   `grid-column: 2` — otherwise it auto-places into row 2 **column 1**, the
   46px numeral gutter, and renders as a 46px-wide ribbon ~600px tall. That
   rule must stay scoped to `max-width: 1023.98px`, or it drags the account out
-  of the real third column on desktop.
+  of the real third column on desktop. `.row-panel` is the fourth child and is
+  placed at every width for the same reason: `1 / -1` below 720px, `2 / -1`
+  above it.
+
+**The register is rendered from `src/register.js`, in one place.** Its markup
+ships in two documents — the hand-authored homepage and the generated
+`/ventures` — and they had already drifted (different order, different logo
+paths). `src/build.js` now emits both: `/ventures` at `h2` with the company
+name linked, and the homepage at `h3` with `reveal`, written into
+`dist/index.html` between the `<!-- register:start -->` / `<!-- register:end -->`
+markers inside `.venture-register`. **Do not hand-edit rows in either file**,
+and do not delete those markers — the build throws rather than silently
+leaving a stale register behind.
+
+**Rows expand in place** (`.row-panel`, section 36 of the stylesheet). Built
+the other way round from a normal accordion, and it must stay that way:
+
+- The panel ships **open** in the markup (`aria-expanded="true"`), and CSS
+  collapses it only under `.js`, which the head sets inline before first paint.
+  So the copy is in the crawled HTML, the register reads with scripting off,
+  and nothing flashes open on load. The toggle button is `display: none` until
+  `.js` exists, because without script it would do nothing.
+- The panel is a **subset** of `/ventures/<slug>` — lead and capabilities only.
+  Prose, specifications and related holdings stay on the page, so "Full
+  profile" is always a step up. **Every row keeps its deep link**; those pages
+  are the indexable surface and must not lose their inbound links.
+- `.row-panel-inner` carries **no padding or border**. It is the clip
+  container, and a `0fr` grid track still reserves its padding and border box —
+  with them there the closed panel measured ~15px, not 0.
+- `script.js` sets `panel.inert` while closed. A clipped panel is not hidden:
+  without it a keyboard user tabs into invisible links.
 
 ### 2.36 Site structure — the interior pages are GENERATED
 
 `dist/index.html`, `dist/brochure.html` and `dist/404.html` are hand-authored.
 **Everything else under `dist/` is generated** — do not hand-edit it, the next
-build overwrites it.
+build overwrites it. One exception in the other direction: the build also
+rewrites the **venture register region of `dist/index.html`**, between its
+marker comments. The rest of that file stays hand-authored.
 
     node src/build.js      # about, ventures, ventures/<slug>, journey, media, contact
     node src/sitemap.js    # sitemap.xml, from the routes actually on disk
@@ -268,11 +300,18 @@ build overwrites it.
 - `src/shell.js` owns the head, nav, breadcrumbs and footer for every generated
   page, so they cannot drift apart across a dozen files.
 - `src/interior.css` is the interior-page stylesheet, appended to
-  `dist/styles.css` as section 33.
-- ML Dynamic, ML Group and ML Capital share one brochure page, so its long copy
-  describes the group rather than any one of them. Those three pages therefore
-  carry only their register copy — using the shared prose on all three would
-  misattribute it.
+  `dist/styles.css` as section 33; `src/register.css` is section 36.
+- `src/register.js` owns the register data and markup for both the homepage and
+  `/ventures`, and its `detailFor()` is the single source for what each holding
+  may say about itself — used by the in-page panel **and** the venture page, so
+  a row that expands and the page it links to cannot state different facts.
+- ML Dynamic, ML Group and ML Capital share brochure page-07, so its lead and
+  prose speak for the **group** and cannot be reused verbatim by the
+  subsidiaries. Its two capability cards are the exception: they are titled per
+  arm ("ML Dynamic Enterprise Architecture", "ML Capital Venture Investments"),
+  so each is attributed to the company it names. Everything else on that page
+  stays with ML Group, which is the page's actual subject. This is what
+  `detailFor()` encodes — do not loosen it.
 - `serve.js` mirrors Cloudflare's routing: directory indexes, clean URLs, and
   308s from the `.html` form. Test against it, not a plain static server.
 - `src/crawl.js` walks every internal link and checks status, JSON-LD validity,

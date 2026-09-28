@@ -3,9 +3,11 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "serve", "dist", "-l", "4321"],
-      "port": 4321
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "serve.js"
+      ],
+      "port": 4399
     }
   ]
 }

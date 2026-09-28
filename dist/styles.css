@@ -3461,4 +3461,201 @@ footer a:hover { border-bottom-color: var(--ink); }
     transform: none !important;
     filter: none !important;
   }
+}/* ---------------------------------------------------------------------------
+   36  THE REGISTER EXPANDS IN PLACE
+   Each holding opens where it sits instead of sending the reader to another
+   document. The panel is a SUBSET of /ventures/<slug> — the thesis and the
+   capabilities — so "Full profile" is still a step up, and the per-venture
+   pages keep the inbound links that make them indexable.
+
+   Built the other way round from a normal accordion: the panel ships OPEN in
+   the markup and is collapsed only under `.js`, which the head sets inline
+   before first paint. So the copy is in the crawled HTML, the register still
+   reads with scripting off, and nothing flashes open on load.
+   ------------------------------------------------------------------------ */
+
+/* Without script the button would do nothing, so it is not rendered at all. */
+.row-expand { display: none; }
+.js .row-expand { display: inline-flex; }
+
+/* The button sits in a row of anchors and must match them exactly. `.row-link`
+   already supplies font, size, colour and the drawing-in rule; only the UA
+   button chrome is reset here, and the `font` shorthand is deliberately NOT
+   redeclared so it keeps inheriting from `.row-link`. */
+.row-expand {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* A drawn chevron rather than a glyph: it survives any font stack, and it can
+   rotate through the open state instead of being swapped for a different
+   character. The two hover rules restate the transform because `.row-link:hover
+   ::after` sets `translateX(4px)` and would otherwise flatten the chevron back
+   into a square on hover. */
+.row-expand::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.45s var(--ease);
+}
+
+.row-expand:hover::after { transform: translateY(-2px) rotate(45deg); }
+
+.venture-row.is-open .row-expand::after,
+.venture-row.is-open .row-expand:hover::after {
+  transform: translateY(1px) rotate(225deg);
+}
+
+/* --- The collapse ---------------------------------------------------------
+   `grid-template-rows: 0fr -> 1fr` is the one way to animate to a content-
+   derived height without measuring it in script. The inner element carries the
+   overflow clip; `min-height: 0` is what lets a grid item actually shrink. */
+/* The panel is the row's fourth grid child. `.venture-row` names no template
+   below 720px, so a full span is right there; above it the panel starts in the
+   identity column and runs to the end, clearing the ledger numeral's gutter.
+   This has to be explicit at every width — the register has been bitten once
+   already by a child auto-placing itself into the 46px numeral column. */
+.row-panel { grid-column: 1 / -1; }
+
+@media (min-width: 720px) {
+  .row-panel { grid-column: 2 / -1; }
+}
+
+.js .row-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  /* `.venture-row` is a grid with a row gap, which would still be spent on a
+     zero-height panel and leave a void under the actions. The negative margin
+     cancels the gap while closed and animates away with the panel. */
+  margin-top: calc(var(--stack-2) * -1);
+  transition:
+    grid-template-rows 0.6s var(--ease),
+    margin-top 0.6s var(--ease);
+}
+
+.js .row-panel > .row-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.35s var(--ease-soft), transform 0.5s var(--ease);
+}
+
+.js .venture-row.is-open .row-panel {
+  grid-template-rows: 1fr;
+  margin-top: 0;
+}
+
+/* The content fades in slightly behind the opening edge, so the panel reads as
+   a drawer being pulled rather than a block appearing. */
+.js .venture-row.is-open .row-panel > .row-panel-inner {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+
+/* --- Panel contents ------------------------------------------------------- */
+/* No padding or border on this element: it is the clip container, and a `0fr`
+   grid track still reserves its padding and border box. With them here the
+   closed panel measured ~15px instead of 0 and every row carried a sliver of
+   dead space. The separation when open comes from `.row-detail`'s own gap. */
+.row-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-2);
+}
+
+.row-panel-lead {
+  max-width: 58ch;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.row-cap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 232px), 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.row-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: clamp(16px, 2vw, 24px);
+  background: var(--paper);
+}
+
+.row-cap-num {
+  font: 500 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+.row-cap-title {
+  font-size: var(--t-small);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.row-cap-body {
+  font-size: var(--t-small);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.row-panel-more a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font: 500 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.3s var(--ease-soft), border-color 0.3s;
+}
+
+.row-panel-more a::after {
+  content: '\2192';
+  margin-left: 8px;
+  transition: transform 0.4s var(--ease);
+}
+
+.row-panel-more a:hover,
+.row-panel-more a:focus-visible { color: var(--acid); border-bottom-color: var(--acid); }
+.row-panel-more a:hover::after { transform: translateX(4px); }
+
+/* --- Open state -----------------------------------------------------------
+   The same promotion the principal row gets: a faintly lifted ground and a
+   solid numeral. Nothing is coloured except the numeral, which is the one
+   place the register already spends the accent on interaction. */
+.venture-row.is-open { background: rgba(244, 242, 236, 0.05); }
+.venture-row.is-open .row-index { color: var(--acid); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .row-panel,
+  .js .row-panel > .row-panel-inner,
+  .row-expand::after,
+  .row-panel-more a::after {
+    transition: none;
+  }
+  .js .row-panel > .row-panel-inner { transform: none; }
 }

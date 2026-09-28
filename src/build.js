@@ -6,6 +6,7 @@ const path = require('path');
 const { pages: dossier } = require('./extract');
 const { SITE, page, crumbJsonLd } = require('./shell');
 const { attrs, size } = require('./dims');
+const { VENTURES, detailFor, renderRegister } = require('./register');
 
 const OUT = path.join(__dirname, '..', 'dist');
 const esc = (s) => String(s)
@@ -13,36 +14,9 @@ const esc = (s) => String(s)
 const byId = (id) => dossier.find((p) => p.id === id);
 const PERSON = { '@id': SITE + '/#person' };
 
-// --- The register, mirrored from index.html -------------------------------
-const VENTURES = [
-  { slug: 'ml-dynamic-solutions', name: 'ML Dynamic Solutions', role: 'Founder & Managing Director',
-    sector: 'Technology', dpiit: true, logo: 'assets/ml-dynamic-logo.svg', src: 'page-07',
-    blurb: 'Enterprise AI and technology solutions spanning intelligent automation, digital transformation, and sovereign platforms.' },
-  { slug: 'ml-group-of-companies', name: 'ML Group of Companies', role: 'Promoter & Director',
-    sector: 'Group', dpiit: false, logo: 'assets/ml-group-logo.svg', src: 'page-07',
-    blurb: 'Leading a diversified group built around technology, capital, operations and long-term enterprise value.' },
-  { slug: 'ml-capital', name: 'ML Capital', role: 'Director',
-    sector: 'Capital', dpiit: false, logo: 'assets/ml-capital-logo.svg', src: 'page-07',
-    blurb: 'Capital management shaped by disciplined financial thinking, opportunity evaluation and sustainable growth.' },
-  { slug: 'vidyuthlabs', name: 'VidyuthLabs', role: 'Co-Founder & Director',
-    sector: 'Deep Tech', dpiit: false, logo: 'assets/vidyuthlabs-logo.svg', src: 'page-03',
-    site: 'https://vidyuthlabs.co.in',
-    blurb: 'Making lab-grade electrochemistry portable through handheld analyzers and interchangeable sensors for water, food, soil and industry.' },
-  { slug: 'predictera', name: 'Predictera', role: 'Co-Founder & Director',
-    sector: 'Vision AI', dpiit: true, logo: 'assets/predictera-logo.png', src: 'page-04',
-    site: 'https://predictera.com',
-    blurb: 'Computer vision intelligence platform transforming passive visual infrastructure into real-time operational perception.' },
-  { slug: 'firstsecure-ai', name: 'FirstSecure.ai', role: 'Co-Founder & Director',
-    sector: 'Agentic Cyber', dpiit: false, logo: 'assets/firstsecure-logo.svg', src: 'page-05',
-    site: 'https://firstsecure.ai',
-    blurb: 'Autonomous agentic AI security platform engineering real-time threat detection, investigation, and automated neutralization.' },
-  { slug: 'denyfix-ai', name: 'DenyFix.ai', role: 'Co-Founder & Director',
-    sector: 'Healthcare AI', dpiit: false, logo: 'assets/denyfix-logo.svg', src: 'page-06',
-    blurb: 'An AI-driven platform focused on intelligent denial management and touchless revenue cycle recovery in healthcare.' },
-  { slug: 'cxoera', name: 'CXOera', role: 'Director',
-    sector: 'Enterprise', dpiit: false, logo: 'assets/cxoera-logo.svg', src: 'page-08',
-    blurb: 'A next-generation ecosystem designed around executive leadership and enterprise enablement.' },
-];
+// The register itself (VENTURES) now lives in src/register.js, because its
+// markup ships in two documents — this generator's /ventures and the
+// hand-authored homepage — and the two had already drifted.
 
 const INDUSTRIAL = [
   ['Akshara Groups Bullion', 'Director', 'Spot bullion trading, vaulting and wholesale liquidity.', 'assets/akshara-logo.svg'],
@@ -81,23 +55,10 @@ const head = (label, heading, sub) => '    <section class="page-head">\n' +
   '    </section>';
 
 /* ------------------------------------------------------------- ventures index */
-const ventureRows = VENTURES.map(function (v, i) {
-  return '        <article class="venture-row' + (v.role.indexOf('Managing Director') > -1 ? ' is-principal' : '') + '">\n' +
-    '          <p class="row-index" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</p>\n' +
-    '          <div class="row-identity">\n' +
-    '            <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="row-logo" loading="lazy" decoding="async"' + attrs(v.logo) + '>\n' +
-    '            <h2><a href="/ventures/' + v.slug + '">' + esc(v.name) + '</a></h2>\n' +
-    '            <p class="row-role">' + esc(v.role) + '</p>\n' +
-    '            <p class="row-sector">' + esc(v.sector) + '</p>\n' +
-    (v.dpiit ? '            <span class="row-gov">DPIIT Recognized</span>\n' : '') +
-    '          </div>\n' +
-    '          <div class="row-detail">\n' +
-    '            <p>' + esc(v.blurb) + '</p>\n' +
-    '            <div class="row-actions">\n' +
-    '              <a class="row-link is-primary" href="/ventures/' + v.slug + '">Read more<span class="sr-only"> about ' + esc(v.name) + '</span></a>\n' +
-    (v.site ? '              <a class="row-link" href="' + v.site + '" target="_blank" rel="noopener">Visit site<span class="sr-only"> for ' + esc(v.name) + '</span></a>\n' : '') +
-    '            </div>\n          </div>\n        </article>';
-}).join('\n');
+// The register IS this page, so each company name takes the h2 and carries its
+// own deep link. The homepage renders the same rows at h3 from the same module
+// (see the foot of this file), so the two can no longer drift apart.
+const ventureRows = renderRegister(dossier, { heading: 'h2', linked: true });
 
 const industrialCards = INDUSTRIAL.map(function (row) {
   return '        <article class="industrial-card">\n' +
@@ -132,18 +93,11 @@ write('ventures.html', page({
 
 /* --------------------------------------------------------- per-venture pages */
 VENTURES.forEach(function (v) {
-  const d = byId(v.src) || {};
-  // ML Dynamic, ML Group and ML Capital share one brochure page, so its long
-  // copy describes the group rather than any one of them. Using it on all three
-  // would misattribute; these three carry their register copy only.
-  const shared = ['ml-dynamic-solutions', 'ml-group-of-companies', 'ml-capital'].indexOf(v.slug) > -1;
-  const lead = shared ? v.blurb : (d.lead || v.blurb);
-  const prose = shared ? [] : (d.prose || []);
-  const cards = shared ? [] : (d.cards || []);
-  const specs = shared ? [] : (d.specs || []);
-  const pills = (shared ? [] : (d.pills || [])).filter(function (p) {
-    return p.toLowerCase() !== 'dpiit recognized startup';
-  });
+  // Same source as the expanding panel on the register, so a row that opens in
+  // place and the page it links to can never state different facts. detailFor()
+  // also carries the s.203 attribution rule for the three ML entities.
+  const d = detailFor(v, dossier);
+  const lead = d.lead, prose = d.prose, cards = d.cards, specs = d.specs, pills = d.pills;
 
   const trail = [{ name: 'Home', path: '/' }, { name: 'Ventures', path: '/ventures' },
     { name: v.name, path: '/ventures/' + v.slug }];
@@ -354,6 +308,32 @@ write('contact.html', page({
     '      <p class="contact-note">Office of Bollam Rishithej &bull; Hyderabad, Telangana, India</p>\n' +
     '    </section>',
 }));
+
+/* ------------------------------------------------- the homepage register too */
+// index.html is hand-authored and stays that way — this rewrites ONE region of
+// it, between the two marker comments, and refuses to touch the file if they
+// have gone missing rather than quietly leaving a stale register behind.
+(function injectHomeRegister() {
+  const f = path.join(OUT, 'index.html');
+  const src = fs.readFileSync(f, 'utf8');
+  const START = '<!-- register:start';
+  const END = '<!-- register:end -->';
+  const a = src.indexOf(START);
+  const b = src.indexOf(END, a);
+  if (a < 0 || b < 0) {
+    throw new Error('index.html: register markers missing — refusing to write. ' +
+      'Restore the <!-- register:start --> / <!-- register:end --> pair inside .venture-register.');
+  }
+  const headEnd = src.indexOf('-->', a) + 3;
+  // The homepage keeps the h3 (it sits under the section's own h2) and the
+  // plain name (the deep link is already in the actions row). `reveal` is the
+  // scroll-entrance class the rest of the page uses.
+  const rows = renderRegister(dossier, { heading: 'h3', rowClass: 'reveal' });
+  const nl = src.indexOf('\r\n') > -1 ? '\r\n' : '\n';
+  const out = src.slice(0, headEnd) + nl + rows.split('\n').join(nl) + nl + '        ' + src.slice(b);
+  if (out !== src) fs.writeFileSync(f, out);
+  written.push('index.html (register region)');
+})();
 
 console.log('generated ' + written.length + ' pages:');
 written.forEach(function (w) { console.log('   ' + w); });

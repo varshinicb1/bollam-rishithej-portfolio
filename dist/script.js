@@ -724,4 +724,37 @@
     syncIndex();
   }
 
+  // -------------------------------------------------------------
+  // 12. Venture register — rows expand in place
+  // -------------------------------------------------------------
+  // The panels ship OPEN in the markup (see src/register.js) so the detail is
+  // in the crawled HTML and the register still reads with scripting off. CSS
+  // collapses them under `.js`; this closes the loop by correcting the ARIA
+  // state and making the toggles work. Rows are independent — opening one does
+  // not shut another, which would move the page under a reader mid-scroll.
+  document.querySelectorAll('.venture-row').forEach((row) => {
+    const btn = row.querySelector('.row-expand');
+    const panel = row.querySelector('.row-panel');
+    if (!btn || !panel) return;
+
+    const label = btn.querySelector('.row-expand-label');
+
+    const setOpen = (open) => {
+      row.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      // A collapsed panel is clipped, not hidden, so without this its links
+      // stay in the tab order and a keyboard user tabs into nothing.
+      panel.inert = !open;
+      if (label) label.textContent = open ? 'Show less' : 'Read more';
+    };
+
+    // The markup says expanded because that is the no-script truth; the
+    // stylesheet has already closed it, so correct the state before paint.
+    setOpen(false);
+
+    btn.addEventListener('click', () => {
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+  });
+
 })();
