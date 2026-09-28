@@ -279,6 +279,34 @@ build overwrites it.
   canonical correctness, `h1` count and broken images. Run it after any
   structural change.
 
+### 2.37 Search indexing — what is automatable and what is not
+
+**IndexNow is automated.** `node src/indexnow.js` submits every URL in
+`sitemap.xml` to the IndexNow network — Bing, Yandex, Seznam, Naver, and so
+DuckDuckGo and the engines behind Copilot and ChatGPT search. It reads the URL
+list from the sitemap so the two cannot drift. Run it after any content change.
+
+- The key file `dist/<key>.txt` is **public by protocol design** — IndexNow
+  requires it to be openly readable so engines can verify domain ownership.
+  It is not a secret and belongs in the repository. Do not move it out of
+  `dist/`, and do not rename it without regenerating the key.
+- Cloudflare caches `/assets/*` for 7 days and will cache a 404 for a path that
+  did not exist yet. After deploying a NEW file at a previously-missing path,
+  purge that path or it serves the stale 404 for a week. This bit both the
+  favicon and the IndexNow key file.
+
+**Google is not automatable from here.**
+
+- Google does not participate in IndexNow; it evaluated the protocol in 2022
+  and declined.
+- Google's sitemap ping endpoint was deprecated in 2023 and now returns 404.
+- That leaves Search Console, which requires the principal's Google account.
+  Do not attempt to automate a sign-in.
+- The fastest path: he adds a **Domain** property in Search Console, which
+  issues a `google-site-verification=` TXT record. That token is a public DNS
+  record, not a credential, and can be added to the Cloudflare zone directly.
+  Domain verification covers every subdomain at once.
+
 ### 2.4 Responsive standards
 
 - Breakpoints: **560 / 620 / 720 / 768 / 900 / 1024 / 1280**. Layout is fluid
