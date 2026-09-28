@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { pages: dossier } = require('./extract');
 const { SITE, page, crumbJsonLd } = require('./shell');
+const { attrs, size } = require('./dims');
 
 const OUT = path.join(__dirname, '..', 'dist');
 const esc = (s) => String(s)
@@ -84,7 +85,7 @@ const ventureRows = VENTURES.map(function (v, i) {
   return '        <article class="venture-row' + (v.role.indexOf('Managing Director') > -1 ? ' is-principal' : '') + '">\n' +
     '          <p class="row-index" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</p>\n' +
     '          <div class="row-identity">\n' +
-    '            <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="row-logo" loading="lazy" decoding="async">\n' +
+    '            <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="row-logo" loading="lazy" decoding="async"' + attrs(v.logo) + '>\n' +
     '            <h2><a href="/ventures/' + v.slug + '">' + esc(v.name) + '</a></h2>\n' +
     '            <p class="row-role">' + esc(v.role) + '</p>\n' +
     '            <p class="row-sector">' + esc(v.sector) + '</p>\n' +
@@ -100,7 +101,7 @@ const ventureRows = VENTURES.map(function (v, i) {
 
 const industrialCards = INDUSTRIAL.map(function (row) {
   return '        <article class="industrial-card">\n' +
-    '          <img src="/' + row[3] + '" alt="' + esc(row[0]) + ' logo" class="industrial-logo" loading="lazy" decoding="async">\n' +
+    '          <img src="/' + row[3] + '" alt="' + esc(row[0]) + ' logo" class="industrial-logo" loading="lazy" decoding="async"' + attrs(row[3]) + '>\n' +
     '          <h3>' + esc(row[0]) + '</h3>\n' +
     '          <p class="row-role">' + esc(row[1]) + '</p>\n' +
     '          <p>' + esc(row[2]) + '</p>\n        </article>';
@@ -148,7 +149,7 @@ VENTURES.forEach(function (v) {
     { name: v.name, path: '/ventures/' + v.slug }];
 
   let body = '    <section class="venture-head">\n' +
-    '      <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="venture-head-logo" decoding="async">\n' +
+    '      <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="venture-head-logo" decoding="async"' + attrs(v.logo) + '>\n' +
     '      <p class="section-no">[ ' + esc(v.sector.toUpperCase()) + ' ]</p>\n' +
     '      <h1>' + esc(v.name) + '</h1>\n' +
     '      <p class="venture-head-role">' + esc(v.role) +
@@ -289,10 +290,21 @@ write('media.html', page({
     { '@type': 'WebPage', '@id': SITE + '/media#page', url: SITE + '/media',
       name: 'Media Kit — Bollam Rishithej', about: PERSON,
       image: PRESS_IMAGES.map(function (row) {
+        const d = size(row[0] + '.' + row[1]) || [];
         return { '@type': 'ImageObject', contentUrl: SITE + '/assets/' + row[0] + '.' + row[1],
+          url: SITE + '/assets/' + row[0] + '.' + row[1],
           name: 'Bollam Rishithej — ' + row[2],
           caption: 'Bollam Rishithej, Founder and Managing Director of ML Dynamic Solutions. ' + row[2] + '.',
-          about: PERSON, creditText: 'Bollam Rishithej', copyrightNotice: '(c) Bollam Rishithej' };
+          description: 'Bollam Rishithej (Rishithej Bollam), Indian deep-tech founder and Managing Director of ML Dynamic Solutions, Hyderabad. ' + row[2] + '.',
+          width: d[0], height: d[1],
+          about: PERSON, creator: PERSON,
+          creditText: 'Bollam Rishithej',
+          copyrightNotice: '(c) Bollam Rishithej',
+          // license + acquireLicensePage are what qualify an image for the
+          // "Licensable" badge in Google Images, which is a real visibility lift.
+          license: SITE + '/media',
+          acquireLicensePage: SITE + '/contact',
+          representativeOfPage: row[0].indexOf('founder-managing-director') > -1 };
       }) },
   ] },
   body: head('MEDIA', 'Media kit',
@@ -305,7 +317,7 @@ write('media.html', page({
     '    <section class="media-images">\n      <p class="section-no">[ PHOTOGRAPHS ]</p>\n      <div class="media-grid">\n' +
     PRESS_IMAGES.map(function (row) {
       return '        <figure class="media-item">\n' +
-        '          <img src="/assets/' + row[0] + '.' + row[1] + '" alt="Bollam Rishithej — ' + esc(row[2]) + '" loading="lazy" decoding="async">\n' +
+        '          <img src="/assets/' + row[0] + '.' + row[1] + '" alt="Bollam Rishithej — ' + esc(row[2]) + '" loading="lazy" decoding="async"' + attrs(row[0] + '.' + row[1]) + '>\n' +
         '          <figcaption>\n            <span>' + esc(row[2]) + '</span>\n' +
         '            <a href="/assets/' + row[0] + '.' + row[1] + '" download>Download ' + row[3] + '</a>\n' +
         '          </figcaption>\n        </figure>';
