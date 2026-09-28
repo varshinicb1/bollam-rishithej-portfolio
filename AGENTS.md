@@ -12,8 +12,8 @@ This project is the flagship institutional web presence, venture portfolio, and 
 - **Name:** Bollam Rishithej
 - **Academic Foundation:** MSc in Advanced Mechanical Engineering with Management, University of Leicester (United Kingdom) &bull; B.Tech Mechanical Engineering
 - **Overarching Vision:** *"Build the best startup ecosystem in India and build for the world from India."*
-- **Official Portfolio URL:** `https://bollam-rishithej.pages.dev/`
-- **Official Brochure / Dossier URL:** `https://bollam-rishithej.pages.dev/brochure.html`
+- **Official Portfolio URL:** `https://bollamrishithej.com/`
+- **Official Brochure / Dossier URL:** `https://bollamrishithej.com/brochure.html`
 - **Verified LinkedIn Profile:** `https://www.linkedin.com/in/rishithej-bollam-5b7638362/`
 - **Official Communications:** `rishi@mldynamic.com` &bull; `rishithej@firstsecure.ai`
 

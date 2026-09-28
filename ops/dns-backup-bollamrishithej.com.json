@@ -1,0 +1,13 @@
+{
+  "note": "DNS on bollamrishithej.com immediately before cutting the apex from Hostinger to Cloudflare Pages, 2026-09-28. Restore these to put the previous Hostinger-hosted site back. ftp.* is unrelated to web hosting and is left in place.",
+  "zone": "bollamrishithej.com",
+  "zone_id": "4e7ae77d23396828df39eb88b0efb82d",
+  "records": [
+    { "id": "a61db4a10b68bb83daa1c1841b49303d", "type": "A", "name": "bollamrishithej.com", "content": "212.1.212.124", "proxied": true, "ttl": 1 },
+    { "id": "d962f511f21321b3dd997f236fc3835a", "type": "A", "name": "bollamrishithej.com", "content": "191.101.104.185", "proxied": true, "ttl": 1 },
+    { "id": "3dd5da79ed838f59952d87e2495956ce", "type": "AAAA", "name": "bollamrishithej.com", "content": "2a02:4780:1d:64d7:ac9a:91de:ac93:a4cf", "proxied": true, "ttl": 1 },
+    { "id": "0459097466557dd83f62570e9408acd7", "type": "AAAA", "name": "bollamrishithej.com", "content": "2a02:4780:22:6ba7:cdb6:465b:4d1d:b1b2", "proxied": true, "ttl": 1 },
+    { "id": "eb49309cb8d65aa9440e7cb2f769ad29", "type": "CNAME", "name": "www.bollamrishithej.com", "content": "www.bollamrishithej.com.cdn.hstgr.net", "proxied": true, "ttl": 1 },
+    { "id": "910b75e34f2903f0eaa84a408e22de06", "type": "A", "name": "ftp.bollamrishithej.com", "content": "82.180.142.59", "proxied": true, "ttl": 1, "kept": true }
+  ]
+}

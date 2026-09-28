@@ -2,8 +2,8 @@
 
 Institutional personal portfolio, venture platform, and executive monograph for **Bollam Rishithej** — Founder, Chief Executive Officer, and Principal Investor across deep technology, autonomous artificial intelligence, and heavy sovereign industrial operations.
 
-🌐 **Live Portfolio:** [https://bollam-rishithej.pages.dev/](https://bollam-rishithej.pages.dev/)  
-📑 **Executive Monograph (Web):** [https://bollam-rishithej.pages.dev/brochure.html](https://bollam-rishithej.pages.dev/brochure.html)  
+🌐 **Live Portfolio:** [https://bollamrishithej.com/](https://bollamrishithej.com/)  
+📑 **Executive Monograph (Web):** [https://bollamrishithej.com/brochure.html](https://bollamrishithej.com/brochure.html)  
 💼 **Verified LinkedIn:** [https://www.linkedin.com/in/rishithej-bollam-5b7638362/](https://www.linkedin.com/in/rishithej-bollam-5b7638362/)
 
 ---

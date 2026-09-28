@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://bollam-rishithej.pages.dev/</loc>
+    <loc>https://bollamrishithej.com/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://bollam-rishithej.pages.dev/assets/hero-exec.jpg</image:loc>
+      <image:loc>https://bollamrishithej.com/assets/hero-exec.jpg</image:loc>
       <image:title>Bollam Rishithej — Founder and Managing Director</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://bollam-rishithej.pages.dev/brochure</loc>
+    <loc>https://bollamrishithej.com/brochure</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://bollam-rishithej.pages.dev/assets/portrait-navy.jpg</image:loc>
+      <image:loc>https://bollamrishithej.com/assets/portrait-navy.jpg</image:loc>
       <image:title>Bollam Rishithej — Executive Monograph</image:title>
     </image:image>
   </url>
