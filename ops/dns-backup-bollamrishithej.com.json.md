@@ -23,3 +23,18 @@ the old site's files — only DNS moved.
 Apex. Every canonical, `og:url`, sitemap entry and JSON-LD `@id` points at
 `https://bollamrishithej.com`. Do not reintroduce `pages.dev` URLs into the
 markup; the `*.pages.dev` subdomain still resolves but is not canonical.
+
+## Update — ftp record removed
+
+`A ftp.bollamrishithej.com -> 82.180.142.59` (Hostinger FTP) was deleted on
+2026-09-28, after the web cutover. It is preserved in the JSON backup alongside
+the web records and can be recreated the same way.
+
+Note this does not remove FTP access to the Hostinger account — that is reached
+via Hostinger's own hostname or IP from hPanel, not through this zone. Only the
+vanity `ftp.` alias on this domain is gone.
+
+The zone is now exactly two records, both pointing at Cloudflare Pages:
+
+    CNAME bollamrishithej.com      -> bollam-rishithej.pages.dev  (proxied)
+    CNAME www.bollamrishithej.com  -> bollam-rishithej.pages.dev  (proxied)

@@ -8,6 +8,6 @@
     { "id": "3dd5da79ed838f59952d87e2495956ce", "type": "AAAA", "name": "bollamrishithej.com", "content": "2a02:4780:1d:64d7:ac9a:91de:ac93:a4cf", "proxied": true, "ttl": 1 },
     { "id": "0459097466557dd83f62570e9408acd7", "type": "AAAA", "name": "bollamrishithej.com", "content": "2a02:4780:22:6ba7:cdb6:465b:4d1d:b1b2", "proxied": true, "ttl": 1 },
     { "id": "eb49309cb8d65aa9440e7cb2f769ad29", "type": "CNAME", "name": "www.bollamrishithej.com", "content": "www.bollamrishithej.com.cdn.hstgr.net", "proxied": true, "ttl": 1 },
-    { "id": "910b75e34f2903f0eaa84a408e22de06", "type": "A", "name": "ftp.bollamrishithej.com", "content": "82.180.142.59", "proxied": true, "ttl": 1, "kept": true }
+    { "id": "910b75e34f2903f0eaa84a408e22de06", "type": "A", "name": "ftp.bollamrishithej.com", "content": "82.180.142.59", "proxied": true, "ttl": 1, "removed": "2026-09-28, after the web cutover; pointed at Hostinger FTP and had no remaining purpose" }
   ]
 }
