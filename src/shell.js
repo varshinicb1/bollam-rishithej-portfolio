@@ -39,7 +39,9 @@ function head({ title, description, path, image, imageAlt, jsonld, noindex }) {
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${SITE}${img}">
   <meta name="twitter:image:alt" content="${imageAlt || 'Bollam Rishithej'}">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/bollam-rishithej-icon-32.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/bollam-rishithej-icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/bollam-rishithej-icon-96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/bollam-rishithej-icon-192.png">
   <link rel="apple-touch-icon" href="/assets/bollam-rishithej-apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
