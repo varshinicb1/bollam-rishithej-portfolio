@@ -2575,3 +2575,76 @@ h2 {
 
   .timeline article::after { transform: scaleX(1) !important; }
 }
+
+/* ---------------------------------------------------------------------------
+   30  NOT FOUND
+   Cloudflare Pages answers unmatched paths with index.html at HTTP 200 unless
+   a 404.html exists — a soft 404, which search engines read as a thin
+   duplicate of the homepage and which hides genuinely broken links.
+   ------------------------------------------------------------------------ */
+
+.notfound-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.notfound {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--stack-3);
+  padding: calc(var(--nav-h) + var(--section-y)) var(--gutter) var(--section-y);
+  max-width: var(--shell);
+  margin-inline: auto;
+  width: 100%;
+}
+
+.notfound h1 {
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  line-height: 0.92;
+}
+
+.notfound-note {
+  max-width: 46ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.notfound-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-top: var(--stack-2);
+}
+
+.notfound-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--tap);
+  padding: 12px 22px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font: 500 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: background 0.35s var(--ease-soft), color 0.35s var(--ease-soft),
+    border-color 0.35s var(--ease-soft);
+}
+
+.notfound-link.is-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.notfound-link.is-primary:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.notfound-link:not(.is-primary):hover { border-color: var(--ink); }
