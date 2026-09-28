@@ -3194,3 +3194,271 @@ footer a:hover { border-bottom-color: var(--ink); }
 
 /* --- Current page in the drawer --- */
 .nav-link.active { color: var(--acid); }
+
+/* ---------------------------------------------------------------------------
+   34  CINEMATIC DEPTH
+   The page was elegant but flat: paper, hairlines, black text, no dimension.
+   This section adds light and depth without touching the palette — every
+   shadow is the ink token at low alpha, every wash is a gradient of surfaces
+   already in the system. No new colour is introduced.
+   ------------------------------------------------------------------------ */
+
+:root {
+  /* Layered rather than single shadows. One large blur reads as a smudge; a
+     tight contact shadow plus a wide ambient one reads as an object sitting
+     on a surface. */
+  --lift-1:
+    0 1px 2px rgba(11, 13, 17, 0.04),
+    0 2px 8px rgba(11, 13, 17, 0.04);
+  --lift-2:
+    0 1px 2px rgba(11, 13, 17, 0.05),
+    0 6px 16px rgba(11, 13, 17, 0.06),
+    0 14px 40px rgba(11, 13, 17, 0.05);
+  --lift-3:
+    0 2px 4px rgba(11, 13, 17, 0.06),
+    0 12px 32px rgba(11, 13, 17, 0.09),
+    0 32px 72px rgba(11, 13, 17, 0.07);
+  --glass: color-mix(in srgb, var(--paper-raised) 74%, transparent);
+  --sheet-radius: clamp(20px, 3vw, 40px);
+}
+
+.tone-dark {
+  --lift-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --lift-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.4);
+  --lift-3: 0 4px 10px rgba(0, 0, 0, 0.5), 0 24px 64px rgba(0, 0, 0, 0.5);
+  --glass: rgba(17, 21, 29, 0.66);
+}
+
+/* --- Atmosphere -----------------------------------------------------------
+   A slow light wash behind the paper sections. Barely perceptible alone; what
+   it removes is the sense of printing on flat card stock. */
+.statement,
+.principles,
+.metrics,
+.ventures,
+.journey,
+.executive-spotlight,
+.contact,
+.subpage main > section {
+  position: relative;
+  isolation: isolate;
+}
+
+.statement::before,
+.principles::before,
+.metrics::before,
+.journey::before,
+.executive-spotlight::before,
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 18% 0%, rgba(255, 255, 255, 0.75), transparent 62%),
+    radial-gradient(90% 60% at 92% 100%, rgba(11, 13, 17, 0.045), transparent 66%);
+}
+
+/* --- The sheet transition -------------------------------------------------
+   Paper slides up over the dark hero on a rounded edge with a cast shadow.
+   This single move does more for perceived depth than anything else here:
+   two planes at different heights, rather than two colours meeting on a line. */
+.statement {
+  margin-top: calc(var(--sheet-radius) * -1.15);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  border-top: none;
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.38);
+  z-index: 2;
+}
+
+/* Same move where the dark venture block ends and paper resumes. */
+.journey {
+  margin-top: calc(var(--sheet-radius) * -1.15);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.34);
+  z-index: 2;
+}
+
+/* And where paper gives way to the closing plate. */
+.closing {
+  margin-top: calc(var(--sheet-radius) * -1.15);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  box-shadow: 0 -18px 50px rgba(11, 13, 17, 0.14);
+  z-index: 2;
+}
+
+.venture-list {
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  margin-top: calc(var(--sheet-radius) * -1.15);
+  box-shadow: 0 -18px 50px rgba(11, 13, 17, 0.16);
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Plates gain weight --------------------------------------------------- */
+.bw-frame,
+.venture-image,
+.spotlight-frame,
+.about-portrait img,
+.media-item img {
+  box-shadow: var(--lift-3);
+}
+
+/* The feathered plates mask their own edges, so a box-shadow would trace a
+   hard rectangle outside the soft edge. They get a drop-shadow filter, which
+   follows the alpha channel instead. */
+.bw-frame,
+.venture-image,
+.spotlight-frame {
+  box-shadow: none;
+  filter: drop-shadow(0 18px 44px rgba(11, 13, 17, 0.16));
+}
+
+/* --- Surfaces ------------------------------------------------------------- */
+.metrics-grid,
+.capability-grid,
+.industrial-grid {
+  box-shadow: var(--lift-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.venture-row,
+.related-card,
+.spec-card,
+.institutional-panel {
+  transition: background 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft),
+    transform 0.5s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .related-card:hover,
+  .metric-card:hover {
+    box-shadow: var(--lift-2);
+    transform: translateY(-3px);
+  }
+}
+
+/* --- Glass ---------------------------------------------------------------- */
+.contact-badge,
+.tags span,
+.dossier-pill,
+.row-gov {
+  background: var(--glass);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  box-shadow: var(--lift-1);
+}
+
+.copy-email-btn,
+.notfound-link.is-primary,
+.btn-dossier {
+  box-shadow: var(--lift-2);
+}
+
+/* --- The principles row, which was the flattest thing on the page ---------- */
+.principle-row {
+  padding-inline: clamp(14px, 2vw, 28px);
+  border-radius: var(--radius);
+  transition: background 0.45s var(--ease-soft), box-shadow 0.45s var(--ease-soft);
+}
+
+.principle-row span {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-3);
+  transition: color 0.4s var(--ease-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .principle-row:hover {
+    background: var(--paper-raised);
+    box-shadow: var(--lift-2);
+  }
+  .principle-row:hover span { color: var(--ink); }
+}
+
+/* --- Type gets more scale contrast ----------------------------------------
+   The hero headline is NOT enlarged here. Its column is capped at 56% so the
+   type never crosses the subject, and the hero clips overflow — push the size
+   past that measure and "industries." loses its last glyphs. The drama in the
+   hero comes from the plate and the sheet transition instead. */
+.metric-num,
+.metric-text { font-size: clamp(3rem, 6.5vw, 5.5rem); }
+
+/* ---------------------------------------------------------------------------
+   35  SCROLL CHOREOGRAPHY
+   All of it runs on native scroll timelines or the compositor, so nothing here
+   costs main-thread work, and all of it is inside prefers-reduced-motion.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    /* The hero recedes as the sheet rises over it — the two planes separate
+       instead of one simply scrolling away.
+       Selector must match `.js .hero-image img` from the entrance section:
+       that rule is more specific, so a bare `.hero-image img` here loses
+       regardless of order and the recede silently never runs. Both the
+       entrance and the scroll-linked recede are declared together. */
+    .js .hero-image img {
+      animation: hero-settle 1.9s var(--ease) both,
+                 aperture 1.5s var(--ease) both,
+                 hero-recede linear both;
+      animation-timeline: auto, auto, view(block);
+      animation-range: normal, normal, exit 0% exit 100%;
+    }
+
+    /* Sections arrive slightly lifted and settle. */
+    .metrics-grid,
+    .capability-grid,
+    .industrial-grid,
+    .bw-frame,
+    .venture-image,
+    .spotlight-frame {
+      animation: settle linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 44%;
+    }
+
+    /* Principle rows deal in one after another. */
+    .principle-row {
+      animation: row-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 6% entry 48%;
+    }
+  }
+}
+
+@keyframes hero-recede {
+  from { transform: scale(1); filter: brightness(1); }
+  to   { transform: scale(1.12); filter: brightness(0.55); }
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(30px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes row-arrive {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image img,
+  .metrics-grid,
+  .capability-grid,
+  .industrial-grid,
+  .bw-frame,
+  .venture-image,
+  .spotlight-frame,
+  .principle-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

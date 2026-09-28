@@ -307,6 +307,31 @@ list from the sitemap so the two cannot drift. Run it after any content change.
   record, not a credential, and can be added to the Cloudflare zone directly.
   Domain verification covers every subdomain at once.
 
+### 2.38 Depth — how the page gets its dimension
+
+`src/depth.css` is appended to `dist/styles.css` as sections 34-35. It adds
+light and depth **without introducing any new colour**: every shadow is the ink
+token at low alpha, every wash is a gradient of surfaces already in the system.
+
+- **Shadows are layered, never single.** One large blur reads as a smudge; a
+  tight contact shadow plus a wide ambient one reads as an object on a surface.
+  Use `--lift-1/2/3`, which invert automatically under `.tone-dark`.
+- **The sheet transition is the main move.** Paper rises over the dark hero on
+  a rounded top edge with a cast shadow — two planes at different heights
+  rather than two colours meeting on a line. Applied at `.statement`,
+  `.venture-list`, `.journey` and `.closing` via a negative top margin.
+- **Feathered plates use `drop-shadow`, not `box-shadow`.** `box-shadow` traces
+  the element's box, which would draw a hard rectangle outside the soft masked
+  edge; `drop-shadow` follows the alpha channel.
+- **Do NOT enlarge the hero headline.** Its column is capped at 56% so the type
+  never crosses the subject, and `.hero` clips overflow — pushing the size past
+  that measure silently eats the last glyphs of "industries."
+- **Specificity trap:** the hero entrance is declared as `.js .hero-image img`.
+  Any later rule adding an animation to the hero plate must match that
+  specificity and re-declare *all* of its animations together, or it loses and
+  silently never runs. Verify with `node src/fxcheck.js`, which reports which
+  timeline each animation is actually bound to.
+
 ### 2.4 Responsive standards
 
 - Breakpoints: **560 / 620 / 720 / 768 / 900 / 1024 / 1280**. Layout is fluid
