@@ -61,7 +61,14 @@
    identity column and runs to the end, clearing the ledger numeral's gutter.
    This has to be explicit at every width — the register has been bitten once
    already by a child auto-placing itself into the 46px numeral column. */
-.row-panel { grid-column: 1 / -1; }
+.row-panel {
+  grid-column: 1 / -1;
+  /* `.venture-row` only sets `align-items: start` at 1024px and up; below that
+     its grid items stretch. A stretched panel does not collapse to nothing —
+     it is pulled back up to the track, and every closed row carried a 14px
+     sliver. Measure collapsed heights BELOW 1024, not just on desktop. */
+  align-self: start;
+}
 
 @media (min-width: 720px) {
   .row-panel { grid-column: 2 / -1; }
