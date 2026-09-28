@@ -50,12 +50,15 @@ http.createServer((req, res) => {
   //   /about     -> about/index.html   (directory index)
   //   /brochure  -> brochure.html      (sibling .html)
   if (!path.extname(file)) {
-    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
+    // Precedence matters: /ventures is BOTH ventures.html and a ventures/
+    // directory holding the per-venture pages. Cloudflare serves the flat file,
+    // so try that first; only fall back to a directory index.
+    const withExt = safeResolve(file + '.html');
+    if (withExt && fs.existsSync(withExt)) {
+      file = withExt;
+    } else if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
       const idx = safeResolve(path.join(file, 'index.html'));
       if (idx && fs.existsSync(idx)) file = idx;
-    } else if (!fs.existsSync(file)) {
-      const withExt = safeResolve(file + '.html');
-      if (withExt && fs.existsSync(withExt)) file = withExt;
     }
   }
 
