@@ -116,10 +116,13 @@ unreadable. On paper the accent role is carried by ink, hairline rules, and
 
 ### 2.2 Typography
 
-1. **Display — `'Bodoni Moda', serif`** (400–900, italic available). Headlines,
-   metric numerals, pull-quotes, the wordmark. Use `font-optical-sizing: auto`.
-   The italic is the emphasis device — never outline or hollow type. This is the
-   **only webfont the site loads**.
+1. **Display — the native system stack**, SF Pro Display first. Headlines,
+   metric numerals, pull-quotes, the wordmark. A grotesque tightens as it
+   grows, so display sizes carry `letter-spacing` of -0.03em to -0.045em.
+   Emphasis is **weight and tone** (300 + `--ink-3`), never italic — SF's
+   italic is weak at display size.
+   **The site loads no webfonts at all.** Bodoni Moda was removed; do not
+   reintroduce it or any `@font-face`.
 2. **Body & UI — the native system stack.** `-apple-system, BlinkMacSystemFont,
    'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', Roboto, …` — SF Pro on
    Apple, Segoe UI on Windows, Roboto on Android. Every reader gets the face

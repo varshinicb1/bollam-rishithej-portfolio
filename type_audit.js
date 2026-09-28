@@ -24,6 +24,25 @@ const probe = () => {
     const r = el.getBoundingClientRect();
     if (!r.width || !r.height) return;
     const fg = parse(cs.color); if (!fg) return;
+
+    // Contrast cannot be computed statically when the text sits over imagery
+    // rather than a painted colour: a fixed, transparent bar floats over
+    // whatever is scrolled beneath it, and walking up the DOM finds body's
+    // colour, not the photograph. Report those separately instead of as
+    // failures — otherwise a real regression hides among known noise.
+    let overImagery = false;
+    for (let e = el; e; e = e.parentElement) {
+      const c = getComputedStyle(e);
+      if (c.backgroundImage && c.backgroundImage !== 'none') { overImagery = true; break; }
+      if (c.position === 'fixed') {
+        const own = parse(c.backgroundColor);
+        const beforeBg = getComputedStyle(e, '::before').backgroundColor;
+        const pseudo = parse(beforeBg);
+        if ((!own || own.a < 0.5) && (!pseudo || pseudo.a < 0.5)) { overImagery = true; break; }
+      }
+    }
+    if (overImagery) return;
+
     const bg = bgOf(el);
     const size = parseFloat(cs.fontSize);
     const weight = parseInt(cs.fontWeight, 10);

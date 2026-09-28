@@ -3,22 +3,49 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://bollamrishithej.com/</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://bollamrishithej.com/assets/hero-exec.jpg</image:loc>
-      <image:title>Bollam Rishithej — Founder and Managing Director</image:title>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-founder-managing-director.jpg</image:loc>
+      <image:title>Bollam Rishithej — Founder and Managing Director, ML Dynamic Solutions</image:title>
+      <image:caption>Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, at a city-facing executive office in Hyderabad.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-executive-portrait.jpg</image:loc>
+      <image:title>Bollam Rishithej — executive portrait</image:title>
+      <image:caption>Black and white executive portrait of Bollam Rishithej, founder and director across deep-tech and industrial ventures.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-corporate-portrait.jpg</image:loc>
+      <image:title>Bollam Rishithej — corporate portrait</image:title>
+      <image:caption>Bollam Rishithej, Rishithej Bollam, photographed in a corporate lobby in Hyderabad, India.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-formal-portrait.jpg</image:loc>
+      <image:title>Bollam Rishithej — formal portrait</image:title>
+      <image:caption>Formal studio portrait of Bollam Rishithej, Managing Director of ML Dynamic Solutions.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-ml-group-headquarters.jpg</image:loc>
+      <image:title>Bollam Rishithej at ML Group headquarters</image:title>
+      <image:caption>Bollam Rishithej at the ML Group of Companies headquarters.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://bollamrishithej.com/brochure</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://bollamrishithej.com/assets/portrait-navy.jpg</image:loc>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-formal-portrait.jpg</image:loc>
       <image:title>Bollam Rishithej — Executive Monograph</image:title>
+      <image:caption>Executive monograph and venture dossier of Bollam Rishithej.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-convocation-565.webp</image:loc>
+      <image:title>Bollam Rishithej — University of Leicester convocation</image:title>
+      <image:caption>Bollam Rishithej at University of Leicester convocation, MSc Advanced Mechanical Engineering with Management.</image:caption>
     </image:image>
   </url>
 </urlset>

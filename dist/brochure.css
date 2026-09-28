@@ -48,7 +48,12 @@
   --plate: #05070a;      /* photographic plate stock */
   --plate-2: #0c1017;
 
-  --font-display: 'Bodoni Moda', 'Times New Roman', serif;
+  /* Apple type throughout. SF Pro Display on Apple, Segoe UI Variable
+     Display on Windows, Roboto on Android. No webfont is loaded at all
+     now, so first paint carries the final type. */
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Segoe UI Variable Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   /* Native system stack: SF Pro on Apple, Segoe UI on Windows, Roboto on
      Android. Apple's licence does not permit shipping SF as a webfont, and
      referencing the installed face is both legal and faster — it paints on
@@ -318,9 +323,9 @@ h4 { font-size: var(--t-h4); }
 
 h1 em,
 h2 em {
-  font-style: italic;
-  font-weight: 500;
-  color: var(--ink-2);
+  font-style: normal;
+  font-weight: 300;
+  color: var(--ink-3);
 }
 
 .page-primary-content h2 {
@@ -1016,24 +1021,20 @@ h2 em {
 }
 
 /* ---------------------------------------------------------------------------
-   14  DIDONE OPTICAL SIZING
-   Same constraint as the portfolio: Bodoni Moda's `opsz` axis means the
-   browser hands a 30px heading the ~22pt DISPLAY cut, whose hairlines are
-   drawn for poster scale and break up at this size. Pin the TEXT cut for
-   every mid-size use; only the cover title and page headlines keep the
-   automatic display cut.
+   14  DISPLAY TYPE
+   The optical-size pins here were for Bodoni's hairlines and are no longer
+   needed. A grotesque tightens as it grows instead.
    ------------------------------------------------------------------------ */
 
 .company-title-meta h3,
 .cover-callout-box p,
 .profile-overview-quote,
-.bar-mark {
-  font-variation-settings: 'opsz' 14;
-  font-optical-sizing: none;
-}
-
+.bar-mark,
 .cover-hero h1,
 .page-primary-content h2 {
-  font-optical-sizing: auto;
   font-variation-settings: normal;
+  font-optical-sizing: auto;
 }
+
+.cover-hero h1 { letter-spacing: -0.04em; }
+.company-title-meta h3 { letter-spacing: -0.03em; }

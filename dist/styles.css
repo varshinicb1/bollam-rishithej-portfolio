@@ -55,7 +55,12 @@
   --ink-deep: #05070a;     /* the canonical dark block background */
 
   /* --- Type families --- */
-  --font-display: 'Bodoni Moda', 'Times New Roman', serif;
+  /* Apple type throughout. SF Pro Display on Apple, Segoe UI Variable
+     Display on Windows, Roboto on Android. No webfont is loaded at all
+     now, so first paint carries the final type. */
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Segoe UI Variable Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   /* Native system stack: SF Pro on Apple, Segoe UI on Windows, Roboto on
      Android. Apple's licence does not permit shipping SF as a webfont, and
      referencing the installed face is both legal and faster — it paints on
@@ -261,10 +266,11 @@ footer {
 
 h1, h2 {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
   font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  line-height: 1.04;
+  /* Grotesques tighten as they grow; the didone's -0.02em is far too loose at
+     display size for SF. */
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -286,9 +292,9 @@ h4 { font-size: var(--t-h4); }
 h1 em,
 h2 em,
 h2 span {
-  font-style: italic;
-  font-weight: 500;
-  color: var(--ink-2);
+  font-style: normal;
+  font-weight: 300;
+  color: var(--ink-3);
 }
 
 p { text-wrap: pretty; }
@@ -1282,15 +1288,19 @@ p { text-wrap: pretty; }
   .venture-row:hover .row-index { color: var(--acid); }
 }
 
-/* The sole s.203 KMP office is the one holding with statutory weight, so it is
-   the only row given any promotion — a rule, not a colour. */
-.venture-row.is-principal { border-left: 2px solid var(--acid); }
+/* The sole s.203 KMP office is the one holding with statutory weight. A green
+   bar down the side read as a highlighter mark rather than as hierarchy, so
+   the promotion is typographic instead: the row sits on a faintly lifted
+   ground and its numeral goes solid. Nothing is coloured. */
+.venture-row.is-principal {
+  background: rgba(244, 242, 236, 0.045);
+}
 
-@media (min-width: 720px) {
-  .venture-row.is-principal {
-    border-left: none;
-    box-shadow: inset 2px 0 0 var(--acid);
-  }
+.venture-row.is-principal .row-index { color: var(--ink); }
+
+.venture-row.is-principal .row-role {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 /* --- Register grid --- */
@@ -2387,16 +2397,10 @@ footer a:hover { border-bottom-color: var(--ink); }
 .section-index.on-dark a.active { color: var(--acid); }
 
 /* ---------------------------------------------------------------------------
-   27  DIDONE OPTICAL SIZING
-   Bodoni Moda is a variable didone with an `opsz` axis from 6 to 96. Under
-   `font-optical-sizing: auto` the browser feeds it the rendered size, so a
-   40px numeral gets the ~30pt DISPLAY cut — whose hairlines are drawn to be
-   thin at poster scale and simply drop out at UI sizes. That is why "4" lost
-   its bar and "MSc" looked damaged.
-
-   Fix: pin a TEXT optical size on every mid-size display use, which is the
-   cut the type designer drew for exactly this problem. Only genuinely large
-   headlines keep the automatic display cut.
+   27  DISPLAY TYPE
+   The optical-size pins that lived here existed solely for Bodoni's hairlines,
+   which broke up below ~45px. SF has no such fragility, so they are gone.
+   What a grotesque needs instead is tighter tracking as it grows.
    ------------------------------------------------------------------------ */
 
 .metric-val,
@@ -2408,23 +2412,14 @@ footer a:hover { border-bottom-color: var(--ink); }
 .contact-email-text,
 .mark,
 .nav-link {
-  /* Only `opsz` is named, so `font-weight` still drives the `wght` axis. */
-  font-variation-settings: 'opsz' 14;
-  font-optical-sizing: none;
-}
-
-/* Weight carries the rest. The numerals matter most here — a damaged letter is
-   guessable from context, a damaged digit is not. */
-.metric-val,
-.venture-row h3 { font-weight: 700; }
-
-/* The hero and section headlines are large enough to carry the display cut,
-   which is where the didone earns its drama. */
-.hero h1,
-h2 {
-  font-optical-sizing: auto;
   font-variation-settings: normal;
+  font-optical-sizing: auto;
 }
+
+.hero h1 { letter-spacing: -0.045em; }
+.metric-num,
+.metric-text { letter-spacing: -0.04em; }
+.venture-row h3 { letter-spacing: -0.03em; }
 
 /* ---------------------------------------------------------------------------
    28  PLATE BLENDING
@@ -2648,3 +2643,147 @@ h2 {
 }
 
 .notfound-link:not(.is-primary):hover { border-color: var(--ink); }
+
+/* ---------------------------------------------------------------------------
+   31  PHOTOGRAPHIC WORDMARK
+   The mark is his face rather than initials. It also spells the name out in
+   full: "BR" is unsearchable, and the wordmark is the most repeated piece of
+   text on the site.
+   ------------------------------------------------------------------------ */
+
+.mark {
+  gap: 11px;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.mark-avatar {
+  width: clamp(30px, 3.4vw, 36px);
+  height: clamp(30px, 3.4vw, 36px);
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+  transition: transform 0.45s var(--ease);
+}
+
+.mark:hover .mark-avatar { transform: scale(1.08); }
+
+/* Below the smallest phones the name would crowd the menu button. */
+@media (max-width: 400px) {
+  .mark span { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   32  HOME PAGE EFFECTS
+   Everything here is compositor-only or driven by a native scroll timeline,
+   and every one is inside prefers-reduced-motion: no-preference.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --- Hero headline deals in line by line --------------------------------
+     Each line rides its own clip, so the words are wiped upward rather than
+     faded — the type arrives as if struck. */
+  .js .hero h1 {
+    animation: line-strike 1.15s var(--ease) 0.15s both;
+  }
+
+  .js .hero .eyebrow { animation: fade-rise 0.9s var(--ease) 0.05s both; }
+  .js .hero-foot     { animation: fade-rise 1s var(--ease) 0.55s both; }
+
+  /* --- Aperture: the plate opens from the centre on load ------------------ */
+  .js .hero-image img {
+    animation: hero-settle 1.9s var(--ease) both,
+               aperture 1.5s var(--ease) both;
+  }
+
+  /* --- A slow light sweep across the hero, once ------------------------- */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 38%,
+                rgba(244, 242, 236, 0.09) 48%, transparent 58%);
+    background-size: 240% 100%;
+    animation: sweep 2.6s var(--ease-soft) 0.6s both;
+  }
+
+  /* --- Metric numerals count up on their own timeline --------------------- */
+  @supports (animation-timeline: view()) {
+    .metric-val {
+      animation: numeral-set linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 55%;
+    }
+
+    /* --- Section rules draw themselves in --------------------------------- */
+    .section-no::after {
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 60%;
+      transform-origin: 0 50%;
+    }
+
+    /* --- The closing seal spins up as it arrives -------------------------- */
+    .orbit {
+      animation: orbit 26s linear infinite, seal-arrive linear both;
+      animation-timeline: auto, view();
+      animation-range: normal, entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes line-strike {
+  from { clip-path: inset(0 0 105% 0); transform: translateY(0.18em); }
+  to   { clip-path: inset(-0.14em 0 -0.3em 0); transform: none; }
+}
+
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes aperture {
+  from { clip-path: inset(14% 8% 14% 8%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes sweep {
+  from { background-position: 180% 0; opacity: 1; }
+  to   { background-position: -80% 0; opacity: 0; }
+}
+
+@keyframes numeral-set {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes seal-arrive {
+  from { opacity: 0; scale: 0.8; }
+  to   { opacity: 1; scale: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .hero h1,
+  .js .hero .eyebrow,
+  .js .hero-foot,
+  .js .hero-image img,
+  .metric-val,
+  .orbit {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    scale: 1 !important;
+  }
+  .hero::after { display: none; }
+  .section-no::after { transform: scaleX(1) !important; }
+}
