@@ -12,7 +12,7 @@ This project is the flagship institutional web presence, venture portfolio, and 
 - **Name:** Bollam Rishithej
 - **Academic Foundation:** MSc in Advanced Mechanical Engineering with Management, University of Leicester (United Kingdom) &bull; B.Tech Mechanical Engineering
 - **Overarching Vision:** *"Build the best startup ecosystem in India and build for the world from India."*
-- **Official Portfolio URL:** `https://bollamrishithej.com/`
+- **Official Portfolio URL:** `https://bollamrishithej.com/` (apex is canonical; www 301s to it)
 - **Official Brochure / Dossier URL:** `https://bollamrishithej.com/brochure.html`
 - **Verified LinkedIn Profile:** `https://www.linkedin.com/in/rishithej-bollam-5b7638362/`
 - **Official Communications:** `rishi@mldynamic.com` &bull; `rishithej@firstsecure.ai`
@@ -52,9 +52,13 @@ public MCA21 register. Two rules govern everything:
   Director, Managing Director or Promoter.
 - **"Promoter"** is the s.2(69) term for a person who caused the company to be
   formed. Use it where there is no board seat to claim.
-- An **LLP** takes **Designated Partner** (identifier: LLPIN), never Director.
-  A **proprietorship** takes Proprietor; a **partnership firm** takes Partner or
-  Managing Partner. Neither is a company, and neither has a CIN.
+- **All twelve entities are Private Limited companies** — confirmed by the
+  principal on 2026-09-28, including the four industrial assets. "Director" is
+  therefore correct throughout and there are no LLPs in the portfolio.
+- Should that ever change: an **LLP** takes **Designated Partner** (identifier:
+  LLPIN), never Director. A **proprietorship** takes Proprietor; a **partnership
+  firm** takes Partner or Managing Partner. Neither is a company, and neither
+  has a CIN.
 - **CEO** is only a lawful label where the company has actually designated one
   under s.2(18) and filed it. Because that office is taken by ML Dynamic
   Solutions, it must not appear against any other entity — including in `alt`
