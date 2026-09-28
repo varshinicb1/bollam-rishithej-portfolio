@@ -5,7 +5,7 @@ const fs = require('fs');
 const OUT = process.env.OUT_DIR || path.join(__dirname, '.audit');
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = ['index.html', 'brochure.html'];
+const PAGES = ['', 'brochure'];
 const WIDTHS = [320, 360, 375, 390, 414, 480, 640, 768, 834, 1024, 1180, 1280, 1440, 1920];
 
 const probe = () => {
