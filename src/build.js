@@ -107,7 +107,7 @@ const industrialCards = INDUSTRIAL.map(function (row) {
 }).join('\n');
 
 const venturesTrail = [{ name: 'Home', path: '/' }, { name: 'Ventures', path: '/ventures' }];
-write('ventures/index.html', page({
+write('ventures.html', page({
   title: 'Ventures &amp; Directorships — Bollam Rishithej',
   description: 'The twelve entities Bollam Rishithej holds office in, across deep technology, autonomous AI, capital management and industrial operations.',
   path: '/ventures',
@@ -184,7 +184,7 @@ VENTURES.forEach(function (v) {
     }).join('\n') +
     '\n      </div>\n      <p class="venture-foot-note">Full detail appears in the <a href="/brochure">executive dossier</a>.</p>\n    </section>';
 
-  write('ventures/' + v.slug + '/index.html', page({
+  write('ventures/' + v.slug + '.html', page({
     title: esc(v.name) + ' — ' + esc(v.role) + ' | Bollam Rishithej',
     description: (v.name + ': ' + lead).slice(0, 155).replace(/"/g, ''),
     path: '/ventures/' + v.slug,
@@ -231,7 +231,7 @@ if (p02.cards.length) {
 }
 aboutBody += '\n    <section class="venture-foot">\n      <p class="venture-foot-note">His ventures are listed in the <a href="/ventures">portfolio</a>, his career in the <a href="/journey">journey</a>, and the full record in the <a href="/brochure">executive dossier</a>.</p>\n    </section>';
 
-write('about/index.html', page({
+write('about.html', page({
   title: 'About Bollam Rishithej — Founder &amp; Managing Director',
   description: 'Biography of Bollam Rishithej (Rishithej Bollam): MSc Advanced Mechanical Engineering with Management, University of Leicester; Managing Director of ML Dynamic Solutions; director across deep-tech and industrial ventures.',
   path: '/about',
@@ -248,7 +248,7 @@ write('about/index.html', page({
 
 /* -------------------------------------------------------------------- journey */
 const journeyTrail = [{ name: 'Home', path: '/' }, { name: 'Journey', path: '/journey' }];
-write('journey/index.html', page({
+write('journey.html', page({
   title: 'Journey &amp; Track Record — Bollam Rishithej',
   description: 'The career of Bollam Rishithej: directorships across bullion, infrastructure, agricultural commodities and food processing, and an MSc from the University of Leicester.',
   path: '/journey',
@@ -279,7 +279,7 @@ write('journey/index.html', page({
 
 /* ---------------------------------------------------------------------- media */
 const mediaTrail = [{ name: 'Home', path: '/' }, { name: 'Media', path: '/media' }];
-write('media/index.html', page({
+write('media.html', page({
   title: 'Media Kit &amp; Photographs — Bollam Rishithej',
   description: 'Approved photographs, biography and designation of Bollam Rishithej for press, conference and publication use.',
   path: '/media',
@@ -316,7 +316,7 @@ write('media/index.html', page({
 
 /* -------------------------------------------------------------------- contact */
 const contactTrail = [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }];
-write('contact/index.html', page({
+write('contact.html', page({
   title: 'Contact — Bollam Rishithej',
   description: 'Direct contact for ventures, partnerships, board enquiries and speaking requests with Bollam Rishithej, Hyderabad, India.',
   path: '/contact',
