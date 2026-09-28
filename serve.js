@@ -30,21 +30,33 @@ http.createServer((req, res) => {
   try { p = decodeURIComponent(req.url.split('?')[0]); }
   catch { res.writeHead(400); return res.end('bad request'); }
 
-  if (p.endsWith('/')) p += 'index.html';
-
-  // Production 308s the .html form to the clean one; mirror that.
-  if (path.extname(p) === '.html' && path.basename(p) !== 'index.html') {
-    res.writeHead(308, { Location: p.replace(/\.html$/, '') });
+  // Production 308s the .html form to the clean one; mirror that. This has to
+  // run on the REQUESTED path, before any index.html is appended, or "/" gets
+  // rewritten to "/index.html" and then redirected back to "/" forever.
+  if (path.extname(p) === '.html') {
+    const target = path.basename(p) === 'index.html'
+      ? (p.slice(0, -'index.html'.length) || '/')
+      : p.replace(/\.html$/, '');
+    res.writeHead(308, { Location: target });
     return res.end();
   }
+
+  if (p.endsWith('/')) p += 'index.html';
 
   let file = safeResolve(path.join(ROOT, p));
   if (!file) { res.writeHead(403); return res.end('forbidden'); }
 
-  // Clean URL: /brochure -> brochure.html
-  if (!fs.existsSync(file) && !path.extname(file)) {
-    const withExt = safeResolve(file + '.html');
-    if (withExt && fs.existsSync(withExt)) file = withExt;
+  // Clean URLs, matching Cloudflare Pages:
+  //   /about     -> about/index.html   (directory index)
+  //   /brochure  -> brochure.html      (sibling .html)
+  if (!path.extname(file)) {
+    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
+      const idx = safeResolve(path.join(file, 'index.html'));
+      if (idx && fs.existsSync(idx)) file = idx;
+    } else if (!fs.existsSync(file)) {
+      const withExt = safeResolve(file + '.html');
+      if (withExt && fs.existsSync(withExt)) file = withExt;
+    }
   }
 
   fs.readFile(file, (err, buf) => {

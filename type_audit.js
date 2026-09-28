@@ -66,7 +66,7 @@ const probe = () => {
 
 (async () => {
   const b = await chromium.launch({ channel: 'chrome' });
-  for (const page of ['index.html','brochure.html']) {
+  for (const page of ['', 'about', 'ventures', 'ventures/predictera', 'media', 'contact', 'brochure']) {
     for (const W of [375, 1440]) {
       const ctx = await b.newContext({ viewport:{width:W,height:900}, isMobile:W<768, hasTouch:W<768 });
       const p = await ctx.newPage();

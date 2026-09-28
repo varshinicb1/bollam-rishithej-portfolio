@@ -254,6 +254,31 @@ Rules for this section:
   rule must stay scoped to `max-width: 1023.98px`, or it drags the account out
   of the real third column on desktop.
 
+### 2.36 Site structure — the interior pages are GENERATED
+
+`dist/index.html`, `dist/brochure.html` and `dist/404.html` are hand-authored.
+**Everything else under `dist/` is generated** — do not hand-edit it, the next
+build overwrites it.
+
+    node src/build.js      # about, ventures, ventures/<slug>, journey, media, contact
+    node src/sitemap.js    # sitemap.xml, from the routes actually on disk
+
+- `src/extract.js` lifts the venture copy out of `brochure.html`, so the
+  generated pages restate the same facts. Nothing is invented.
+- `src/shell.js` owns the head, nav, breadcrumbs and footer for every generated
+  page, so they cannot drift apart across a dozen files.
+- `src/interior.css` is the interior-page stylesheet, appended to
+  `dist/styles.css` as section 33.
+- ML Dynamic, ML Group and ML Capital share one brochure page, so its long copy
+  describes the group rather than any one of them. Those three pages therefore
+  carry only their register copy — using the shared prose on all three would
+  misattribute it.
+- `serve.js` mirrors Cloudflare's routing: directory indexes, clean URLs, and
+  308s from the `.html` form. Test against it, not a plain static server.
+- `src/crawl.js` walks every internal link and checks status, JSON-LD validity,
+  canonical correctness, `h1` count and broken images. Run it after any
+  structural change.
+
 ### 2.4 Responsive standards
 
 - Breakpoints: **560 / 620 / 720 / 768 / 900 / 1024 / 1280**. Layout is fluid

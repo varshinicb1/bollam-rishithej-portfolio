@@ -5,7 +5,7 @@ const fs = require('fs');
 const OUT = process.env.OUT_DIR || path.join(__dirname, '.audit');
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = ['', 'brochure'];
+const PAGES = ['', 'about', 'ventures', 'ventures/predictera', 'journey', 'media', 'contact', 'brochure'];
 const WIDTHS = [320, 360, 375, 390, 414, 480, 640, 768, 834, 1024, 1180, 1280, 1440, 1920];
 
 const probe = () => {
@@ -33,6 +33,14 @@ const probe = () => {
     if (cs.display === 'none' || cs.visibility === 'hidden') return;
     const b = e.getBoundingClientRect();
     if (b.width === 0 || b.height === 0) return;
+    // WCAG 2.5.8 exempts links inside a sentence of running text: their size
+    // is set by the prose, and boxing them would break the line. Counting them
+    // as failures buries the controls that genuinely need fixing.
+    const inSentence = e.tagName === 'A'
+      && e.parentElement
+      && /^(P|LI|TD|DD|FIGCAPTION|BLOCKQUOTE)$/.test(e.parentElement.tagName)
+      && e.parentElement.textContent.trim().length > e.textContent.trim().length + 12;
+    if (inSentence) return;
     if (b.height < 44 || b.width < 44) {
       const key = e.tagName + '.' + (e.className || '').toString().trim().split(/\s+/).slice(0, 2).join('.') + '|' + e.textContent.trim().slice(0, 18);
       if (seenT.has(key)) return;
