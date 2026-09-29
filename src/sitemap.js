@@ -8,7 +8,7 @@ const today = new Date().toISOString().slice(0, 10);
 
 const IMAGES = {
   '/': [
-    ['bollam-rishithej-founder-managing-director.jpg', 'Bollam Rishithej — Founder and Managing Director, ML Dynamic Solutions',
+    ['bollam-rishithej-founder-portrait.jpg', 'Bollam Rishithej — Founder and Managing Director, ML Dynamic Solutions',
      'Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, studio portrait lit in blue against a dark ground.'],
     ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
      'Black and white editorial portrait of Bollam Rishithej, seated against a white studio ground.'],
@@ -20,7 +20,7 @@ const IMAGES = {
      'Editorial portrait of Bollam Rishithej, Managing Director of ML Dynamic Solutions.'],
   ],
   '/media': [
-    ['bollam-rishithej-founder-managing-director.jpg', 'Bollam Rishithej — executive office portrait', 'Approved press photograph of Bollam Rishithej.'],
+    ['bollam-rishithej-founder-portrait.jpg', 'Bollam Rishithej — executive office portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-formal-portrait.jpg', 'Bollam Rishithej — formal portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-ml-group-headquarters.jpg', 'Bollam Rishithej at ML Group headquarters', 'Bollam Rishithej at the ML Group of Companies headquarters.'],

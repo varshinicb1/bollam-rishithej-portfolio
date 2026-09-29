@@ -14,7 +14,7 @@ const NAV_ITEMS = [
 
 function head({ title, description, path, image, imageAlt, jsonld, noindex }) {
   const url = SITE + path;
-  const img = image || '/assets/bollam-rishithej-founder-managing-director.jpg';
+  const img = image || '/assets/bollam-rishithej-og-image.jpg';
   return `  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">

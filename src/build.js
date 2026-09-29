@@ -33,7 +33,7 @@ const CAREER = [
 ];
 
 const PRESS_IMAGES = [
-  ['bollam-rishithej-founder-managing-director', 'jpg', 'Studio portrait, blue key light', '1152 x 1536'],
+  ['bollam-rishithej-founder-portrait', 'jpg', 'Studio portrait, blue key light', '1152 x 1536'],
   ['bollam-rishithej-editorial-portrait', 'jpg', 'Black and white editorial portrait', '1147 x 1536'],
   ['bollam-rishithej-director-portrait', 'jpg', 'Grey-suit studio portrait', '1024 x 1536'],
   ['bollam-rishithej-formal-portrait', 'jpg', 'Formal studio portrait', '1152 x 1536'],
@@ -258,7 +258,7 @@ write('media.html', page({
           // "Licensable" badge in Google Images, which is a real visibility lift.
           license: SITE + '/media',
           acquireLicensePage: SITE + '/contact',
-          representativeOfPage: row[0].indexOf('founder-managing-director') > -1 };
+          representativeOfPage: row[0].indexOf('founder-portrait') > -1 };
       }) },
   ] },
   body: head('MEDIA', 'Media kit',
