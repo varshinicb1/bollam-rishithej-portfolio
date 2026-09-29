@@ -34,8 +34,8 @@ const CAREER = [
 
 const PRESS_IMAGES = [
   ['bollam-rishithej-founder-managing-director', 'jpg', 'Executive office portrait', '1672 x 941'],
-  ['bollam-rishithej-executive-portrait', 'jpg', 'Black and white studio portrait', '1122 x 1402'],
-  ['bollam-rishithej-corporate-portrait', 'jpg', 'Corporate lobby portrait', '1122 x 1402'],
+  ['bollam-rishithej-editorial-portrait', 'jpg', 'Black and white editorial portrait', '1147 x 1536'],
+  ['bollam-rishithej-director-portrait', 'jpg', 'Grey-suit studio portrait', '1024 x 1536'],
   ['bollam-rishithej-formal-portrait', 'jpg', 'Formal studio portrait', '1152 x 1536'],
   ['bollam-rishithej-ml-group-headquarters', 'jpg', 'At ML Group headquarters', '1280 x 960'],
 ];
@@ -165,7 +165,7 @@ let aboutBody = head('PROFILE', 'About <em>Bollam Rishithej</em>',
   'Indian deep-tech founder and operator. Managing Director of ML Dynamic Solutions, and a director and co-founder across ventures in agentic AI security, computer vision, electrochemical sensing, healthcare revenue intelligence, capital management and industrial operations.') +
   '\n    <section class="about-body">\n' +
   '      <figure class="about-portrait">\n' +
-  '        <img src="/assets/bollam-rishithej-executive-portrait-1122.webp" alt="Executive portrait of Bollam Rishithej" width="1122" height="1402" loading="lazy" decoding="async">\n' +
+  '        <img src="/assets/bollam-rishithej-editorial-portrait-1147.webp" alt="Editorial portrait of Bollam Rishithej" width="1147" height="1536" loading="lazy" decoding="async">\n' +
   '      </figure>\n      <div class="about-prose">\n' +
   p02.prose.map(function (p) { return '        <p>' + esc(p) + '</p>'; }).join('\n') +
   '\n      </div>\n    </section>';
@@ -190,7 +190,7 @@ write('about.html', page({
   title: 'About Bollam Rishithej — Founder &amp; Managing Director',
   description: 'Biography of Bollam Rishithej (Rishithej Bollam): MSc Advanced Mechanical Engineering with Management, University of Leicester; Managing Director of ML Dynamic Solutions; director across deep-tech and industrial ventures.',
   path: '/about',
-  image: '/assets/bollam-rishithej-executive-portrait.jpg',
+  image: '/assets/bollam-rishithej-editorial-portrait.jpg',
   imageAlt: 'Executive portrait of Bollam Rishithej',
   trail: aboutTrail,
   jsonld: { '@context': 'https://schema.org', '@graph': [

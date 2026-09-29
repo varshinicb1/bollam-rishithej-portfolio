@@ -3666,3 +3666,100 @@ footer a:hover { border-bottom-color: var(--ink); }
   }
   .js .row-panel > .row-panel-inner { transform: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   37  PHOTOGRAPHIC GROUNDS
+   The two portraits on the homepage are real studio photographs, and both
+   frames FEATHER — their edges fade to transparent rather than ending on a
+   rectangle. A feather only disappears when the page behind it is the same
+   colour as the photograph's own backdrop; against a mismatched ground the
+   fade stops short and the plate reads as pasted on.
+
+   So each of these two sections is grounded to its own photograph, sampled
+   from the file rather than guessed:
+
+     editorial portrait  corners #ffffff        -> statement runs near-white
+     director portrait   corners #171717-#181818,
+                         centre-left #3e3e40    -> ventures runs charcoal
+
+   If either photograph is replaced, RE-SAMPLE the new file and update the
+   ground with it. These two values are the only place in the system where a
+   colour answers to an image instead of to the palette, which is why they are
+   named for the plate and kept here rather than added to the global palette.
+   ------------------------------------------------------------------------ */
+
+/* --- The statement: black-and-white plate on a white ground --------------- */
+/* The photograph's ground is pure #ffffff on every corner. The brand cream
+   (#f4f2ec) is a 4% step away and even --paper-raised (#fbfaf7) leaves a 1.5%
+   step, which the eye reads as a faint rectangle hanging in the page — the
+   exact artefact the feather exists to prevent. So this section is grounded on
+   the photograph itself. */
+.statement {
+  --paper: #ffffff;
+  --paper-raised: #ffffff;
+  background: var(--paper);
+}
+
+/* The ambient wash lays a dark radial into the lower right. At 4.5% that is
+   invisible on cream and plainly visible against a pure-white plate, so inside
+   this one section the wash keeps only its light half. */
+.statement::before {
+  background: radial-gradient(120% 70% at 18% 0%, rgba(255, 255, 255, 0.75), transparent 62%);
+}
+
+/* --- The ventures intro: charcoal plate on a charcoal ground -------------- */
+/* `.tone-dark` inverts the type tokens, which is what makes the copy legible
+   here. Its default surface is --paper #05070a, which is markedly darker and
+   bluer than this photograph's neutral #181818 ground, so the surface token is
+   re-pointed at the plate. Every text token still resolves through .tone-dark,
+   and the contrast was re-measured against THIS ground, not the default one. */
+.ventures.tone-dark {
+  --paper: #181818;
+  --paper-sunk: #121212;
+  --paper-raised: #232325;
+  background: var(--paper);
+}
+
+/* The photograph's ground is not flat — it lifts to #3e3e40 behind his
+   shoulder and falls to #171717 in the corners. A matching wash lets the
+   feathered edge resolve into a gradient rather than onto a flat fill. */
+.ventures.tone-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 30% 42%, rgba(62, 62, 64, 0.85), transparent 68%),
+    radial-gradient(90% 70% at 90% 100%, rgba(0, 0, 0, 0.5), transparent 70%);
+}
+
+/* The dark run now starts one section earlier, so the sheet transition that
+   marked the old paper-to-dark edge moves up with it: the ventures intro is
+   what now rises over the metrics. `.venture-list` keeps its own sheet, which
+   still reads dark-on-dark because a radius and a cast shadow describe two
+   planes, not two colours. */
+.ventures.tone-dark {
+  position: relative;
+  isolation: isolate;
+  margin-top: calc(var(--sheet-radius) * -1.15);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  box-shadow: 0 -18px 50px rgba(11, 13, 17, 0.16);
+  z-index: 2;
+}
+
+/* The plate plants itself on the ground it matches, so the drop-shadow that
+   lifts the other frames off paper would only muddy the join here. */
+.ventures.tone-dark .venture-image { filter: none; }
+
+/* --- Crops -----------------------------------------------------------------
+   Both frames are 4:5 and both photographs are 3:4, so each loses a band.
+   These anchor what is kept. The editorial shot is a full-length seated figure
+   sitting right of centre in a wide white field; centring the crop on him
+   keeps the negative space that makes it editorial instead of cropping into
+   it. */
+.statement .bw-frame img { object-position: 58% 45%; }
+
+/* The director portrait is a head-and-torso shot; holding it high keeps the
+   face clear of the frame's lower feather. */
+.ventures .venture-image img { object-position: 50% 22%; }

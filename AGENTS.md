@@ -300,7 +300,36 @@ marker comments. The rest of that file stays hand-authored.
 - `src/shell.js` owns the head, nav, breadcrumbs and footer for every generated
   page, so they cannot drift apart across a dozen files.
 - `src/interior.css` is the interior-page stylesheet, appended to
-  `dist/styles.css` as section 33; `src/register.css` is section 36.
+  `dist/styles.css` as section 33; `src/register.css` is section 36 and
+  `src/plates.css` is section 37.
+
+**Photographs are the real ones, and their sections are grounded to them.**
+The homepage once carried AI-generated portraits; the genuine studio
+photographs were deleted as "unreferenced" in `fd4686a` while surviving under
+their SEO names for the brochure. Never reintroduce a synthetic portrait.
+
+Because `.bw-frame`, `.venture-image` and `.spotlight-frame` **feather** — their
+edges fade to transparent instead of ending on a rectangle — a plate only
+disappears when the page behind it matches the photograph's own backdrop.
+Section 37 grounds two sections on their images, sampled from the files:
+
+| Section | Photograph | Corner sample | Ground |
+|---|---|---|---|
+| `.statement` | editorial portrait | `#ffffff` | `--paper` re-pointed to `#ffffff` |
+| `.ventures` | director portrait | `#171717`–`#3e3e40` | `.tone-dark`, `--paper` re-pointed to `#181818` |
+
+  - **If either photograph is replaced, re-sample the new file** and update the
+    ground with it. A mismatch of even 1.5% reads as a faint rectangle hanging
+    in the page — exactly what the feather exists to prevent.
+  - These are the only colours in the system that answer to an image rather
+    than to the palette, which is why they live with the plate rules and are
+    not added to the global tokens.
+  - `.ventures` is now dark, so the dark run starts one section earlier and the
+    sheet transition moved up with it. `.venture-list` keeps its own sheet; a
+    radius and a cast shadow still describe two planes dark-on-dark.
+  - `office-wide.jpg` (recoverable from `fd4686a^`) shows a desk nameplate
+    reading **CEO**. It contradicts the s.203 designation matrix in CLAUDE.md
+    and must not be published without cropping that nameplate out.
 - `src/register.js` owns the register data and markup for both the homepage and
   `/ventures`, and its `detailFor()` is the single source for what each holding
   may say about itself — used by the in-page panel **and** the venture page, so

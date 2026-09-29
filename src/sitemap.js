@@ -10,19 +10,19 @@ const IMAGES = {
   '/': [
     ['bollam-rishithej-founder-managing-director.jpg', 'Bollam Rishithej — Founder and Managing Director, ML Dynamic Solutions',
      'Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, at a city-facing executive office in Hyderabad.'],
-    ['bollam-rishithej-executive-portrait.jpg', 'Bollam Rishithej — executive portrait',
-     'Black and white executive portrait of Bollam Rishithej.'],
-    ['bollam-rishithej-corporate-portrait.jpg', 'Bollam Rishithej — corporate portrait',
-     'Bollam Rishithej, Rishithej Bollam, photographed in a corporate lobby in Hyderabad, India.'],
+    ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
+     'Black and white editorial portrait of Bollam Rishithej, seated against a white studio ground.'],
+    ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait',
+     'Bollam Rishithej, Rishithej Bollam, studio portrait in a grey suit against a charcoal ground.'],
   ],
   '/about': [
-    ['bollam-rishithej-executive-portrait.jpg', 'Bollam Rishithej — executive portrait',
-     'Executive portrait of Bollam Rishithej, Managing Director of ML Dynamic Solutions.'],
+    ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
+     'Editorial portrait of Bollam Rishithej, Managing Director of ML Dynamic Solutions.'],
   ],
   '/media': [
     ['bollam-rishithej-founder-managing-director.jpg', 'Bollam Rishithej — executive office portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-formal-portrait.jpg', 'Bollam Rishithej — formal portrait', 'Approved press photograph of Bollam Rishithej.'],
-    ['bollam-rishithej-corporate-portrait.jpg', 'Bollam Rishithej — corporate portrait', 'Approved press photograph of Bollam Rishithej.'],
+    ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-ml-group-headquarters.jpg', 'Bollam Rishithej at ML Group headquarters', 'Bollam Rishithej at the ML Group of Companies headquarters.'],
   ],
   '/brochure': [
