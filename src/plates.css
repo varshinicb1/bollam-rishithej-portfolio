@@ -84,6 +84,78 @@
    lifts the other frames off paper would only muddy the join here. */
 .ventures.tone-dark .venture-image { filter: none; }
 
+/* --- The hero plate --------------------------------------------------------
+   The hero photograph is now the real one: a 1152x1536 PORTRAIT, shot with the
+   subject on the right and empty ground on the left for the headline to sit
+   in. It replaces a 1672x941 landscape frame, so every crop anchor tuned for
+   that frame is wrong and is restated here.
+
+   The governing difference: a portrait in a landscape viewport is scaled to
+   fill the WIDTH, so the crop falls on the vertical axis and the horizontal
+   anchor stops doing anything. The old rules read `center` vertically, which
+   on a 1920px-tall scaled frame lands on his chest and cuts his head off.
+   These hold him high instead. The percentages are the share of the CROPPED
+   overflow, not of the image. */
+.hero .hero-image img { object-position: 88% 16%; }
+
+/* On a landscape viewport a 0.75 portrait stretched full-bleed is scaled to
+   fill the width, and at 1440x900 that is a 1.25x blow-up showing a 47% band
+   of the frame — one eye and an ear, with his face running off the screen
+   edge. The photograph is not a landscape plate and cannot be made into one.
+
+   It is a HALF frame: the subject sits at the right, already bleeding off that
+   edge by design, with empty ground to the left. So on wide screens it is
+   given the right-hand panel it was composed for, at a sane scale, and its
+   left edge is feathered into the hero's black rather than cut. The blue key
+   light in its upper left would otherwise land mid-screen as a hard-edged
+   smear; the feather turns it into an ambient wash. Same principle as the
+   other plates — the photograph dissolves into a ground that matches it. */
+@media (min-width: 900px) {
+  .hero .hero-image {
+    left: auto;
+    right: 0;
+    width: min(64%, 1040px);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 26%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 26%);
+  }
+
+  .hero .hero-image img { object-position: 50% 14%; }
+}
+
+@media (min-width: 1600px) {
+  .hero .hero-image img { object-position: 50% 12%; }
+}
+
+/* A short landscape window crops hardest of all; ease him back in. */
+@media (orientation: landscape) and (max-height: 560px) {
+  .hero .hero-image img { object-position: 84% 10%; }
+}
+
+/* --- The headline was being cut -------------------------------------------
+   Pre-existing, and not visible to the obvious test: `.hero-copy` was capped
+   at 56%/52%, the headline's last line overflowed that box, and `.hero`
+   hides overflow — so the full stop of "industries." was sliced off from
+   900px all the way to 1440px, the whole laptop range.
+
+   It measures clean if you compare LINE boxes to the container, because a
+   line box is clamped to its container while the glyphs inside it overflow.
+   Measure the last text node's own rect against the h1 instead:
+
+     900px  needs 498 / had 452      1180px needs 653 / had 592
+     1024px needs 567 / had 514      1280px needs 673 / had 596
+
+   Fixed by widening the measure rather than shrinking the type — the headline
+   is the loudest thing on the page and should stay that way. The caps below
+   still keep the text well clear of the subject: at 1280 the type ends around
+   725px and his face does not start until roughly 830px. */
+@media (min-width: 900px) {
+  .hero .hero-copy { max-width: min(66%, 46rem); }
+}
+
+@media (min-width: 1280px) {
+  .hero .hero-copy { max-width: min(60%, 50rem); }
+}
+
 /* --- Crops -----------------------------------------------------------------
    Both frames are 4:5 and both photographs are 3:4, so each loses a band.
    These anchor what is kept. The editorial shot is a full-length seated figure

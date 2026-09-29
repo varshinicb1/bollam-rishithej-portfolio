@@ -9,7 +9,7 @@ const today = new Date().toISOString().slice(0, 10);
 const IMAGES = {
   '/': [
     ['bollam-rishithej-founder-managing-director.jpg', 'Bollam Rishithej — Founder and Managing Director, ML Dynamic Solutions',
-     'Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, at a city-facing executive office in Hyderabad.'],
+     'Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, studio portrait lit in blue against a dark ground.'],
     ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
      'Black and white editorial portrait of Bollam Rishithej, seated against a white studio ground.'],
     ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait',

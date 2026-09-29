@@ -315,6 +315,7 @@ Section 37 grounds two sections on their images, sampled from the files:
 
 | Section | Photograph | Corner sample | Ground |
 |---|---|---|---|
+| `.hero` | hero half-frame portrait | `#010101`–`#040406` | already `--ink-deep`; plate feathers into it |
 | `.statement` | editorial portrait | `#ffffff` | `--paper` re-pointed to `#ffffff` |
 | `.ventures` | director portrait | `#171717`–`#3e3e40` | `.tone-dark`, `--paper` re-pointed to `#181818` |
 
@@ -327,6 +328,17 @@ Section 37 grounds two sections on their images, sampled from the files:
   - `.ventures` is now dark, so the dark run starts one section earlier and the
     sheet transition moved up with it. `.venture-list` keeps its own sheet; a
     radius and a cast shadow still describe two planes dark-on-dark.
+  - **The hero photograph is a HALF frame** — 1152x1536 portrait, subject at the
+    right already bleeding off that edge, empty ground at the left for the
+    headline. Full-bleed `cover` in a landscape viewport blows it up 1.25x and
+    shows a 47% band: one eye, face running off screen. Above 900px it is given
+    a right-hand panel at natural scale with its left edge feathered into the
+    hero black. Do not restore it to full-bleed on desktop.
+  - `.hero-copy` is capped at 66%/60%, not 56%/52%. The narrower caps cut the
+    full stop off industries. from 900px to 1440px. That defect measures
+    CLEAN if you compare line boxes to the container — a line box is clamped to
+    its container while its glyphs overflow. **Measure the last text node's own
+    rect against the h1.**
   - `office-wide.jpg` (recoverable from `fd4686a^`) shows a desk nameplate
     reading **CEO**. It contradicts the s.203 designation matrix in CLAUDE.md
     and must not be published without cropping that nameplate out.

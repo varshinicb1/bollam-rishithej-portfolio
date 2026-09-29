@@ -33,7 +33,7 @@ const CAREER = [
 ];
 
 const PRESS_IMAGES = [
-  ['bollam-rishithej-founder-managing-director', 'jpg', 'Executive office portrait', '1672 x 941'],
+  ['bollam-rishithej-founder-managing-director', 'jpg', 'Studio portrait, blue key light', '1152 x 1536'],
   ['bollam-rishithej-editorial-portrait', 'jpg', 'Black and white editorial portrait', '1147 x 1536'],
   ['bollam-rishithej-director-portrait', 'jpg', 'Grey-suit studio portrait', '1024 x 1536'],
   ['bollam-rishithej-formal-portrait', 'jpg', 'Formal studio portrait', '1152 x 1536'],
