@@ -49,6 +49,22 @@ const VENTURES = [
   { slug: 'cxoera', name: 'CXOera', role: 'Director',
     sector: 'Enterprise', dpiit: false, logo: 'assets/cxoera-logo.svg', src: 'page-08',
     blurb: 'A next-generation ecosystem designed around executive leadership and enterprise enablement.' },
+  // The only entity here that is NOT an MCA company. `jurisdiction` marks that:
+  // it keeps the register's "designations under the Companies Act, 2013" claim
+  // true, and this office must NOT be counted toward the s.165 directorship cap.
+  // The title matches emergera.ai's own leadership listing. CTO is not one of
+  // the five whole-time KMP offices under s.203 (MD, WTD, CEO, CFO, CS), so it
+  // does not touch the sole KMP office at ML Dynamic Solutions.
+  // It has no brochure page, so detailFor() falls back to the blurb.
+  { slug: 'emergera-ai', name: 'Emergera.ai', role: 'Co-Founder & Chief Technology Officer',
+    sector: 'AI Education', dpiit: false,
+    jurisdiction: 'United States · LLC',
+    logo: 'assets/emergera-logo.svg',
+    // Supplied as two artworks rather than one inverted file, so no filter is
+    // needed: a dark wordmark for paper, a light one for the register.
+    logoOnDark: 'assets/emergera-logo-on-dark.svg',
+    site: 'https://emergera.ai',
+    blurb: 'Live, practitioner-taught AI programs where learners build and deploy working agents rather than watch recorded lectures.' },
 ];
 
 // What each holding may say about itself.
@@ -114,9 +130,18 @@ function renderRegister(dossier, opts) {
       panel += '              <div class="tags">' +
         d.pills.map(function (p) { return '<span>' + esc(p) + '</span>'; }).join('') + '</div>\n';
     }
-    panel += '              <p class="row-panel-more"><a href="/ventures/' + v.slug + '">' +
-      'Full profile, specifications and related holdings<span class="sr-only"> for ' + name +
-      '</span></a></p>\n';
+    // Whether there is anything worth opening. A holding with no brochure page
+    // yields a panel containing nothing but the link back out, and a toggle
+    // that expands onto a single link is worse than no toggle: the reader pays
+    // a click to learn there was nothing there. Those rows keep the plain
+    // "Full profile" link only.
+    const hasDetail = panel !== '';
+
+    if (hasDetail) {
+      panel += '              <p class="row-panel-more"><a href="/ventures/' + v.slug + '">' +
+        'Full profile, specifications and related holdings<span class="sr-only"> for ' + name +
+        '</span></a></p>\n';
+    }
 
     const title = o.linked
       ? '<a href="/ventures/' + v.slug + '">' + name + '</a>'
@@ -126,20 +151,37 @@ function renderRegister(dossier, opts) {
       (v.role.indexOf('Managing Director') > -1 ? ' is-principal' : '') + cls + '">\n' +
       '          <p class="row-index" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</p>\n' +
       '          <div class="row-identity">\n' +
-      '            <img src="/' + v.logo + '" alt="' + name + ' logo" class="row-logo' +
-        (v.inkArt ? ' is-ink-art' : '') + '" loading="lazy" decoding="async"' + attrs(v.logo) + '>\n' +
+      // The logo is optional. A holding can be added before its mark exists,
+      // and emitting `src="/undefined"` would be a broken image on the most
+      // scrutinised page on the site.
+      // The register always sits on a dark ground, so a holding that ships a
+      // purpose-made light artwork uses it here in preference to inverting.
+      (function () {
+        const mark = v.logoOnDark || v.logo;
+        if (!mark) return '';
+        return '            <img src="/' + mark + '" alt="' + name + ' logo" class="row-logo' +
+          (v.inkArt ? ' is-ink-art' : '') + '" loading="lazy" decoding="async"' + attrs(mark) + '>\n';
+      })() +
       '            <' + h + '>' + title + '</' + h + '>\n' +
       '            <p class="row-role">' + esc(v.role) + '</p>\n' +
       '            <p class="row-sector">' + esc(v.sector) + '</p>\n' +
       (v.dpiit ? '            <span class="row-gov">DPIIT Recognized</span>\n' : '') +
+      // Marks a holding that sits OUTSIDE the Companies Act, 2013. Without it
+      // the register's own standfirst — "statutory designations are stated
+      // under the Companies Act, 2013" — would be claiming something untrue of
+      // this row. Deliberately not the accent badge: it is a qualifier, not a
+      // credential.
+      (v.jurisdiction ? '            <span class="row-juris">' + esc(v.jurisdiction) + '</span>\n' : '') +
       '          </div>\n' +
       '          <div class="row-detail">\n' +
       '            <p class="row-blurb">' + esc(v.blurb) + '</p>\n' +
       '            <div class="row-actions">\n' +
-      '              <button class="row-link row-expand is-primary" type="button" aria-expanded="true" aria-controls="' + panelId + '">\n' +
-      '                <span class="row-expand-label">Read more</span><span class="sr-only"> about ' + name + '</span>\n' +
-      '              </button>\n' +
-      '              <a class="row-link" href="/ventures/' + v.slug + '">Full profile<span class="sr-only"> of ' + name + '</span></a>\n' +
+      (hasDetail
+        ? '              <button class="row-link row-expand is-primary" type="button" aria-expanded="true" aria-controls="' + panelId + '">\n' +
+          '                <span class="row-expand-label">Read more</span><span class="sr-only"> about ' + name + '</span>\n' +
+          '              </button>\n'
+        : '') +
+      '              <a class="row-link' + (hasDetail ? '' : ' is-primary') + '" href="/ventures/' + v.slug + '">Full profile<span class="sr-only"> of ' + name + '</span></a>\n' +
       (v.site ? '              <a class="row-link" href="' + v.site + '" target="_blank" rel="noopener">Visit site<span class="sr-only"> for ' + name + '</span></a>\n' : '') +
       '            </div>\n' +
       '          </div>\n' +
@@ -147,9 +189,11 @@ function renderRegister(dossier, opts) {
       // span the row's grid columns. Left inside, it inherited the narrow
       // account column and a four-card capability grid stacked two-up beside a
       // column of empty space — over a thousand pixels tall for one holding.
-      '          <div class="row-panel" id="' + panelId + '">\n' +
-      '            <div class="row-panel-inner">\n' + panel.replace(/^ {14}/gm, '            ') +
-      '            </div>\n          </div>\n' +
+      (hasDetail
+        ? '          <div class="row-panel" id="' + panelId + '">\n' +
+          '            <div class="row-panel-inner">\n' + panel.replace(/^ {14}/gm, '            ') +
+          '            </div>\n          </div>\n'
+        : '') +
       '        </article>';
   }).join('\n');
 }

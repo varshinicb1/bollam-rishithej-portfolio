@@ -12,8 +12,6 @@ const IMAGES = {
      'Bollam Rishithej, Indian deep-tech founder and Managing Director of ML Dynamic Solutions, studio portrait lit in blue against a dark ground.'],
     ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
      'Black and white editorial portrait of Bollam Rishithej, seated against a white studio ground.'],
-    ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait',
-     'Bollam Rishithej, Rishithej Bollam, studio portrait in a grey suit against a charcoal ground.'],
   ],
   '/about': [
     ['bollam-rishithej-editorial-portrait.jpg', 'Bollam Rishithej — editorial portrait',
@@ -22,7 +20,6 @@ const IMAGES = {
   '/media': [
     ['bollam-rishithej-founder-portrait.jpg', 'Bollam Rishithej — executive office portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-formal-portrait.jpg', 'Bollam Rishithej — formal portrait', 'Approved press photograph of Bollam Rishithej.'],
-    ['bollam-rishithej-director-portrait.jpg', 'Bollam Rishithej — studio portrait', 'Approved press photograph of Bollam Rishithej.'],
     ['bollam-rishithej-ml-group-headquarters.jpg', 'Bollam Rishithej at ML Group headquarters', 'Bollam Rishithej at the ML Group of Companies headquarters.'],
   ],
   '/brochure': [

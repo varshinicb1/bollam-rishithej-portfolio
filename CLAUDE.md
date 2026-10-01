@@ -21,12 +21,24 @@ This repository houses the personal portfolio, venture platform, and executive m
   | DenyFix.ai *(Co-Founder, NOT a venture/employee)* | Co-Founder & Director |
   | CXOera | Director |
   | Akshara Groups Bullion / Jenani Infra / Aditya Trading Company / RS Food Products | Director |
+  | Emergera.ai *(**United States LLC — NOT an MCA company**)* | Co-Founder & Chief Technology Officer |
 
   - "Co-Founder" and "Founder" are **business descriptors, not MCA designations** — always
     pair them with the statutory term (Director / Managing Director / Promoter).
   - "Promoter" is the statutory term under **s.2(69)** for a person who caused the company
     to be formed; use it where there is no board seat to claim.
-  - **s.165** caps directorships at 20 (max 10 public). The current matrix is 12 — compliant.
+  - **s.165** caps directorships at 20 (max 10 public). The matrix holds **12 MCA directorships** —
+    compliant. **Emergera.ai is a United States LLC and is NOT counted**: it falls outside the
+    Companies Act entirely, so it is neither a directorship for s.165 nor an office for s.203.
+  - **Foreign entities must be marked.** The register's own standfirst says designations are
+    stated under the Companies Act, 2013, so any holding outside that Act carries a
+    `jurisdiction` field rendered as `.row-juris`. Never list a foreign holding unmarked.
+  - **CTO, CIO and CxO titles other than CEO/CFO are NOT s.203 KMP offices.** The five whole-time
+    KMP offices are MD, WTD, CEO, CFO and CS. A CTO title elsewhere does not conflict with the
+    sole KMP office at ML Dynamic Solutions.
+  - **Verify a stated title against the company's own site before publishing it.** Emergera.ai
+    publicly lists him as Chief Technology Officer; an earlier instruction said "Director". The
+    company's own listing won. Do not propagate a title that its own company contradicts.
   - Any entity that is an **LLP** takes **Designated Partner**, never Director. Any
     **proprietorship or partnership firm** takes Proprietor / Partner and is not MCA-registered.
   - Do not publish DIN, CIN or LLPIN numbers — withheld by the principal's instruction.

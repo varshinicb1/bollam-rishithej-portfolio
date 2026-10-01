@@ -31,3 +31,27 @@ img.company-emblem.is-ink-art {
 img.company-emblem {
   object-fit: contain;
 }
+
+/* --- Jurisdiction qualifier -----------------------------------------------
+   Marks a holding outside the Companies Act, 2013. Set as a quiet qualifier,
+   NOT the accent badge used for the DPIIT recognition: that one is a
+   credential and earns the accent, this one is a caveat and must not read as
+   one. Same mono metrics as the sector label it sits beside. */
+.row-juris {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font: 400 var(--t-meta) / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.row-juris::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--ink-3);
+  border-radius: 50%;
+}

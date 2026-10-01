@@ -35,7 +35,6 @@ const CAREER = [
 const PRESS_IMAGES = [
   ['bollam-rishithej-founder-portrait', 'jpg', 'Studio portrait, blue key light', '1152 x 1536'],
   ['bollam-rishithej-editorial-portrait', 'jpg', 'Black and white editorial portrait', '1147 x 1536'],
-  ['bollam-rishithej-director-portrait', 'jpg', 'Grey-suit studio portrait', '1024 x 1536'],
   ['bollam-rishithej-formal-portrait', 'jpg', 'Formal studio portrait', '1152 x 1536'],
   ['bollam-rishithej-ml-group-headquarters', 'jpg', 'At ML Group headquarters', '1280 x 960'],
 ];
@@ -71,7 +70,7 @@ const industrialCards = INDUSTRIAL.map(function (row) {
 const venturesTrail = [{ name: 'Home', path: '/' }, { name: 'Ventures', path: '/ventures' }];
 write('ventures.html', page({
   title: 'Ventures &amp; Directorships — Bollam Rishithej',
-  description: 'The twelve entities Bollam Rishithej holds office in, across deep technology, autonomous AI, capital management and industrial operations.',
+  description: 'The thirteen entities Bollam Rishithej holds office in, across deep technology, autonomous AI, AI education, capital management and industrial operations.',
   path: '/ventures',
   trail: venturesTrail,
   jsonld: { '@context': 'https://schema.org', '@graph': [
@@ -83,7 +82,7 @@ write('ventures.html', page({
       }) } },
   ] },
   body: head('THE PORTFOLIO', 'Ventures &amp; <em>directorships</em>',
-    'Twelve entities across deep technology, autonomous AI, capital and industrial operations. Statutory designations are stated under the Companies Act, 2013.') +
+    'Thirteen entities across deep technology, autonomous AI, AI education, capital and industrial operations. Statutory designations for the Indian companies are stated under the Companies Act, 2013; holdings outside it are marked with their jurisdiction.') +
     '\n    <section class="venture-list tone-dark" aria-label="Ventures">\n      <div class="venture-register">\n' +
     ventureRows + '\n      </div>\n    </section>\n' +
     '    <section class="industrial">\n      <p class="section-no">[ INDUSTRIAL OPERATIONS ]</p>\n' +
@@ -103,7 +102,7 @@ VENTURES.forEach(function (v) {
     { name: v.name, path: '/ventures/' + v.slug }];
 
   let body = '    <section class="venture-head">\n' +
-    '      <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="venture-head-logo" decoding="async"' + attrs(v.logo) + '>\n' +
+    (v.logo ? '      <img src="/' + v.logo + '" alt="' + esc(v.name) + ' logo" class="venture-head-logo" decoding="async"' + attrs(v.logo) + '>\n' : '') +
     '      <p class="section-no">[ ' + esc(v.sector.toUpperCase()) + ' ]</p>\n' +
     '      <h1>' + esc(v.name) + '</h1>\n' +
     '      <p class="venture-head-role">' + esc(v.role) +
@@ -148,7 +147,7 @@ VENTURES.forEach(function (v) {
       crumbJsonLd(trail),
       { '@type': 'Organization', '@id': SITE + '/ventures/' + v.slug + '#org', name: v.name,
         url: v.site || SITE + '/ventures/' + v.slug, description: lead,
-        logo: SITE + '/' + v.logo, founder: PERSON,
+        logo: v.logo ? SITE + '/' + v.logo : undefined, founder: PERSON,
         member: { '@type': 'OrganizationRole', roleName: v.role, member: PERSON } },
       { '@type': 'WebPage', '@id': SITE + '/ventures/' + v.slug + '#page',
         url: SITE + '/ventures/' + v.slug, name: v.name + ' — ' + v.role,
@@ -217,13 +216,13 @@ write('journey.html', page({
     'Board positions across bullion, heavy infrastructure, agricultural commodities and food processing, alongside the deep-tech portfolio.') +
     '\n    <section class="journey">\n      <div class="timeline">\n' +
     CAREER.map(function (row) {
-      return '        <article>\n          <time>' + row[0] + '</time>\n' +
+      return '        <article>\n' +
         '          <div class="timeline-body">\n' +
         '            <img src="/' + row[4] + '" alt="' + esc(row[2]) + ' logo" class="timeline-brand-logo" width="28" height="28" loading="lazy">\n' +
         '            <div>\n              <h2>' + esc(row[1]) + ' &middot; ' + esc(row[2]) + '</h2>\n' +
         '              <p>' + esc(row[3]) + '</p>\n            </div>\n          </div>\n        </article>';
     }).join('\n') +
-    '\n        <article class="education">\n          <time>2022 — 2024</time>\n' +
+    '\n        <article class="education">\n' +
     '          <div class="timeline-body">\n' +
     '            <img src="/assets/university-of-leicester.svg" alt="University of Leicester" class="timeline-brand-logo" width="32" height="32" loading="lazy">\n' +
     '            <div>\n              <h2>University of Leicester</h2>\n' +

@@ -1,0 +1,21 @@
+
+/* ---------------------------------------------------------------------------
+   39  JOURNEY WITHOUT DATES
+   The year labels were removed from the timeline at the principal's request.
+   They were not decoration: above 900px each entry was a two-column grid of
+   `clamp(140px, 16vw, 210px)` for the <time> and the rest for the body. With
+   the dates gone the body would auto-place into that first narrow column and
+   render as a ~140px ribbon — the same failure the venture register hit once
+   before, which is why grid placement is stated explicitly here rather than
+   left to auto-placement.
+   ------------------------------------------------------------------------ */
+
+@media (min-width: 900px) {
+  .timeline article {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline .timeline-body {
+    grid-column: 1;
+  }
+}

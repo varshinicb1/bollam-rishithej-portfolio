@@ -16,11 +16,6 @@
       <image:title>Bollam Rishithej — editorial portrait</image:title>
       <image:caption>Black and white editorial portrait of Bollam Rishithej, seated against a white studio ground.</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-director-portrait.jpg</image:loc>
-      <image:title>Bollam Rishithej — studio portrait</image:title>
-      <image:caption>Bollam Rishithej, Rishithej Bollam, studio portrait in a grey suit against a charcoal ground.</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://bollamrishithej.com/about</loc>
@@ -78,11 +73,6 @@
       <image:caption>Approved press photograph of Bollam Rishithej.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-director-portrait.jpg</image:loc>
-      <image:title>Bollam Rishithej — studio portrait</image:title>
-      <image:caption>Approved press photograph of Bollam Rishithej.</image:caption>
-    </image:image>
-    <image:image>
       <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-ml-group-headquarters.jpg</image:loc>
       <image:title>Bollam Rishithej at ML Group headquarters</image:title>
       <image:caption>Bollam Rishithej at the ML Group of Companies headquarters.</image:caption>
@@ -96,6 +86,12 @@
   </url>
   <url>
     <loc>https://bollamrishithej.com/ventures/denyfix-ai</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bollamrishithej.com/ventures/emergera-ai</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
