@@ -1,0 +1,33 @@
+
+/* ---------------------------------------------------------------------------
+   38  INK-ART LOGOS
+   `.is-ink-art` marks a logo supplied as DARK marks on transparency. One file
+   has to serve three surfaces with two different grounds:
+
+     register row logo      venture-list / brochure plate   DARK   -> invert
+     brochure emblem        --plate #05070a                 DARK   -> invert
+     venture page header    paper                           LIGHT  -> as-is
+
+   So the artwork ships unmodified — correct on paper — and is inverted only
+   where it sits on a dark ground. A pre-inverted file would have been
+   invisible on the venture page, and inverting every logo would have wrecked
+   the others, which are SVGs already drawn for dark.
+   ------------------------------------------------------------------------ */
+
+/* `invert(1)` on its own also flips the gold dot to blue, because inversion
+   is per-channel and takes the hue with it. Following it with a 180deg hue
+   rotation returns the hue while keeping the inverted lightness, so the marks
+   go white and the accent stays gold rather than turning cold. */
+.tone-dark .is-ink-art,
+img.company-emblem.is-ink-art {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* The brochure sets `.company-emblem` on the <img> ITSELF, so the existing
+   `.company-emblem img { object-fit: contain }` rule never matches it and the
+   image is stretched to the square emblem box. That was harmless while the
+   emblem was a 48x48 square SVG; this artwork is 192x177 and would be pulled
+   8% wide. */
+img.company-emblem {
+  object-fit: contain;
+}

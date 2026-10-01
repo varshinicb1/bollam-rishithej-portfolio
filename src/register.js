@@ -27,8 +27,12 @@ const VENTURES = [
   { slug: 'ml-capital', name: 'ML Capital', role: 'Director',
     sector: 'Capital', dpiit: false, logo: 'assets/ml-capital-logo.svg', src: 'page-07',
     blurb: 'Capital management shaped by disciplined financial thinking, opportunity evaluation and sustainable growth.' },
+  // `inkArt` marks a logo supplied as DARK artwork on transparency. It is
+  // correct as-is on paper and has to be inverted on dark grounds, which the
+  // register is. See `.is-ink-art` in the stylesheet.
   { slug: 'vidyuthlabs', name: 'VidyuthLabs', role: 'Co-Founder & Director',
-    sector: 'Deep Tech', dpiit: false, logo: 'assets/vidyuthlabs-logo.svg', src: 'page-03',
+    sector: 'Deep Tech', dpiit: false, logo: 'assets/vidyuthlabs-logo.png', src: 'page-03',
+    inkArt: true,
     site: 'https://vidyuthlabs.co.in',
     blurb: 'Making lab-grade electrochemistry portable through handheld analyzers and interchangeable sensors for water, food, soil and industry.' },
   { slug: 'predictera', name: 'Predictera', role: 'Co-Founder & Director',
@@ -122,7 +126,8 @@ function renderRegister(dossier, opts) {
       (v.role.indexOf('Managing Director') > -1 ? ' is-principal' : '') + cls + '">\n' +
       '          <p class="row-index" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</p>\n' +
       '          <div class="row-identity">\n' +
-      '            <img src="/' + v.logo + '" alt="' + name + ' logo" class="row-logo" loading="lazy" decoding="async"' + attrs(v.logo) + '>\n' +
+      '            <img src="/' + v.logo + '" alt="' + name + ' logo" class="row-logo' +
+        (v.inkArt ? ' is-ink-art' : '') + '" loading="lazy" decoding="async"' + attrs(v.logo) + '>\n' +
       '            <' + h + '>' + title + '</' + h + '>\n' +
       '            <p class="row-role">' + esc(v.role) + '</p>\n' +
       '            <p class="row-sector">' + esc(v.sector) + '</p>\n' +
