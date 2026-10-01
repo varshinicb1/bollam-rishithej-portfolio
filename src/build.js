@@ -188,7 +188,7 @@ aboutBody += '\n    <section class="venture-foot">\n      <p class="venture-foot
 
 write('about.html', page({
   title: 'About Bollam Rishithej — Founder &amp; Managing Director',
-  description: 'Biography of Bollam Rishithej (Rishithej Bollam): MSc Advanced Mechanical Engineering with Management, University of Leicester; Managing Director of ML Dynamic Solutions; director across deep-tech and industrial ventures.',
+  description: 'Biography of Bollam Rishithej (Rishithej Bollam): MSc Entrepreneurship and Innovation Management, University of Leicester; Managing Director of ML Dynamic Solutions; director across deep-tech and industrial ventures.',
   path: '/about',
   image: '/assets/bollam-rishithej-editorial-portrait.jpg',
   imageAlt: 'Executive portrait of Bollam Rishithej',
@@ -227,7 +227,7 @@ write('journey.html', page({
     '          <div class="timeline-body">\n' +
     '            <img src="/assets/university-of-leicester.svg" alt="University of Leicester" class="timeline-brand-logo" width="32" height="32" loading="lazy">\n' +
     '            <div>\n              <h2>University of Leicester</h2>\n' +
-    '              <p>MSc Advanced Mechanical Engineering with Management.</p>\n' +
+    '              <p>MSc Entrepreneurship and Innovation Management.</p>\n' +
     '            </div>\n          </div>\n        </article>\n      </div>\n    </section>\n' +
     '    <section class="venture-foot">\n      <p class="venture-foot-note">The current portfolio is listed under <a href="/ventures">ventures</a>.</p>\n    </section>',
 }));
@@ -265,7 +265,7 @@ write('media.html', page({
     'Approved photographs and biography for press, conference programmes and publication use. Please credit Bollam Rishithej.') +
     '\n    <section class="media-bio">\n      <p class="section-no">[ BIOGRAPHY ]</p>\n' +
     '      <h2>Short form</h2>\n' +
-    '      <p class="media-copy">Bollam Rishithej is an Indian deep-tech founder and operator, and Managing Director of ML Dynamic Solutions. He is a director and co-founder across VidyuthLabs, Predictera, FirstSecure.ai and DenyFix.ai, and holds board positions across ML Capital, CXOera and four industrial companies. He holds an MSc in Advanced Mechanical Engineering with Management from the University of Leicester.</p>\n' +
+    '      <p class="media-copy">Bollam Rishithej is an Indian deep-tech founder and operator, and Managing Director of ML Dynamic Solutions. He is a director and co-founder across VidyuthLabs, Predictera, FirstSecure.ai and DenyFix.ai, and holds board positions across ML Capital, CXOera and four industrial companies. He holds an MSc in Entrepreneurship and Innovation Management from the University of Leicester.</p>\n' +
     '      <h2>Designation</h2>\n      <p class="media-copy">Founder &amp; Managing Director, ML Dynamic Solutions.</p>\n' +
     '      <h2>Location</h2>\n      <p class="media-copy">Hyderabad, Telangana, India.</p>\n    </section>\n' +
     '    <section class="media-images">\n      <p class="section-no">[ PHOTOGRAPHS ]</p>\n      <div class="media-grid">\n' +

@@ -10,7 +10,11 @@ This project is the flagship institutional web presence, venture portfolio, and 
 
 ### Key Executive Facts & Non-Negotiable Context
 - **Name:** Bollam Rishithej
-- **Academic Foundation:** MSc in Advanced Mechanical Engineering with Management, University of Leicester (United Kingdom) &bull; B.Tech Mechanical Engineering
+- **Academic Foundation:** MSc in Entrepreneurship and Innovation Management, University of Leicester (United Kingdom).
+  - The MSc is **NOT** mechanical engineering. An earlier version of this file said "Advanced Mechanical
+    Engineering with Management" and listed a "B.Tech Mechanical Engineering" beside it; the principal has
+    confirmed BOTH were wrong. The undergraduate degree is withheld until confirmed — do not restore it,
+    and do not infer a discipline for it.
 - **Overarching Vision:** *"Build the best startup ecosystem in India and build for the world from India."*
 - **Official Portfolio URL:** `https://bollamrishithej.com/` (apex is canonical; www 301s to it)
 - **Official Brochure / Dossier URL:** `https://bollamrishithej.com/brochure.html`
