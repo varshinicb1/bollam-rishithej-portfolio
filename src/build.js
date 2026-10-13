@@ -6,6 +6,7 @@ const path = require('path');
 const { pages: dossier } = require('./extract');
 const { SITE, page, crumbJsonLd } = require('./shell');
 const { attrs, size } = require('./dims');
+const blogpages = require('./blogpages');
 const { VENTURES, detailFor, renderRegister } = require('./register');
 
 const OUT = path.join(__dirname, '..', 'dist');
@@ -372,5 +373,7 @@ write('contact.html', page({
   written.push('index.html (register region)');
 })();
 
+const blogStats = blogpages.build(write);
+console.log('blog: ' + blogStats.live + ' published, ' + blogStats.drafts + ' draft(s)');
 console.log('generated ' + written.length + ' pages:');
 written.forEach(function (w) { console.log('   ' + w); });

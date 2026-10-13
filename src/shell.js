@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   ['/about', 'About'],
   ['/ventures', 'Ventures'],
   ['/journey', 'Journey'],
+  ['/blog', 'Writing'],
   ['/media', 'Media'],
   ['/contact', 'Contact'],
   ['/brochure', 'Dossier'],
@@ -45,6 +46,7 @@ function head({ title, description, path, image, imageAlt, jsonld, noindex }) {
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/bollam-rishithej-icon-192.png?v=cd8db615">
   <link rel="apple-touch-icon" href="/assets/bollam-rishithej-apple-touch-icon.png?v=cd8db615">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="Bollam Rishithej — Writing" href="/feed.xml">
   <link rel="stylesheet" href="/styles.css">
   <script type="application/ld+json">
 ${JSON.stringify(jsonld, null, 2)}
