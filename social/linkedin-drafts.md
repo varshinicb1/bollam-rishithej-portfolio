@@ -52,11 +52,11 @@ Promoter where there is no board seat. Aditya Trading Company and RS Food
 Products are Director. ML Capital is Director, and a subsidiary of the KMP
 company, so it is clean either way.
 
-Two smaller ones. **ML Engineering Works** and **ML Constructions** are named in
-the old text but are not in the register the site publishes - either add them
-there or drop them here, but the two documents must not disagree. And the infra
-company is spelt **Jenani Infra** on the site and "Janani" in the old text; pick
-one and use it in both places.
+Two smaller ones, both now settled. **ML Engineering Works** and **ML
+Constructions** were named in the old text but are not in the register the site
+publishes, and they stay out of both - see 2b for why. And the infra company is
+spelt **Jenani Infra** on the site and "Janani" in the old text; Jenani is
+correct, so the LinkedIn spelling changes, not the site's.
 
 > I measure what I'm building by one number, and it isn't valuation.
 >
@@ -147,23 +147,29 @@ missed opportunity: the profile currently understates the real portfolio while
 overstating the offices held inside it - the precise inversion of what you want,
 because the portfolio is checkable and the offices are checkable too.
 
-### Still unresolved: ML Engineering Works and ML Constructions
+### Settled: ML Engineering Works and ML Constructions stay off both documents
 
-Both are named in the old About. Neither is in the site register, and I have
-not published them, because I do not know their legal form and the designation
-is determined entirely by it:
+Both were named in the old About. Neither is in the site register, and neither
+is going in. Decided deliberately, not by omission.
 
-- a **private limited company** takes Director, and takes the count to 14 of 20
-  under s.165;
-- an **LLP** takes **Designated Partner** - never Director;
-- a **proprietorship or partnership firm** takes **Proprietor** or **Partner**,
-  is not MCA-registered at all, and must not appear in a register whose
-  standfirst says designations are stated under the Companies Act, 2013.
+The designation for an entity is determined entirely by its legal form - a
+private limited company takes Director, an **LLP** takes **Designated Partner**
+and never Director, and a **proprietorship or partnership firm** takes
+**Proprietor** or **Partner** and is not MCA-registered at all. "Works" and
+"Constructions" are both as commonly firm names as company names, so there was
+a real chance of publishing a false statutory designation on the one page built
+to be legally precise.
 
-"Works" and "Constructions" are both commonly firm names rather than companies,
-so guessing here has a real chance of publishing a false statutory designation
-on the one page built to be legally precise. Tell me the form and the two rows
-go in with the right term.
+So the two documents are reconciled by subtraction rather than addition: **delete
+both Experience rows from LinkedIn.** The register stays at twelve MCA
+directorships plus one United States LLC, which is what the site already says in
+all three places it states a count, and the profile and the register now agree
+exactly.
+
+If either one later needs to be published, the form determines the term and the
+count copy moves with it - `src/register.js` for the row, and the three count
+statements in `src/build.js` (the biography, the FAQ answer on directorships,
+and the media-kit paragraph).
 
 ---
 
