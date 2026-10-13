@@ -24,6 +24,35 @@ const IMAGES = {
   ],
   '/brochure': [
     ['bollam-rishithej-formal-portrait.jpg', 'Bollam Rishithej — Executive Monograph', 'Executive monograph and venture dossier of Bollam Rishithej.'],
+    ['bollam-rishithej-leicester-graduation-certificate.jpg', 'Bollam Rishithej — University of Leicester graduation',
+     'Bollam Rishithej in cap and gown at his University of Leicester graduation, the Indian flag around his shoulders, holding his degree certificate.'],
+    ['bollam-rishithej-leicester-graduation-indian-flag.jpg', 'Bollam Rishithej with the Indian flag at his Leicester graduation',
+     'Bollam Rishithej holding the Indian national flag open at his University of Leicester graduation ceremony.'],
+    ['bollam-rishithej-university-of-leicester-campus.jpg', 'Bollam Rishithej at the University of Leicester',
+     'Bollam Rishithej beside the University of Leicester campus sign.'],
+    ['bollam-rishithej-leicester-graduation-ceremony.jpg', 'Bollam Rishithej on graduation day, University of Leicester',
+     'Bollam Rishithej in academic dress at the gates of the University of Leicester graduation venue.'],
+    ['bollam-rishithej-leicester-graduation-memorial-arch.jpg', 'Bollam Rishithej in Victoria Park, Leicester',
+     'Bollam Rishithej reading his graduation certificate in front of the memorial arch in Victoria Park, Leicester.'],
+  ],
+};
+
+// Video sitemap entries, keyed the same way as IMAGES. Google discovers video
+// from the sitemap AND from the VideoObject markup on the page, and the two
+// have to agree, so both are written from the same facts. thumbnail_loc,
+// title, description and content_loc are all required — an entry missing any
+// one of them is dropped silently rather than reported.
+const VIDEOS = {
+  '/brochure': [
+    ['bollam-rishithej-leicester-graduation-ceremony-video',
+     'Bollam Rishithej at his University of Leicester graduation ceremony',
+     'Bollam Rishithej at the University of Leicester graduation ceremony in Victoria Park, Leicester, after completing an MSc in Entrepreneurship and Innovation Management.', 18],
+    ['bollam-rishithej-leicester-graduation-walk-video',
+     'Bollam Rishithej walking out of his Leicester graduation',
+     'Bollam Rishithej walking out of the University of Leicester graduation ceremony with his degree certificate.', 20],
+    ['bollam-rishithej-leicester-graduation-campus-video',
+     'Bollam Rishithej on the University of Leicester campus',
+     'Bollam Rishithej on the University of Leicester campus on graduation day.', 8],
   ],
 };
 
@@ -59,18 +88,30 @@ const body = all.map((r) => {
       <image:title>${esc(title)}</image:title>
       <image:caption>${esc(caption)}</image:caption>
     </image:image>`).join('\n');
+  const vids = (VIDEOS[r] || []).map(([f, title, desc, secs]) =>
+`    <video:video>
+      <video:thumbnail_loc>${SITE}/assets/${f}-poster.jpg</video:thumbnail_loc>
+      <video:title>${esc(title)}</video:title>
+      <video:description>${esc(desc)}</video:description>
+      <video:content_loc>${SITE}/assets/${f}.mp4</video:content_loc>
+      <video:duration>${secs}</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>${today}</video:publication_date>
+    </video:video>`).join('\n');
   return `  <url>
     <loc>${SITE}${r}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${PRIORITY[r] || '0.6'}</priority>${imgs ? '\n' + imgs : ''}
+    <priority>${PRIORITY[r] || '0.6'}</priority>${imgs ? '\n' + imgs : ''}${vids ? '\n' + vids : ''}
   </url>`;
 }).join('\n');
 
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
 `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 ${body}
 </urlset>
 `);

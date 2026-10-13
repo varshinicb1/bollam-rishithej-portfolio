@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://bollamrishithej.com/</loc>
     <lastmod>2026-10-13</lastmod>
@@ -44,6 +45,61 @@
       <image:title>Bollam Rishithej — Executive Monograph</image:title>
       <image:caption>Executive monograph and venture dossier of Bollam Rishithej.</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-certificate.jpg</image:loc>
+      <image:title>Bollam Rishithej — University of Leicester graduation</image:title>
+      <image:caption>Bollam Rishithej in cap and gown at his University of Leicester graduation, the Indian flag around his shoulders, holding his degree certificate.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-indian-flag.jpg</image:loc>
+      <image:title>Bollam Rishithej with the Indian flag at his Leicester graduation</image:title>
+      <image:caption>Bollam Rishithej holding the Indian national flag open at his University of Leicester graduation ceremony.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-university-of-leicester-campus.jpg</image:loc>
+      <image:title>Bollam Rishithej at the University of Leicester</image:title>
+      <image:caption>Bollam Rishithej beside the University of Leicester campus sign.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-ceremony.jpg</image:loc>
+      <image:title>Bollam Rishithej on graduation day, University of Leicester</image:title>
+      <image:caption>Bollam Rishithej in academic dress at the gates of the University of Leicester graduation venue.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-memorial-arch.jpg</image:loc>
+      <image:title>Bollam Rishithej in Victoria Park, Leicester</image:title>
+      <image:caption>Bollam Rishithej reading his graduation certificate in front of the memorial arch in Victoria Park, Leicester.</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-ceremony-video-poster.jpg</video:thumbnail_loc>
+      <video:title>Bollam Rishithej at his University of Leicester graduation ceremony</video:title>
+      <video:description>Bollam Rishithej at the University of Leicester graduation ceremony in Victoria Park, Leicester, after completing an MSc in Entrepreneurship and Innovation Management.</video:description>
+      <video:content_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-ceremony-video.mp4</video:content_loc>
+      <video:duration>18</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-10-13</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-walk-video-poster.jpg</video:thumbnail_loc>
+      <video:title>Bollam Rishithej walking out of his Leicester graduation</video:title>
+      <video:description>Bollam Rishithej walking out of the University of Leicester graduation ceremony with his degree certificate.</video:description>
+      <video:content_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-walk-video.mp4</video:content_loc>
+      <video:duration>20</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-10-13</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-campus-video-poster.jpg</video:thumbnail_loc>
+      <video:title>Bollam Rishithej on the University of Leicester campus</video:title>
+      <video:description>Bollam Rishithej on the University of Leicester campus on graduation day.</video:description>
+      <video:content_loc>https://bollamrishithej.com/assets/bollam-rishithej-leicester-graduation-campus-video.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-10-13</video:publication_date>
+    </video:video>
   </url>
   <url>
     <loc>https://bollamrishithej.com/contact</loc>
@@ -116,6 +172,12 @@
   </url>
   <url>
     <loc>https://bollamrishithej.com/blog/we-do-not-have-competitors</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bollamrishithej.com/blog/why-i-am-going-to-guangzhou</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
