@@ -41,7 +41,7 @@ const VENTURES = [
     blurb: 'Computer vision intelligence platform transforming passive visual infrastructure into real-time operational perception.' },
   { slug: 'firstsecure-ai', name: 'FirstSecure.ai', role: 'Co-Founder & Director',
     sector: 'Agentic Cyber', dpiit: false, logo: 'assets/firstsecure-logo.svg', src: 'page-05',
-    // site: 'https://firstsecure.ai',  // domain parked, no DNS - restore when live
+    site: 'https://firstsecure.ai',
     blurb: 'Autonomous agentic AI security platform engineering real-time threat detection, investigation, and automated neutralization.' },
   { slug: 'denyfix-ai', name: 'DenyFix.ai', role: 'Co-Founder & Director',
     sector: 'Healthcare AI', dpiit: false, logo: 'assets/denyfix-logo.png', logoOnDark: 'assets/denyfix-logo-on-dark.png', src: 'page-06',

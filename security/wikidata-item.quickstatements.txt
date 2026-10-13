@@ -7,6 +7,7 @@ LAST|Aen|"B. Rishithej"
 LAST|Aen|"Rishi Bollam"
 LAST|P31|Q5|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
 LAST|P21|Q6581097|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
+LAST|P569|+1999-09-22T00:00:00Z/11|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
 LAST|P27|Q668|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
 LAST|P106|Q131524|S854|"https://bollamrishithej.com/ventures"|S813|+2026-10-14T00:00:00Z/11
 LAST|P106|Q107100767|S854|"https://bollamrishithej.com/ventures"|S813|+2026-10-14T00:00:00Z/11

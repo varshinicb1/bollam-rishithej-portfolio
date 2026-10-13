@@ -1,0 +1,49 @@
+CREATE
+LAST|Len|"VidyuthLabs"
+LAST|Den|"Indian deep-technology company developing portable electrochemical sensing instruments"
+LAST|Aen|"Vidyuthlabs Technologies"
+LAST|P31|Q4830453|S854|"https://vidyuthlabs.co.in/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q668|S854|"https://vidyuthlabs.co.in/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P159|Q1361|S854|"https://bollamrishithej.com/ventures/vidyuthlabs"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://vidyuthlabs.co.in/"
+
+CREATE
+LAST|Len|"Predictera"
+LAST|Den|"Indian computer vision company"
+LAST|P31|Q4830453|S854|"https://predictera.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q668|S854|"https://predictera.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P159|Q1361|S854|"https://bollamrishithej.com/ventures/predictera"|S813|+2026-10-14T00:00:00Z/11
+LAST|P452|Q844240|S854|"https://predictera.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://predictera.com/"
+
+CREATE
+LAST|Len|"FirstSecure.ai"
+LAST|Den|"Cybersecurity company developing autonomous AI security software"
+LAST|P31|Q4830453|S854|"https://firstsecure.ai/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q668|S854|"https://bollamrishithej.com/ventures/firstsecure-ai"|S813|+2026-10-14T00:00:00Z/11
+LAST|P452|Q3510521|S854|"https://firstsecure.ai/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://firstsecure.ai/"
+
+CREATE
+LAST|Len|"ML Dynamic Solutions"
+LAST|Den|"Indian company providing AI-based healthcare revenue cycle management"
+LAST|P31|Q4830453|S854|"https://mldynamic.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q668|S854|"https://mldynamic.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P159|Q1361|S854|"https://bollamrishithej.com/ventures/ml-dynamic-solutions"|S813|+2026-10-14T00:00:00Z/11
+LAST|P452|Q11660|S854|"https://mldynamic.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://mldynamic.com/"
+
+CREATE
+LAST|Len|"CXOera"
+LAST|Den|"Executive leadership and enterprise enablement network"
+LAST|P31|Q4830453|S854|"https://cxoera.com/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q668|S854|"https://bollamrishithej.com/ventures/cxoera"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://cxoera.com/"
+
+CREATE
+LAST|Len|"Emergera.ai"
+LAST|Den|"United States company providing practitioner-taught artificial intelligence programmes"
+LAST|P31|Q4830453|S854|"https://emergera.ai/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P17|Q30|S854|"https://bollamrishithej.com/ventures/emergera-ai"|S813|+2026-10-14T00:00:00Z/11
+LAST|P452|Q11660|S854|"https://emergera.ai/"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://emergera.ai/"
