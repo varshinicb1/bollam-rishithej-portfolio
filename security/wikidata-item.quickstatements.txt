@@ -1,0 +1,17 @@
+CREATE
+LAST|Len|"Bollam Rishithej"
+LAST|Den|"Indian company director and technology entrepreneur"
+LAST|Aen|"Rishithej Bollam"
+LAST|Aen|"Bollam Rishi Thej"
+LAST|Aen|"B. Rishithej"
+LAST|Aen|"Rishi Bollam"
+LAST|P31|Q5|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
+LAST|P21|Q6581097|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
+LAST|P27|Q668|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
+LAST|P106|Q131524|S854|"https://bollamrishithej.com/ventures"|S813|+2026-10-14T00:00:00Z/11
+LAST|P106|Q107100767|S854|"https://bollamrishithej.com/ventures"|S813|+2026-10-14T00:00:00Z/11
+LAST|P69|Q1333399|P512|Q950900|S854|"https://bollamrishithej.com/about"|S813|+2026-10-14T00:00:00Z/11
+LAST|P551|Q1361|S854|"https://bollamrishithej.com/contact"|S813|+2026-10-14T00:00:00Z/11
+LAST|P856|"https://bollamrishithej.com/"
+LAST|P6634|"rishithej-bollam-5b7638362"
+LAST|P2003|"rishithej_bollam"
