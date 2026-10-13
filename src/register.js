@@ -36,18 +36,18 @@ const VENTURES = [
     site: 'https://vidyuthlabs.co.in',
     blurb: 'Making lab-grade electrochemistry portable through handheld analyzers and interchangeable sensors for water, food, soil and industry.' },
   { slug: 'predictera', name: 'Predictera', role: 'Co-Founder & Director',
-    sector: 'Vision AI', dpiit: true, logo: 'assets/predictera-logo.png', src: 'page-04',
+    sector: 'Vision AI', dpiit: true, logo: 'assets/predictera-logo.svg', logoOnDark: 'assets/predictera-logo-on-dark.svg', src: 'page-04',
     site: 'https://predictera.com',
     blurb: 'Computer vision intelligence platform transforming passive visual infrastructure into real-time operational perception.' },
   { slug: 'firstsecure-ai', name: 'FirstSecure.ai', role: 'Co-Founder & Director',
     sector: 'Agentic Cyber', dpiit: false, logo: 'assets/firstsecure-logo.svg', src: 'page-05',
-    site: 'https://firstsecure.ai',
+    // site: 'https://firstsecure.ai',  // domain parked, no DNS - restore when live
     blurb: 'Autonomous agentic AI security platform engineering real-time threat detection, investigation, and automated neutralization.' },
   { slug: 'denyfix-ai', name: 'DenyFix.ai', role: 'Co-Founder & Director',
     sector: 'Healthcare AI', dpiit: false, logo: 'assets/denyfix-logo.svg', src: 'page-06',
     blurb: 'An AI-driven platform focused on intelligent denial management and touchless revenue cycle recovery in healthcare.' },
   { slug: 'cxoera', name: 'CXOera', role: 'Director',
-    sector: 'Enterprise', dpiit: false, logo: 'assets/cxoera-logo.svg', src: 'page-08',
+    sector: 'Enterprise', dpiit: false, logo: 'assets/cxoera-logo.png', logoOnDark: 'assets/cxoera-logo-on-dark.png', src: 'page-08',
     blurb: 'A next-generation ecosystem designed around executive leadership and enterprise enablement.' },
   // The only entity here that is NOT an MCA company. `jurisdiction` marks that:
   // it keeps the register's "designations under the Companies Act, 2013" claim

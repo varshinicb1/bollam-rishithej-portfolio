@@ -183,6 +183,32 @@ if (p02.cards.length) {
         '          <p>' + esc(c.body) + '</p>\n        </article>';
     }).join('\n') + '\n      </div>\n    </section>';
 }
+// Plain answers to the questions people actually type. Every answer restates
+// something already established elsewhere on the site — nothing new is claimed
+// here. Rendered VISIBLY and mirrored in FAQPage markup below: FAQ structured
+// data that has no on-page counterpart is a guidelines violation, and answer
+// engines quote the visible text anyway.
+const FAQ = [
+  ['Who is Bollam Rishithej?',
+   'Bollam Rishithej is an Indian deep-tech founder and operator based in Hyderabad, Telangana. He is Founder and Managing Director of ML Dynamic Solutions, and holds board positions across thirteen entities spanning agentic AI security, computer vision, electrochemical sensing, healthcare revenue intelligence, capital management, executive networks and industrial operations.'],
+  ['What is Bollam Rishithej’s role at ML Dynamic Solutions?',
+   'He is Founder and Managing Director. Under section 203 of the Companies Act, 2013 a person may hold only one whole-time key managerial personnel office, and ML Dynamic Solutions is his.'],
+  ['Which companies is Bollam Rishithej a director of?',
+   'ML Dynamic Solutions, ML Group of Companies, ML Capital, VidyuthLabs Technologies, Predictera, FirstSecure.ai, DenyFix.ai, CXOera, and the industrial companies Akshara Groups Bullion, Jenani Infra, Aditya Trading Company and RS Food Products — twelve directorships under the Companies Act, 2013. He is additionally Co-Founder and Chief Technology Officer of Emergera.ai, a United States LLC outside that Act.'],
+  ['What did Bollam Rishithej study?',
+   'He holds an MSc in Entrepreneurship and Innovation Management from the University of Leicester in the United Kingdom.'],
+  ['Where is Bollam Rishithej based?',
+   'Hyderabad, Telangana, India.'],
+  ['Is Bollam Rishithej the same person as Rishithej Bollam?',
+   'Yes. The name appears as Bollam Rishithej, Rishithej Bollam, Rishi Bollam and Bollam Rishi Thej across public records and press; they refer to the same person.'],
+];
+
+aboutBody += '\n    <section class="about-faq">\n      <p class="section-no">[ COMMON QUESTIONS ]</p>\n      <dl class="faq-list">\n' +
+  FAQ.map(function (qa) {
+    return '        <div class="faq-row">\n          <dt>' + esc(qa[0]) + '</dt>\n' +
+      '          <dd>' + esc(qa[1]) + '</dd>\n        </div>';
+  }).join('\n') + '\n      </dl>\n    </section>';
+
 aboutBody += '\n    <section class="venture-foot">\n      <p class="venture-foot-note">His ventures are listed in the <a href="/ventures">portfolio</a>, his career in the <a href="/journey">journey</a>, and the full record in the <a href="/brochure">executive dossier</a>.</p>\n    </section>';
 
 write('about.html', page({
@@ -196,6 +222,12 @@ write('about.html', page({
     crumbJsonLd(aboutTrail),
     { '@type': 'AboutPage', '@id': SITE + '/about#page', url: SITE + '/about',
       name: 'About Bollam Rishithej', mainEntity: PERSON },
+    // Mirrors the visible list above, question for question.
+    { '@type': 'FAQPage', '@id': SITE + '/about#faq', about: PERSON,
+      mainEntity: FAQ.map(function (qa) {
+        return { '@type': 'Question', name: qa[0],
+          acceptedAnswer: { '@type': 'Answer', text: qa[1] } };
+      }) },
   ] },
   body: aboutBody,
 }));

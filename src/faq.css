@@ -1,0 +1,34 @@
+
+/* ---------------------------------------------------------------------------
+   40  COMMON QUESTIONS
+   Plain answers to the questions people type into a search box. Set as a
+   definition list because that is what it is, and styled off the existing
+   spec-row rhythm rather than inventing a component.
+   ------------------------------------------------------------------------ */
+
+.about-faq { padding-inline: var(--gutter); }
+
+.faq-list { margin-top: var(--stack-3); }
+
+.faq-row {
+  padding-block: clamp(18px, 2.4vw, 28px);
+  border-top: 1px solid var(--rule);
+}
+
+.faq-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.faq-row dt {
+  font-size: var(--t-h4);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.faq-row dd {
+  max-width: 68ch;
+  margin: 10px 0 0;
+  font-size: var(--t-small);
+  line-height: 1.7;
+  color: var(--ink-2);
+}

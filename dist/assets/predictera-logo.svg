@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Predictera">
+  <!-- Paper variant. The brand orange is unchanged; the off-white cells, which
+       only read on their own dark site, take the monograph ink so the mark
+       stays legible on paper. Standard reversible-logo practice. -->
+  <rect x="0"  y="0"  width="13" height="13" fill="#F09020"/>
+  <rect x="15" y="0"  width="13" height="13" fill="#0b0d11"/>
+  <rect x="0"  y="15" width="13" height="13" fill="#0b0d11"/>
+  <rect x="15" y="15" width="13" height="13" fill="#F09020"/>
+</svg>

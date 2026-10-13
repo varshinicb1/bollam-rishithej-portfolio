@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Predictera">
+  <!-- Predictera's own mark, rebuilt from the live site: a 2x2 grid of 13px
+       cells with a 2px gutter, orange and off-white on the diagonal.
+       Colours sampled from predictera.com: #F09020 / #F0EBE0. -->
+  <rect x="0"  y="0"  width="13" height="13" fill="#F09020"/>
+  <rect x="15" y="0"  width="13" height="13" fill="#F0EBE0"/>
+  <rect x="0"  y="15" width="13" height="13" fill="#F0EBE0"/>
+  <rect x="15" y="15" width="13" height="13" fill="#F09020"/>
+</svg>
