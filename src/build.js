@@ -20,14 +20,14 @@ const PERSON = { '@id': SITE + '/#person' };
 // hand-authored homepage — and the two had already drifted.
 
 const INDUSTRIAL = [
-  ['Akshara Groups Bullion', 'Director', 'Spot bullion trading, vaulting and wholesale liquidity.', 'assets/akshara-logo.svg'],
+  ['Akshara Groups Bullion', 'Director', 'Spot bullion trading, vaulting and wholesale liquidity.', 'assets/akshara-logo.png'],
   ['Jenani Infra', 'Director', 'Heavy civil infrastructure contracting, logistics hubs and EPC.', 'assets/jenani-infra-logo.svg'],
   ['Aditya Trading Company', 'Director', 'Wholesale agricultural commodity supply chain and inter-state grain logistics.', 'assets/aditya-trading-logo.svg'],
   ['RS Food Products', 'Director', 'High-throughput staple milling, packaged consumer foods and regional distribution.', 'assets/rs-foods-logo.svg'],
 ];
 
 const CAREER = [
-  ['2024 — Present', 'Director', 'Akshara Groups', 'Strategy, operations and growth across the gold industry.', 'assets/akshara-logo.svg'],
+  ['2024 — Present', 'Director', 'Akshara Groups', 'Strategy, operations and growth across the gold industry.', 'assets/akshara-logo.png'],
   ['2022 — 2025', 'Director', 'Jenani Infra', 'Infrastructure growth, project execution and operational improvement.', 'assets/jenani-infra-logo.svg'],
   ['2021 — Present', 'Director', 'Aditya Trading Company', 'Business development, financial oversight and sustainable profitability.', 'assets/aditya-trading-logo.svg'],
   ['2019 — 2021', 'Director', 'RS Food Products', 'Growth, operations and product excellence.', 'assets/rs-foods-logo.svg'],
@@ -184,6 +184,40 @@ if (p02.cards.length) {
         '          <p>' + esc(c.body) + '</p>\n        </article>';
     }).join('\n') + '\n      </div>\n    </section>';
 }
+// The stated goal, in his words, framed as the intention it is rather than as
+// an accomplishment. It is the single most distinguishing thing on the site.
+aboutBody += '\n    <section class="about-vision">\n' +
+  '      <p class="section-no">[ THE INTENTION ]</p>\n' +
+  '      <blockquote class="vision-quote">\n' +
+  '        <p>Fifty thousand people employed, within ten years. Not users, not valuation &mdash; fifty thousand families with a salary because something we built exists.</p>\n' +
+  '      </blockquote>\n' +
+  '      <p class="vision-body">That target shapes which sectors are worth entering: large, real, and organised well below what they are capable of. It is also why the work is deliberately non-competitive. In a sector that does not function yet, a second serious company is corroboration rather than a threat, and the ecosystem being stronger is worth more than any position within it.</p>\n' +
+  '      <p class="vision-body">The standard he works to is Ratan Tata&rsquo;s &mdash; a company run as though it is accountable to the country it operates in, with returns as the consequence of doing that properly rather than the purpose of it. <a href="/blog/fifty-thousand-people">The reasoning is set out here</a>.</p>\n' +
+  '    </section>';
+
+// Named, verifiable relationships. Only Deccan Springs' mark is reproduced:
+// they are the named pilot partner. The institutions are set in type, because
+// reproducing a university's logo needs its own permission.
+const COLLAB = [
+  ['Deccan Springs Global School', 'Hyderabad', 'Pilot partner for the AI school management system. Deployed, under a signed MoU.', 'assets/deccan-springs-logo.png'],
+  ['BITS Pilani, Hyderabad', 'Academic collaboration', 'Research collaboration.', null],
+  ['RV College of Engineering', 'Academic collaboration', 'Research collaboration.', null],
+  ['USM Business Systems', 'United States &amp; India', 'Delivery partner across both markets.', null],
+];
+
+aboutBody += '\n    <section class="about-collab">\n' +
+  '      <p class="section-no">[ COLLABORATIONS ]</p>\n' +
+  '      <h2>Built with others</h2>\n' +
+  '      <div class="collab-grid">\n' +
+  COLLAB.map(function (c) {
+    return '        <article class="collab-card">\n' +
+      (c[3] ? '          <img src="/' + c[3] + '" alt="' + esc(c[0]) + ' logo" class="collab-logo" loading="lazy" decoding="async"' + attrs(c[3]) + '>\n' : '') +
+      '          <h3>' + c[0] + '</h3>\n' +
+      '          <p class="collab-where">' + c[1] + '</p>\n' +
+      '          <p>' + c[2] + '</p>\n        </article>';
+  }).join('\n') +
+  '\n      </div>\n    </section>';
+
 // Plain answers to the questions people actually type. Every answer restates
 // something already established elsewhere on the site — nothing new is claimed
 // here. Rendered VISIBLY and mirrored in FAQPage markup below: FAQ structured
@@ -198,6 +232,8 @@ const FAQ = [
    'ML Dynamic Solutions, ML Group of Companies, ML Capital, VidyuthLabs Technologies, Predictera, FirstSecure.ai, DenyFix.ai, CXOera, and the industrial companies Akshara Groups Bullion, Jenani Infra, Aditya Trading Company and RS Food Products — twelve directorships under the Companies Act, 2013. He is additionally Co-Founder and Chief Technology Officer of Emergera.ai, a United States LLC outside that Act.'],
   ['What did Bollam Rishithej study?',
    'He holds an MSc in Entrepreneurship and Innovation Management from the University of Leicester in the United Kingdom.'],
+  ['What is Bollam Rishithej’s vision?',
+   'To have fifty thousand people employed within ten years through the ventures he builds and backs — a measure of families supported rather than valuation. He works to a collaborative rather than competitive model, entering unorganised sectors through a single committed pilot partner and generalising only once the system survives live operation.'],
   ['Where is Bollam Rishithej based?',
    'Hyderabad, Telangana, India.'],
   ['Is Bollam Rishithej the same person as Rishithej Bollam?',

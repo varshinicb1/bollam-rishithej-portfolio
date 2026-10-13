@@ -19,7 +19,7 @@ const esc = (s) => String(s)
 
 const VENTURES = [
   { slug: 'ml-dynamic-solutions', name: 'ML Dynamic Solutions', role: 'Founder & Managing Director',
-    sector: 'Technology', dpiit: true, logo: 'assets/ml-dynamic-logo.svg', src: 'page-07',
+    sector: 'Technology', dpiit: true, logo: 'assets/ml-dynamic-logo.png', src: 'page-07',
     blurb: 'Enterprise AI and technology solutions spanning intelligent automation, digital transformation, and sovereign platforms.' },
   { slug: 'ml-group-of-companies', name: 'ML Group of Companies', role: 'Promoter & Director',
     sector: 'Group', dpiit: false, logo: 'assets/ml-group-logo.svg', src: 'page-07',
@@ -44,7 +44,7 @@ const VENTURES = [
     // site: 'https://firstsecure.ai',  // domain parked, no DNS - restore when live
     blurb: 'Autonomous agentic AI security platform engineering real-time threat detection, investigation, and automated neutralization.' },
   { slug: 'denyfix-ai', name: 'DenyFix.ai', role: 'Co-Founder & Director',
-    sector: 'Healthcare AI', dpiit: false, logo: 'assets/denyfix-logo.svg', src: 'page-06',
+    sector: 'Healthcare AI', dpiit: false, logo: 'assets/denyfix-logo.png', logoOnDark: 'assets/denyfix-logo-on-dark.png', src: 'page-06',
     blurb: 'An AI-driven platform focused on intelligent denial management and touchless revenue cycle recovery in healthcare.' },
   { slug: 'cxoera', name: 'CXOera', role: 'Director',
     sector: 'Enterprise', dpiit: false, logo: 'assets/cxoera-logo.png', logoOnDark: 'assets/cxoera-logo-on-dark.png', src: 'page-08',
