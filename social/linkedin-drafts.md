@@ -205,7 +205,19 @@ sets up why fifty thousand is the measure rather than valuation.
 
 ## 5. Post three — the pilot
 
-The proof post. Tag Deccan Springs Global School if they have a page.
+The proof post — the first one in the sequence with named, checkable evidence
+behind it.
+
+**Image:** attach `deccan-springs-pilot.jpg` (in dist/assets/, 1200x630). It
+carries their mark, the school's name, Hyderabad, and the one line of
+substance — deployed, under a signed MoU. A partnership announcement is one of
+the few posts where a logo card is the right image rather than a vanity one,
+because the logo IS the evidence.
+
+**Before posting:** check Deccan Springs are happy to be named publicly and to
+have their mark used. The MoU is a commercial relationship and partners like
+being asked. If they would rather not be named yet, the post still works with
+the school anonymised — "one school in Hyderabad" — and no image.
 
 > The usual way to enter a sector is to study it, build what the study
 > implies, then go find someone to sell it to.

@@ -3,6 +3,9 @@ title: Start with one school
 description: How we enter an unorganised sector — find one partner willing to run it for real, build for their actual constraints, and only then call it a product. In education that partner is Deccan Springs Global School.
 date: 2026-10-12
 tags: Education, Method
+image: /assets/deccan-springs-pilot.jpg
+imageAlt: Deccan Springs Global School, Hyderabad — pilot partner for the AI school management system
+imageCaption: Deccan Springs Global School, Hyderabad. Pilot deployed, MoU signed.
 ---
 
 The usual way to enter a sector is to study it, build what the study implies, and then look for someone to sell it to. I have watched that fail often enough to be suspicious of it.
