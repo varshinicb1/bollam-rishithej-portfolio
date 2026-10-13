@@ -31,7 +31,7 @@ const VENTURES = [
   // correct as-is on paper and has to be inverted on dark grounds, which the
   // register is. See `.is-ink-art` in the stylesheet.
   { slug: 'vidyuthlabs', name: 'VidyuthLabs', role: 'Co-Founder & Director',
-    sector: 'Deep Tech', dpiit: false, logo: 'assets/vidyuthlabs-logo.png', src: 'page-03',
+    sector: 'Deep Tech', dpiit: true, logo: 'assets/vidyuthlabs-logo.png', src: 'page-03',
     inkArt: true,
     site: 'https://vidyuthlabs.co.in',
     blurb: 'Making lab-grade electrochemistry portable through handheld analyzers and interchangeable sensors for water, food, soil and industry.' },
