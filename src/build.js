@@ -332,6 +332,12 @@ write('contact.html', page({
     '        <a href="https://www.linkedin.com/in/rishithej-bollam-5b7638362/" target="_blank" rel="noopener" class="contact-link">\n' +
     '          <span class="contact-email-text">linkedin.com/in/rishithej-bollam</span>\n' +
     '          <span class="contact-badge">LINKEDIN &#8599;</span>\n        </a>\n' +
+    // rel="me" is the explicit identity claim between a page and a profile it
+    // owns, and a sameAs entry counts for more when the profile is linked
+    // on-page as well as asserted in the graph.
+    '        <a href="https://www.instagram.com/rishithej_bollam/" target="_blank" rel="me noopener" class="contact-link">\n' +
+    '          <span class="contact-email-text">instagram.com/rishithej_bollam</span>\n' +
+    '          <span class="contact-badge">INSTAGRAM &#8599;</span>\n        </a>\n' +
     '        <a href="/brochure" class="contact-link">\n' +
     '          <span class="contact-email-text">Executive Dossier &amp; Monograph</span>\n' +
     '          <span class="contact-badge">VIEW DOSSIER &#8599;</span>\n        </a>\n' +
