@@ -33,39 +33,69 @@ survives truncation on mobile, and it invites the obvious follow-up question.
 
 ## 2. About section
 
+LinkedIn allows 2,600 characters. This is 2,433, so it fits with room to edit.
+Only the first ~265 characters show before "see more" on mobile, which is why
+the number is in the first line and the title sits below the fold, not above it.
+
+**Three claims in the previous About had to go, and not for style reasons.**
+
+Companies Act, 2013, s.203 permits a person exactly ONE whole-time key
+managerial office - MD, WTD, CEO, CFO or CS - plus that same company's own
+subsidiaries. The old text claimed Chief Executive Officer of the ML Group AND
+Managing Director of ML Dynamic Solutions AND of ML Capital AND of Aditya
+Trading Company AND, historically, of RS Food Products. That is four to five
+concurrent KMP offices. It is not aggressive positioning, it is not legally
+possible, and it contradicts bollamrishithej.com, which states one. Anyone who
+pulls the MCA master data sees the mismatch. The single office is **Founder &
+Managing Director, ML Dynamic Solutions**; everywhere else is Director, or
+Promoter where there is no board seat. Aditya Trading Company and RS Food
+Products are Director. ML Capital is Director, and a subsidiary of the KMP
+company, so it is clean either way.
+
+Two smaller ones. **ML Engineering Works** and **ML Constructions** are named in
+the old text but are not in the register the site publishes - either add them
+there or drop them here, but the two documents must not disagree. And the infra
+company is spelt **Jenani Infra** on the site and "Janani" in the old text; pick
+one and use it in both places.
+
 > I measure what I'm building by one number, and it isn't valuation.
 >
-> Fifty thousand people employed within ten years. Not users, not downloads —
-> fifty thousand families with a salary because something we built exists.
+> Fifty thousand people employed within ten years.
 >
-> I'm Founder and Managing Director of ML Dynamic Solutions, and I hold board
-> positions across twelve companies spanning agentic AI security, computer
-> vision, electrochemical sensing, healthcare revenue intelligence, capital
-> management and industrial operations. I'm also Co-Founder and CTO of
-> Emergera.ai in the United States.
+> Not users. Not downloads. Fifty thousand families with a salary because something we built exists.
 >
-> That combination looks unfocused until you see what it's for. Software
-> alone doesn't employ fifty thousand people — that isn't how software works.
-> It happens by being genuinely useful to sectors that are large, real, and
-> currently operating well below what they're capable of.
+> I'm Founder and Managing Director of ML Dynamic Solutions, and I hold board positions across twelve Indian companies in all — agentic AI security, computer vision, electrochemical sensing, healthcare revenue intelligence, capital management, bullion, infrastructure and food processing — plus Co-Founder and Chief Technology Officer of Emergera.ai in the United States.
 >
-> So we enter those sectors the slow way: find one partner willing to run it
-> for real, build for their actual constraints, deploy where failure is
-> embarrassing, and only then call it a product. In education that partner is
-> Deccan Springs Global School in Hyderabad — pilot deployed, MoU signed.
+> That combination looks unfocused until you see what it's for. Software alone does not employ fifty thousand people. That isn't how software works. It happens by being genuinely useful to sectors that are large, real, and running well below what they are capable of.
 >
-> I don't think about competitors much. In a sector that doesn't function yet,
-> a second serious company is corroboration, not a threat. Categories get
-> built by several people at once or they don't get built. That's why the
-> collaborations matter — BITS Pilani Hyderabad, RV College of Engineering,
-> and USM Business Systems across the US and India.
+> So we enter those sectors the slow way.
 >
-> The standard I work to is Ratan Tata's: a company run as though it's
-> accountable to the country it operates in, with returns as the consequence
-> of doing that properly rather than the purpose of it. I'm nowhere near it.
-> A standard you're nowhere near is more useful than a target you've cleared.
+> Find one partner willing to run it for real. Build for their actual constraints. Deploy it where failure would be embarrassing. Only then call it a product.
 >
-> Hyderabad, Telangana. Writing at bollamrishithej.com/blog
+> In education that partner is Deccan Springs Global School, Hyderabad. Pilot deployed. MoU signed. One building, done properly — then the second.
+>
+> I don't think about competitors much. In a sector that doesn't function yet, a second serious company is corroboration, not a threat. Categories get built by several people at once or they don't get built at all. That is why the collaborations matter: BITS Pilani Hyderabad, RV College of Engineering, and USM Business Systems across the United States and India.
+>
+> My Master's in Entrepreneurship and Innovation Management went on a business model for turning plastic waste into fuel. It never commercialised. It taught me the thing I use most — that a good idea and a working business are separated by an enormous amount of unglamorous work, and that almost everybody quits inside that gap. I also hold a Bachelor's in Business Administration, and have published on entrepreneurial leadership in multi-sector enterprises and on AI adoption in conventional industries.
+>
+> The standard I work to is Ratan Tata's: a company run as though it is accountable to the country it operates in, with returns as the consequence of doing that properly rather than the purpose of it.
+>
+> I am nowhere near it. A standard you're nowhere near is more useful than a target you've already cleared.
+>
+> Hyderabad, Telangana.
+> Writing: bollamrishithej.com/blog
+
+Tone notes, if you want to adjust it yourself:
+
+- The plastic-waste dissertation is the strongest human line in the whole
+  profile and the old version wasted it as a credential. The admission that it
+  never commercialised is what makes it land. Do not cut that clause.
+- "Diversified business conglomerate", "operational excellence", "strategic
+  cohesion" and "long-term value creation" are gone. They are the phrases that
+  make a reader decide a profile was written by a committee.
+- The published papers stay, stated plainly, without the bulleted display.
+  Listed as a showcase they read as padding; mentioned in passing they read as
+  a person who writes.
 
 ---
 
