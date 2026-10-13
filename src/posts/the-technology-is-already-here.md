@@ -4,6 +4,7 @@ description: A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS 
 date: 2026-10-14
 tags: Deep tech, VidyuthLabs, Research
 image: /assets/vidyuthlabs-bits-pilani-mmne-lab.jpg
+linkedin: https://www.linkedin.com/feed/update/urn:li:share:7509439269426417666
 imageAlt: Bollam Rishithej with the VidyuthLabs team and Prof. Sanket Goel's research group at the MEMS, Microfluidics and Nanoelectronics Lab, BITS Pilani Hyderabad Campus
 ---
 

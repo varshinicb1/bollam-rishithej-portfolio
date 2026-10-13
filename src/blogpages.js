@@ -101,6 +101,32 @@ function build(write) {
             '    </figure>\n'
           : '') +
         '    <article class="post-body">\n' + p.html + '\n    </article>\n' +
+        // `linkedin: <share-id or full url>` embeds the original post as the
+        // primary source.
+        //
+        // The iframe is NOT written into the markup. `loading="lazy"` was
+        // tried and measured and it does not defer this: 28 requests to
+        // linkedin.com and licdn.com fired on page load, pulling a tracking
+        // chain (protechts.net, px-cloud.net) with them, because Chrome's
+        // lazy threshold is generous enough to start it immediately. So the
+        // frame is injected by script.js only when the placeholder actually
+        // scrolls near the viewport. With no JavaScript, or for a reader who
+        // never scrolls this far, nothing of LinkedIn's is ever requested and
+        // the plain link below carries the source.
+        (p.meta.linkedin ? (function () {
+          const id = String(p.meta.linkedin).match(/(\d{10,})/);
+          if (!id) return '';
+          const urn = 'urn:li:share:' + id[1];
+          return '    <section class="post-source">\n' +
+            '      <p class="section-no">[ THE ORIGINAL POST ]</p>\n' +
+            '      <div class="post-embed" data-linkedin-embed="' + urn + '">\n' +
+            '        <p class="post-embed-ph">Loading the original post from LinkedIn&hellip;</p>\n' +
+            '      </div>\n' +
+            '      <p class="post-source-note">Embedded from LinkedIn, which sets its own cookies. ' +
+            'It loads only when you scroll to it &mdash; or read it ' +
+            '<a href="https://www.linkedin.com/feed/update/' + urn + '" target="_blank" rel="noopener">directly on LinkedIn</a>.</p>\n' +
+            '    </section>\n';
+        })() : '') +
         '    <section class="venture-foot">\n' +
         '      <p class="venture-foot-note">More in <a href="/blog">writing</a>, the portfolio under <a href="/ventures">ventures</a>, and the full record in the <a href="/brochure">executive dossier</a>.</p>\n' +
         '    </section>',

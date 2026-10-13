@@ -757,4 +757,37 @@
     });
   });
 
+
+  // -------------------------------------------------------------
+  // 13. Deferred LinkedIn embeds
+  // -------------------------------------------------------------
+  // The iframe is built here rather than shipped in the markup.
+  // loading="lazy" was measured and does not defer it — 28 requests to
+  // linkedin.com and licdn.com fired on page load, tracking chain included.
+  // An IntersectionObserver genuinely does: nothing of LinkedIn's is
+  // requested until the placeholder is close to the viewport, and never at
+  // all for a reader who does not scroll that far.
+  document.querySelectorAll("[data-linkedin-embed]").forEach((host) => {
+    const urn = host.getAttribute("data-linkedin-embed");
+    if (!/^urn:li:share:[0-9]+$/.test(urn)) return;
+
+    const mount = () => {
+      if (host.dataset.mounted) return;
+      host.dataset.mounted = "1";
+      const f = document.createElement("iframe");
+      f.src = "https://www.linkedin.com/embed/feed/update/" + urn;
+      f.title = "The original announcement on LinkedIn";
+      f.setAttribute("frameborder", "0");
+      f.setAttribute("allowfullscreen", "");
+      f.width = 504; f.height = 1788;
+      host.replaceChildren(f);
+    };
+
+    if (!("IntersectionObserver" in window)) { mount(); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { mount(); io.disconnect(); } });
+    }, { rootMargin: "300px" });
+    io.observe(host);
+  });
+
 })();

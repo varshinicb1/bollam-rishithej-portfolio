@@ -4107,3 +4107,62 @@ img.company-emblem {
   letter-spacing: 0.04em;
   color: var(--ink-3);
 }
+
+/* --- The original post, embedded ------------------------------------------
+   Set at the foot of a piece as a source, never as the piece itself. The
+   frame is lazy, so LinkedIn's script and its cookies never load for a reader
+   who does not scroll this far. */
+.post-source { padding-inline: var(--gutter); margin-top: var(--stack-4); }
+
+.post-embed {
+  max-width: 504px;
+  margin-top: var(--stack-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper-raised);
+}
+
+/* The frame is a fixed 504px wide from LinkedIn. Below that it has to shrink,
+   and the content reflows taller when it does, so the height goes up to
+   compensate rather than clipping the post. */
+.post-embed iframe {
+  display: block;
+  width: 100%;
+  height: 1788px;
+  border: 0;
+}
+
+/* Holds the space before the frame mounts, so nothing jumps when it does. */
+.post-embed-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: var(--stack-3);
+  font: 400 var(--t-meta) / 1.5 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .post-embed iframe { height: 2100px; }
+}
+
+.post-source-note {
+  max-width: 68ch;
+  margin-top: var(--stack-2);
+  font-size: var(--t-small);
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+.post-source-note a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.3s;
+}
+
+.post-source-note a:hover { border-bottom-color: var(--ink); }
