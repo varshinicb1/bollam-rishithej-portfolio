@@ -69,9 +69,104 @@ survives truncation on mobile, and it invites the obvious follow-up question.
 
 ---
 
-## 3. Post one — the vision
+## 3. Post one — the ecosystem
 
-Flagship. Post this first; everything else follows from it.
+This is the opening post. It states the thesis everything else sits inside,
+and it argues with something the whole feed believes, which is what makes it
+travel.
+
+> Most of the startups being celebrated in India this year will not exist in
+> two years.
+>
+> Not because the founders aren't capable. Many are exceptional.
+>
+> Because the thing they're building was never designed to last. It was
+> designed to be sold.
+>
+> That isn't a moral failure. It's the natural result of the incentives we've
+> built around them.
+>
+> Somewhere in the last few years, raising money stopped being a step toward
+> building something and became the achievement itself. The round is the
+> announcement. The valuation is the headline. The deck gets more attention
+> than the product.
+>
+> A founder learns very quickly that the skill being rewarded is narrative,
+> not delivery.
+>
+> Meanwhile — and this is the part that genuinely bothers me —
+>
+> There are engineers and researchers in this country with a working product
+> and a real insight who will never start a company. Not for lack of
+> conviction. Because they believe the entry price is lakhs of rupees and
+> fifty people on day one.
+>
+> They've watched the funding theatre and concluded, reasonably, that this is
+> what starting looks like. So the thing stays a side project. Or a paper. Or
+> nothing.
+>
+> That belief is wrong, and it's costing India more than any funding winter
+> ever did.
+>
+> Here's what makes me optimistic rather than bitter.
+>
+> Every part we need already exists.
+>
+> Innovation, sitting in university labs, substantially complete.
+> Angel investors with capital, tired of being pitched narratives, genuinely
+> looking for something solid.
+> Operators who've scaled real businesses and know exactly where a company
+> breaks at twenty people, and at two hundred.
+> Advisors with decades of sector knowledge you cannot acquire any faster than
+> by living it.
+> And an effectively unlimited supply of real, expensive, unsolved problems in
+> every sector you can name.
+>
+> Each of those is strong. None of them is connected to the others.
+>
+> We don't have a shortage of ingredients. We have a shortage of wiring.
+>
+> The researcher never meets the operator. The angel never sees the lab. The
+> advisor who knows exactly why that sector resists automation is never in the
+> room when the product is designed.
+>
+> One more thing, because I think the confusion starts here.
+>
+> Everyone repeats: build a great product.
+>
+> A great product isn't the thing. I've watched beautiful products die and
+> ugly ones build durable companies, and the difference was never craft.
+>
+> Business is solving a problem worth solving — worth someone paying for,
+> repeatedly, because the alternative costs them more. The product is just the
+> shape your answer takes.
+>
+> And business is collaboration for collective growth. Not as a sentiment. As
+> a structure.
+>
+> The ecosystem I want to help build is one where a researcher with a working
+> result can find an operator, an advisor and a first customer without needing
+> fifty people and a crore to begin.
+>
+> Where capital goes to problems worth solving rather than to decks.
+>
+> Where the measure of a company is how long it lasts and how many people it
+> carries — not what it sold for.
+>
+> None of that requires inventing anything. It requires connecting things that
+> already exist, and doing the slow, unglamorous work of making those
+> connections real.
+>
+> I'd rather spend ten years on that than on a good exit.
+
+*Full piece: bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem*
+
+---
+
+## 4. Post two — the vision
+
+The number this all comes down to. Post it second — the ecosystem piece
+sets up why fifty thousand is the measure rather than valuation.
 
 > Every founder gets asked the same question, and it's almost always about
 > money. What's the valuation. What's the round. What's the exit.
@@ -108,7 +203,7 @@ Flagship. Post this first; everything else follows from it.
 
 ---
 
-## 4. Post two — the pilot
+## 5. Post three — the pilot
 
 The proof post. Tag Deccan Springs Global School if they have a page.
 
@@ -159,7 +254,7 @@ The proof post. Tag Deccan Springs Global School if they have a page.
 
 ---
 
-## 5. Post three — collaboration
+## 6. Post four — collaboration
 
 The most likely of the four to travel, because it argues with a widely held
 assumption.
@@ -202,7 +297,7 @@ assumption.
 
 ---
 
-## 6. Post four — the governance one
+## 7. Post five — the governance one
 
 The credibility post. Narrower audience, but founders, CAs, CSs and investors
 will all recognise that almost nobody gets this right.
@@ -249,14 +344,15 @@ will all recognise that almost nobody gets this right.
 
 ## Posting notes
 
-- **Order and spacing.** Post one, then two, then three, then four — roughly
-  one a week. Each sets up the next.
+- **Order and spacing.** Ecosystem, then fifty thousand, then the pilot, then
+  collaboration, then governance — roughly one a week. The first states the
+  thesis; each one after it is evidence for a different part of it.
 - **The link.** LinkedIn suppresses reach on posts with an outbound link in
   the body. Put the post in full, then drop the article link in the first
   comment.
 - **First two lines decide everything.** They're all that shows before "see
   more" on mobile. Each draft above is built so those two lines stand alone.
-- **Tagging.** Post two is the one to tag Deccan Springs Global School on —
+- **Tagging.** The pilot post is the one to tag Deccan Springs Global School on —
   and worth checking they're happy to be named publicly first, since the MoU
   is a commercial relationship.
 - **Replies are the work.** More reach comes from answering comments properly
