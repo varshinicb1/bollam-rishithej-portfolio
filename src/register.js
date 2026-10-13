@@ -22,7 +22,7 @@ const VENTURES = [
     sector: 'Technology', dpiit: true, logo: 'assets/ml-dynamic-logo.png', src: 'page-07',
     blurb: 'Enterprise AI and technology solutions spanning intelligent automation, digital transformation, and sovereign platforms.' },
   { slug: 'ml-group-of-companies', name: 'ML Group of Companies', role: 'Promoter & Director',
-    sector: 'Group', dpiit: false, logo: 'assets/ml-group-logo.svg', src: 'page-07',
+    sector: 'Group', dpiit: false, logo: 'assets/ml-group-logo.png', logoOnDark: 'assets/ml-group-logo-on-dark.png', src: 'page-07',
     blurb: 'Leading a diversified group built around technology, capital, operations and long-term enterprise value.' },
   { slug: 'ml-capital', name: 'ML Capital', role: 'Director',
     sector: 'Capital', dpiit: false, logo: 'assets/ml-capital-logo.svg', src: 'page-07',
