@@ -4080,3 +4080,30 @@ img.company-emblem {
   background: var(--paper-sunk);
   border-radius: var(--radius);
 }
+
+/* --- Lead photograph on a post -------------------------------------------- */
+.post-figure {
+  max-width: 68ch;
+  margin: var(--stack-3) 0 0;
+  padding-inline: var(--gutter);
+}
+
+/* The gutter belongs to the section, not the figure's measure, so it is added
+   back outside the 68ch rather than eating into it. */
+@supports (width: 1px) {
+  .post-figure { max-width: calc(68ch + var(--gutter) * 2); }
+}
+
+.post-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: var(--paper-sunk);
+}
+
+.post-figure figcaption {
+  margin-top: 10px;
+  font: 400 var(--t-meta) / 1.5 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}

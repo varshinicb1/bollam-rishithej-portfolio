@@ -200,8 +200,8 @@ aboutBody += '\n    <section class="about-vision">\n' +
 // reproducing a university's logo needs its own permission.
 const COLLAB = [
   ['Deccan Springs Global School', 'Hyderabad', 'Pilot partner for the AI school management system. Deployed, under a signed MoU.', 'assets/deccan-springs-logo.png'],
-  ['BITS Pilani, Hyderabad', 'Academic collaboration', 'Research collaboration.', null],
-  ['RV College of Engineering', 'Academic collaboration', 'Research collaboration.', null],
+  ['BITS Pilani, Hyderabad', 'MMNE Lab · Exploratory', 'Discussions with Prof. Sanket Goel’s MEMS, Microfluidics and Nanoelectronics Lab on commercialising electrochemical sensing research, under VidyuthLabs. Nothing signed yet.', null],
+  ['RV College of Engineering', 'Academic', 'Research collaboration.', null],
   ['USM Business Systems', 'United States &amp; India', 'Delivery partner across both markets.', null],
 ];
 

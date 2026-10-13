@@ -2,6 +2,7 @@
 // Called by src/build.js; nothing here is hand-edited in dist/.
 const { loadPosts, esc, human } = require('./blog');
 const { SITE, page, crumbJsonLd } = require('./shell');
+const { attrs } = require('./dims');
 
 const PERSON = { '@id': SITE + '/#person' };
 
@@ -57,6 +58,8 @@ function build(write) {
       title: esc(p.meta.title) + ' — Bollam Rishithej',
       description: p.meta.description.replace(/"/g, ''),
       path: '/blog/' + p.slug,
+      image: p.meta.image || undefined,
+      imageAlt: p.meta.imageAlt || undefined,
       noindex: p.draft,
       trail: trail,
       jsonld: { '@context': 'https://schema.org', '@graph': [
@@ -70,6 +73,7 @@ function build(write) {
           author: PERSON, publisher: PERSON,
           inLanguage: 'en', isPartOf: { '@id': SITE + '/blog#blog' },
           mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+          image: p.meta.image ? SITE + p.meta.image : undefined,
           keywords: p.tags.join(', ') || undefined,
           wordCount: p.body.split(/\s+/).filter(Boolean).length },
       ] },
@@ -82,6 +86,20 @@ function build(write) {
           '<span class="post-dot" aria-hidden="true">&bull;</span>Bollam Rishithej</p>\n' +
         (p.tags.length ? '      <div class="tags">' + p.tags.map((t) => '<span>' + esc(t) + '</span>').join('') + '</div>\n' : '') +
         '    </section>\n' +
+        // A post may carry a lead photograph. Served as WebP with a JPEG
+        // fallback and intrinsic dimensions, like every other image here, so
+        // it cannot shift layout while it loads.
+        (p.meta.image
+          ? '    <figure class="post-figure">\n' +
+            '      <picture>\n' +
+            '        <source type="image/webp" srcset="' + p.meta.image.replace(/\.jpg$/, '-768.webp') + ' 768w, ' +
+              p.meta.image.replace(/\.jpg$/, '-1280.webp') + ' 1280w" sizes="(max-width: 900px) 100vw, 68ch">\n' +
+            '        <img src="' + p.meta.image + '" alt="' + esc(p.meta.imageAlt || p.meta.title) + '"' +
+              attrs(p.meta.image.replace(/^\//, '')) + ' loading="lazy" decoding="async">\n' +
+            '      </picture>\n' +
+            (p.meta.imageCaption ? '      <figcaption>' + esc(p.meta.imageCaption) + '</figcaption>\n' : '') +
+            '    </figure>\n'
+          : '') +
         '    <article class="post-body">\n' + p.html + '\n    </article>\n' +
         '    <section class="venture-foot">\n' +
         '      <p class="venture-foot-note">More in <a href="/blog">writing</a>, the portfolio under <a href="/ventures">ventures</a>, and the full record in the <a href="/brochure">executive dossier</a>.</p>\n' +
