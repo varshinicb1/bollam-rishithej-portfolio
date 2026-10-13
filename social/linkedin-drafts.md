@@ -96,6 +96,74 @@ Tone notes, if you want to adjust it yourself:
 - The published papers stay, stated plainly, without the bulleted display.
   Listed as a showcase they read as padding; mentioned in passing they read as
   a person who writes.
+---
+
+## 2b. LinkedIn Experience — the exact title for every row
+
+The About section was only half the problem. LinkedIn's **Experience** entries
+are the part a recruiter, an analyst or a journalist actually reads as a claim
+of office, and they are where the s.203 breach physically lives. Rewriting the
+About while leaving an Experience row that says "Chief Executive Officer, ML
+Group of Companies" fixes nothing.
+
+Set each row to exactly this. These match bollamrishithej.com/ventures
+character for character, which is the point - the two documents have to agree,
+because anyone checking will read both.
+
+| Company | Title to set on LinkedIn | Was |
+|---|---|---|
+| ML Dynamic Solutions | **Founder & Managing Director** | Managing Director - correct, and the only one |
+| ML Group of Companies | **Promoter & Director** | Chief Executive Officer |
+| ML Capital | **Director** | Managing Director |
+| Aditya Trading Company | **Director** | Managing Director |
+| RS Food Products | **Director** | Managing Director |
+| Jenani Infra | **Director** | Director - correct, but spelt "Janani" |
+| Akshara Groups Bullion | **Director** | not listed |
+| VidyuthLabs Technologies | **Co-Founder & Director** | not listed |
+| Predictera | **Co-Founder & Director** | not listed |
+| FirstSecure.ai | **Co-Founder & Director** | not listed |
+| DenyFix.ai | **Co-Founder & Director** | not listed |
+| CXOera | **Director** | not listed |
+| Emergera.ai | **Co-Founder & Chief Technology Officer** | not listed |
+
+Three notes on why these specific words:
+
+- **"Promoter & Director" for ML Group** is not a demotion from CEO. Promoter is
+  the statutory term under s.2(69) for the person who caused the company to be
+  formed. It is a stronger claim than CEO, because CEO is an office you can be
+  appointed to and removed from, and promoter is a fact about who built it.
+- **"Co-Founder" is a business descriptor, not an MCA designation.** It is
+  always paired with the statutory term, never used alone. "Co-Founder" by
+  itself on a row invites the question of what office you actually hold.
+- **Chief Technology Officer at Emergera.ai does not conflict with the sole MD
+  office.** The five whole-time KMP offices under s.203 are MD, WTD, CEO, CFO
+  and CS. CTO is not one of them, and Emergera.ai is a United States LLC
+  outside the Companies Act entirely. Both reasons are independently
+  sufficient. Mark it "United States" on the row so it never reads as a
+  thirteenth Indian directorship.
+
+Six of these rows are missing from LinkedIn altogether. That is the larger
+missed opportunity: the profile currently understates the real portfolio while
+overstating the offices held inside it - the precise inversion of what you want,
+because the portfolio is checkable and the offices are checkable too.
+
+### Still unresolved: ML Engineering Works and ML Constructions
+
+Both are named in the old About. Neither is in the site register, and I have
+not published them, because I do not know their legal form and the designation
+is determined entirely by it:
+
+- a **private limited company** takes Director, and takes the count to 14 of 20
+  under s.165;
+- an **LLP** takes **Designated Partner** - never Director;
+- a **proprietorship or partnership firm** takes **Proprietor** or **Partner**,
+  is not MCA-registered at all, and must not appear in a register whose
+  standfirst says designations are stated under the Companies Act, 2013.
+
+"Works" and "Constructions" are both commonly firm names rather than companies,
+so guessing here has a real chance of publishing a false statutory designation
+on the one page built to be legally precise. Tell me the form and the two rows
+go in with the right term.
 
 ---
 
