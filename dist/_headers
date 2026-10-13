@@ -1,8 +1,69 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  X-Frame-Options: SAMEORIGIN
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  X-Permitted-Cross-Domain-Policies: none
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: accelerometer=(), autoplay=(), bluetooth=(), camera=(), display-capture=(), encrypted-media=(), gamepad=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), usb=(), xr-spatial-tracking=()
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; frame-src https://www.linkedin.com; frame-ancestors 'none'; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests
+
+# ---------------------------------------------------------------------------
+# Why these values, so the next person does not loosen them by accident.
+#
+# Content-Security-Policy starts at default-src 'none' and names only what
+# the site actually loads, which an audit of dist/ established is very
+# little: no external script, no webfont (the type is the native system
+# stack), no data: URI anywhere in the HTML or either stylesheet, and no
+# analytics. So img-src, style-src, font-src and connect-src are all plain
+# 'self' with no escape hatches.
+#
+# The sha256 covers exactly one inline script, present on every generated
+# page:  document.documentElement.classList.add('js');
+# It has to stay inline and un-deferred, because the CSS it gates
+# (.js .row-expand and friends) would otherwise flash the no-JS state on
+# first paint. A hash keeps it working while still refusing every other
+# inline script, which is what an injected payload would be. If that one
+# line is ever edited, recompute the hash or the site loses its JavaScript:
+#   printf "%s" "document.documentElement.classList.add('js');" \
+#     | openssl dgst -sha256 -binary | openssl base64
+#
+# frame-src names www.linkedin.com for the post embeds and nothing else.
+# script.js hardens that frame further with a sandbox attribute.
+#
+# frame-ancestors 'none' replaces X-Frame-Options, which is why the older
+# header is gone: it is the superseding standard, it is honoured by every
+# current browser, and nothing here is framed, not even same-origin.
+# form-action 'none' is honest - the site has no form at all, and /contact
+# is a mailto link.
+# base-uri 'none' closes base-tag injection, which is the usual way a
+# stored-HTML flaw turns a relative script path into an attacker's host.
+#
+# Strict-Transport-Security is two years with includeSubDomains and preload.
+# 'preload' is a standing request to be built into browsers' HTTPS-only
+# lists, and it is a deliberate commitment: every present and future
+# subdomain of bollamrishithej.com must then be served over HTTPS. That is
+# already true here, and submission at hstspreload.org is a separate manual
+# step - the header alone does not enrol the domain.
+#
+# Cross-Origin-Opener-Policy severs window.opener for anything this site
+# opens. Cross-Origin-Embedder-Policy is deliberately NOT set: it would
+# require the LinkedIn frame to send CORP headers, which it does not, and
+# would break the embeds for no gain on a site with no SharedArrayBuffer.
+#
+# Permissions-Policy denies every powerful feature by name rather than only
+# the three it used to list. The site needs none of them, and an empty
+# allowlist on a feature the site never uses costs nothing and removes it
+# from any injected script's reach.
+# ---------------------------------------------------------------------------
 
 /assets/*
   Cache-Control: public, max-age=604800
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8

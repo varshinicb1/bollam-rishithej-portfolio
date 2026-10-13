@@ -1,0 +1,12 @@
+# Security contact for bollamrishithej.com
+#
+# This is a static site: no server-side code, no database, no form, no
+# user accounts and no third-party script. Reports most likely to be
+# valid concern the DNS records, the published headers, or the content.
+
+Contact: mailto:rishi@mldynamic.com
+Expires: 2027-10-13T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://bollamrishithej.com/.well-known/security.txt
+
+# Please allow a reasonable period for a reply before disclosing publicly.

@@ -165,7 +165,7 @@ button:focus-visible {
   pointer-events: none;
   opacity: 0.03;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-image: url("/assets/bollam-rishithej-grain-200.svg");
 }
 
 /* ---------------------------------------------------------------------------
@@ -1071,3 +1071,15 @@ img.company-emblem.is-ink-art {
 img.company-emblem {
   object-fit: contain;
 }
+
+/* ---------------------------------------------------------------------------
+   40. Utility classes lifted out of inline style attributes
+   These were five `style="..."` attributes in brochure.html. They are classes
+   now so the Content-Security-Policy can be `style-src 'self'` with no
+   'unsafe-inline' - an inline style attribute is the one thing that would
+   have forced the policy open. Behaviour is byte-identical.
+--------------------------------------------------------------------------- */
+.diagram-contain { object-fit: contain; padding: 12px; }
+.panoramic-header-banner.is-short { height: 150px; margin-bottom: 1.6rem; }
+.focus-lower { object-position: center 48%; }
+.spec-cards-grid.has-top-gap { margin-top: 2rem; }

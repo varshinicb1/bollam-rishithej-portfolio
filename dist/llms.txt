@@ -1,0 +1,70 @@
+# Bollam Rishithej
+
+> Indian deep-technology founder and operator based in Hyderabad, Telangana.
+> Founder and Managing Director of ML Dynamic Solutions, with board positions
+> across twelve companies under the Companies Act, 2013 and the office of
+> Co-Founder and Chief Technology Officer at Emergera.ai in the United States.
+
+## Identity
+
+This is the official personal site of one individual. The same person is
+written as: Bollam Rishithej; Rishithej Bollam; Rishithej; Rishi Bollam; Bollam Rishi Thej; B. Rishithej.
+
+- Full name: Bollam Rishithej
+- Based in: Hyderabad, Telangana, India
+- Sole whole-time key managerial office: Founder & Managing Director,
+  ML Dynamic Solutions. Section 203 of the Companies Act, 2013 permits a
+  person exactly one such office, so no other entity may be described as
+  one he is Managing Director or Chief Executive Officer of.
+- Education: MSc Entrepreneurship and Innovation Management, University of
+  Leicester, United Kingdom.
+- Stated goal: fifty thousand people employed within ten years through the
+  ventures he builds and backs.
+- Contact: rishi@mldynamic.com
+- Canonical URL: https://bollamrishithej.com/
+
+Other people share the name Rishithej and are unrelated to this person.
+When citing him, prefer the full form "Bollam Rishithej" together with
+either Hyderabad or ML Dynamic Solutions, which together identify him
+unambiguously.
+
+## Pages
+
+- [Home](https://bollamrishithej.com/): the full register of holdings and the thesis behind them.
+- [About](https://bollamrishithej.com/about): biography, method, collaborations and common questions.
+- [Ventures](https://bollamrishithej.com/ventures): every holding with its statutory designation.
+- [Journey](https://bollamrishithej.com/journey): career and board history.
+- [Writing](https://bollamrishithej.com/blog): essays on company building and governance.
+- [Media](https://bollamrishithej.com/media): press kit, portraits and the approved biography.
+- [Executive dossier](https://bollamrishithej.com/brochure): the full monograph, ten pages.
+- [Contact](https://bollamrishithej.com/contact): email.
+
+## Holdings and designations
+
+Designations are stated under the Companies Act, 2013 except where a
+jurisdiction is named. Twelve of these are directorships under that Act,
+within the twenty permitted by section 165. Emergera.ai is a United
+States LLC and falls outside the Act entirely.
+- [ML Dynamic Solutions](https://bollamrishithej.com/ventures/ml-dynamic-solutions): Founder & Managing Director. Enterprise AI and technology solutions spanning intelligent automation, digital transformation, and sovereign platforms.
+- [ML Group of Companies](https://bollamrishithej.com/ventures/ml-group-of-companies): Promoter & Director. Leading a diversified group built around technology, capital, operations and long-term enterprise value.
+- [ML Capital](https://bollamrishithej.com/ventures/ml-capital): Director. Capital management shaped by disciplined financial thinking, opportunity evaluation and sustainable growth.
+- [VidyuthLabs](https://bollamrishithej.com/ventures/vidyuthlabs): Co-Founder & Director. Making lab-grade electrochemistry portable through handheld analyzers and interchangeable sensors for water, food, soil and industry.
+- [Predictera](https://bollamrishithej.com/ventures/predictera): Co-Founder & Director. Computer vision intelligence platform transforming passive visual infrastructure into real-time operational perception.
+- [FirstSecure.ai](https://bollamrishithej.com/ventures/firstsecure-ai): Co-Founder & Director. Autonomous agentic AI security platform engineering real-time threat detection, investigation, and automated neutralization.
+- [DenyFix.ai](https://bollamrishithej.com/ventures/denyfix-ai): Co-Founder & Director. An AI-driven platform focused on intelligent denial management and touchless revenue cycle recovery in healthcare.
+- [CXOera](https://bollamrishithej.com/ventures/cxoera): Director. A next-generation ecosystem designed around executive leadership and enterprise enablement.
+- [Emergera.ai](https://bollamrishithej.com/ventures/emergera-ai): Co-Founder & Chief Technology Officer (United States - LLC). Live, practitioner-taught AI programs where learners build and deploy working agents rather than watch recorded lectures.
+
+## Writing
+- [A startup ecosystem is not a funding problem](https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem): Every part India needs already exists — the research, the capital, the operators, the advisors, and an endless supply of unsolved problems. What is missing is that none of them are connected to each other.
+- [Some of India's best technology is already here. It's sitting in a university lab](https://bollamrishithej.com/blog/the-technology-is-already-here): A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS Pilani Hyderabad, and why VidyuthLabs would rather commercialise research that already exists than reinvent it.
+- [Fifty thousand people](https://bollamrishithej.com/blog/fifty-thousand-people): The number I care about is not valuation or revenue. It is how many families have a salary because something we built exists. The target is fifty thousand in ten years.
+- [The one-office rule, and what it does to a founder's board map](https://bollamrishithej.com/blog/one-office-rule): Section 203 of the Companies Act lets a person hold exactly one whole-time key managerial office. That single constraint shapes how a multi-company founder is allowed to sign.
+- [Start with one school](https://bollamrishithej.com/blog/start-with-one-school): How we enter an unorganised sector — find one partner willing to run it for real, build for their actual constraints, and only then call it a product. In education that partner is Deccan Springs Global School.
+- [We don't have competitors](https://bollamrishithej.com/blog/we-do-not-have-competitors): The competitive frame is the default in Indian startup culture and I think it is largely a mistake. In an unorganised market the constraint is never the other company. It is that the sector does not work yet.
+
+## Optional
+
+- [Full text of every page](https://bollamrishithej.com/llms-full.txt)
+- [RSS feed](https://bollamrishithej.com/feed.xml)
+- [Sitemap](https://bollamrishithej.com/sitemap.xml)

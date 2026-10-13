@@ -1,0 +1,391 @@
+# Bollam Rishithej
+
+> Indian deep-technology founder and operator based in Hyderabad, Telangana.
+> Founder and Managing Director of ML Dynamic Solutions, with board positions
+> across twelve companies under the Companies Act, 2013 and the office of
+> Co-Founder and Chief Technology Officer at Emergera.ai in the United States.
+
+## Identity
+
+This is the official personal site of one individual. The same person is
+written as: Bollam Rishithej; Rishithej Bollam; Rishithej; Rishi Bollam; Bollam Rishi Thej; B. Rishithej.
+
+- Full name: Bollam Rishithej
+- Based in: Hyderabad, Telangana, India
+- Sole whole-time key managerial office: Founder & Managing Director,
+  ML Dynamic Solutions. Section 203 of the Companies Act, 2013 permits a
+  person exactly one such office, so no other entity may be described as
+  one he is Managing Director or Chief Executive Officer of.
+- Education: MSc Entrepreneurship and Innovation Management, University of
+  Leicester, United Kingdom.
+- Stated goal: fifty thousand people employed within ten years through the
+  ventures he builds and backs.
+- Contact: rishi@mldynamic.com
+- Canonical URL: https://bollamrishithej.com/
+
+Other people share the name Rishithej and are unrelated to this person.
+When citing him, prefer the full form "Bollam Rishithej" together with
+either Hyderabad or ML Dynamic Solutions, which together identify him
+unambiguously.
+
+## Full text
+
+What follows is the complete text of every published essay, newest first,
+so it can be read without fetching each page.
+
+---
+# A startup ecosystem is not a funding problem
+
+Published: 2026-10-14
+Source: https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem
+Author: Bollam Rishithej
+Tags: Ecosystem, India, Philosophy
+
+Every part India needs already exists — the research, the capital, the operators, the advisors, and an endless supply of unsolved problems. What is missing is that none of them are connected to each other.
+
+I want to say something that will sound ungenerous, and isn't meant to be.
+
+Most of the startups being celebrated in India this year will not exist in two years. Not because the founders are not capable — many are exceptional — but because the thing they are building was never designed to last. It was designed to be sold.
+
+That is not a moral failure. It is the natural result of the incentives we have built around them.
+
+## Fundraising stopped being a means
+
+Somewhere in the last few years raising money stopped being a step toward building something and became the achievement itself. The round is the announcement. The valuation is the headline. The deck gets more attention than the product, and a founder learns very quickly that the skill being rewarded is narrative, not delivery.
+
+So we get companies optimised for the next round rather than the next decade. The target is an exit, and if the target is an exit then every decision downstream of it is about looking fundable rather than about being durable. It is a complete and internally consistent game. It just has very little to do with building a business.
+
+## Meanwhile, the people who should be starting aren't
+
+Here is what I find genuinely painful, because I meet these people constantly.
+
+There are engineers and researchers in this country with a working product and a real insight who will never start a company. Not because they lack conviction. Because they believe the entry price is lakhs of rupees and fifty people on day one.
+
+They have watched the funding theatre and concluded, reasonably, that this is what starting looks like — and that they cannot afford the ticket. So the thing stays a side project, or a paper, or nothing.
+
+That belief is wrong, and it is costing India more than any funding winter ever did.
+
+## And our best work dies in the building it was made in
+
+The research is not missing. Walk into any serious university lab in this country and you will find work that is genuinely world-class — demonstrated, documented, sometimes patented.
+
+And then it stops.
+
+Not because it failed. Because the distance between a working result and a product someone can buy is enormous, and nothing in the system is designed to carry it across. The researcher is not supposed to be a manufacturer. Nobody is funded to do the unglamorous half. So it sits there, and the paper gets cited, and no one is employed by it.
+
+## Every part we need already exists
+
+This is the part I keep coming back to, because it is the reason I am optimistic rather than bitter.
+
+Look at what India already has, separately:
+
+- **Innovation**, sitting in university laboratories, substantially complete.
+- **Angel investors** with capital who genuinely want to back something solid, and who are tired of being pitched narratives.
+- **Operators** who have scaled real businesses and know exactly where a company breaks at twenty people, and at two hundred.
+- **Advisors** with decades of sector knowledge that cannot be acquired any faster than by living it.
+- **Problems** — an effectively unlimited supply of real, expensive, unsolved operational problems in every sector you can name.
+
+Each of those is strong. None of them is connected to the others.
+
+> We do not have a shortage of ingredients. We have a shortage of wiring.
+
+The researcher never meets the operator. The angel never sees the lab. The advisor who knows exactly why that sector resists automation is never in the room when the product is being designed. And so each part stays individually excellent and collectively useless.
+
+## What business actually is
+
+I think the confusion starts with a sentence everyone repeats: *build a great product.*
+
+A great product is not the thing. I have seen beautiful products die, and ugly ones build durable companies, and the difference was never craft.
+
+Business is about solving a problem that is **worth solving** — worth someone paying for, repeatedly, because the alternative costs them more. That is a much narrower set than the set of interesting problems, and identifying which is which is most of the work. A product is just the shape your answer happens to take.
+
+And the second half, which I believe more strongly the longer I do this: **business is collaboration for collective growth.**
+
+Not a slogan. A structural claim. In a sector that does not function yet, a second serious company is not your competitor — it is evidence to every customer and every bank that the category is real. The lab is not a vendor; it is a partner whose success has to be genuine or the collaboration dies. The angel is not an ATM. The advisor is not decoration.
+
+## The ecosystem I want to help build
+
+One where a researcher with a working result can find an operator, an advisor and a first customer without needing fifty people and a crore to begin.
+
+Where starting is cheap enough that the person with the genuine insight is not priced out before they try.
+
+Where capital goes to problems worth solving rather than to decks, because the investors can finally see what they are buying.
+
+Where the measure of a company is how long it lasts and how many people it carries, not what it sold for.
+
+None of that requires inventing anything. It requires connecting things that already exist, and being willing to do the slow, unglamorous work of making those connections real.
+
+That is the work. I would rather spend ten years on it than on a good exit.
+
+---
+
+# Some of India's best technology is already here. It's sitting in a university lab
+
+Published: 2026-10-14
+Source: https://bollamrishithej.com/blog/the-technology-is-already-here
+Author: Bollam Rishithej
+Tags: Deep tech, VidyuthLabs, Research
+
+A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS Pilani Hyderabad, and why VidyuthLabs would rather commercialise research that already exists than reinvent it.
+
+There is a story Indian deep tech tells about itself that I think is mostly wrong: that the hard part is inventing the science.
+
+In my experience the science is frequently already done. It is sitting in a university laboratory, written up, demonstrated, sometimes patented — and then it stops. Not because it failed. Because the distance between a working laboratory result and a product somebody can buy, deploy and rely on is enormous, and crossing it is a completely different discipline from the one that produced the result.
+
+## The visit
+
+My co-founder and I spent a long session with **Prof. Sanket Goel** and his research team at the **MEMS, Microfluidics and Nanoelectronics (MMNE) Lab** at BITS Pilani, Hyderabad Campus.
+
+We went in to talk about heavy-metal sensing, which is close to what VidyuthLabs already works on. The conversation did not stay there. By the end we had covered contamination detection more broadly, portable sensing and instrumentation, battery and energy research, and — the thread running underneath all of it — what it would take to move technology out of that lab and into the field.
+
+I will be precise about where this stands, because precision matters more than enthusiasm. **Nothing is signed.** This was an exploratory discussion that identified several areas where their capabilities and ours are complementary, and we are taking those conversations forward. That is all it is, and it is worth more than it sounds.
+
+## Why this direction, rather than building it ourselves
+
+VidyuthLabs exists to make lab-grade electrochemistry portable — handheld, field-deployable, continuous. We could try to originate every piece of that science in-house. Plenty of companies do.
+
+I think that is often the slower path, and sometimes the vain one.
+
+A university lab like MMNE has spent years on problems we would be starting from zero on. What such a lab frequently does *not* have — and has no particular reason to have — is the other half: product engineering, manufacturing, software, field deployment, regulatory work, distribution, and somebody whose job is to make the thing survive contact with a real site rather than a controlled bench.
+
+That second half is what a company is for.
+
+> The opportunity is not to reinvent the science. It is to be the bridge between research that already works and a product somebody can actually use.
+
+For our contamination intelligence work under **AnalyteX**, access to that depth of expertise in electrochemical sensing and heavy-metal detection would matter a great deal. And the thinking extends well past any one product line.
+
+## What the bridge actually involves
+
+It is worth being concrete, because "technology transfer" is a phrase that can mean almost nothing.
+
+- **Translating conditions.** A lab result holds under controlled temperature, prepared samples and an expert operator. A field device gets none of those. Most of the engineering is in making a result survive that difference.
+- **Manufacturability.** A device that can be assembled once by a researcher is not the same as one that can be built a thousand times consistently.
+- **The deployment reality.** Fouling, drift, power, connectivity, and the fact that the person using it has a job to do and did not sign up to be a technician.
+- **Commercial structure.** Who owns what, who earns from it, and how the lab continues to benefit if the thing succeeds. Get this wrong and the collaboration dies regardless of how good the technology is.
+
+None of that diminishes the research. It is the work that makes the research matter outside the building it was done in.
+
+## Why I think this is the shape of Indian deep tech
+
+Research → Product → Deployment → Impact.
+
+That chain breaks in India far more often at the second arrow than the first. We are not short of capable researchers or good results. We are short of companies willing to do the unglamorous half — the manufacturing, the field failures, the second and third redesign — and to do it in genuine partnership with the people who did the science rather than extracting from them.
+
+I would rather build that kind of company than one that claims to have invented everything itself.
+
+My thanks to Prof. Goel and his entire team for an exceptionally open discussion, and for showing us what they are building.
+
+*The original announcement, with the team, is on [LinkedIn](https://www.linkedin.com/feed/update/urn:li:share:7509439269426417666).*
+
+---
+
+# Fifty thousand people
+
+Published: 2026-10-13
+Source: https://bollamrishithej.com/blog/fifty-thousand-people
+Author: Bollam Rishithej
+Tags: Vision, Employment
+
+The number I care about is not valuation or revenue. It is how many families have a salary because something we built exists. The target is fifty thousand in ten years.
+
+Every founder is asked the same question, and it is almost always about money. What is the valuation. What is the round. What is the exit.
+
+I have a different number, and I would rather be measured against it.
+
+**Fifty thousand people employed, within ten years.**
+
+Not users. Not downloads. Not a figure on a cap table. Fifty thousand people who go to work somewhere because a thing we built exists, and who go home at the end of the month able to pay for what their family needs.
+
+## Why that number and not another
+
+I grew up watching what a job does to a household. Not a good job in some abstract sense — just a job. Steady, predictable, enough. It changes what a family is able to plan for. It decides whether a child's education is a decision or a dream. It is the difference between a household that can absorb a bad month and one that cannot.
+
+A company that makes a few people very rich and employs eleven of them is an achievement. I am not dismissing it. But it is not the achievement I am trying to have.
+
+The person I keep coming back to is Ratan Tata. Not because of scale, though the scale is extraordinary. Because of a specific habit of mind: he built as though the company existed to serve the country it was in, and the returns were a consequence of doing that properly rather than the point of doing it at all. He was not performing that. He simply ran it that way for decades, including in the years when nobody was watching and it cost him something.
+
+> The companies that last are the ones that behave as though they are accountable to more than their shareholders — long before anybody requires them to.
+
+That is the standard. I am nowhere near it. But a standard you are nowhere near is more useful than a target you have already cleared.
+
+## What fifty thousand actually requires
+
+It is worth being honest that this does not happen through one company. No software business I build is going to employ fifty thousand people directly; that is not how software works, and pretending otherwise would be dishonest arithmetic.
+
+It happens by being useful to sectors that *are* large, that *do* employ at that scale, and that are currently unorganised enough to be operating well below what they are capable of.
+
+That is why the portfolio looks the way it does. Deep technology on one side — sensing, vision, security, healthcare revenue. Ground operations on the other — bullion, infrastructure, agricultural commodities, food processing. People sometimes read that combination as unfocused. It is the opposite. The technology is only worth building if it has somewhere real to land, and the ground operations are where you learn what actually breaks when a system meets a workforce.
+
+Employment at that scale is not created by inventing something clever. It is created by taking a sector where thousands of people already work inefficiently, and making the work worth more.
+
+## The part I do not know yet
+
+I am not going to pretend there is a plan that gets from here to fifty thousand with every step mapped. There isn't. Anyone who shows you that chart is selling something.
+
+What there is: a direction, a set of sectors, a way of entering them, and a refusal to measure progress by the metric everybody else uses.
+
+Ten years is long enough that most of what I believe today about *how* to get there will turn out to be wrong. I expect to be corrected repeatedly. The number is the part that does not move.
+
+Hold me to it.
+
+---
+
+# The one-office rule, and what it does to a founder's board map
+
+Published: 2026-10-13
+Source: https://bollamrishithej.com/blog/one-office-rule
+Author: Bollam Rishithej
+Tags: Governance, Companies Act
+
+Section 203 of the Companies Act lets a person hold exactly one whole-time key managerial office. That single constraint shapes how a multi-company founder is allowed to sign.
+
+Most people read a long list of directorships as a vanity exercise. In India it is closer to the opposite: it is a constrained optimisation, and the binding constraint is a single sentence in the Companies Act, 2013.
+
+## One whole-time office, and only one
+
+Section 203 requires certain classes of company to appoint whole-time key managerial personnel. The offices it names are Managing Director, Whole-Time Director, Chief Executive Officer, Chief Financial Officer and Company Secretary. Those five are the statutory KMP offices; nothing else is, whatever a business card says.
+
+The constraint follows immediately. A whole-time key managerial person **shall not hold office in more than one company at the same time**, with one carve-out: they may also hold office in that company's own subsidiary.
+
+That is the whole mechanism, and it is more severe than it first looks. It does not cap how many boards you sit on. It caps how many companies you can be *executive* in. You get one.
+
+## What it rules out
+
+The practical effect is that the common founder fantasy — Managing Director here, CEO there, CFO of the third thing — is not available. Once the MD office is taken at one company, every other relationship has to be something else:
+
+- **Director**, a board seat with no whole-time executive office attached.
+- **Promoter**, the statutory term under section 2(69) for a person who caused the company to be formed. It describes origin, not a board seat, and it is the honest word where there is no seat to claim.
+- **Co-Founder** or **Founder**, which are business descriptors and not MCA designations at all. They should always travel attached to the statutory term, not instead of it.
+
+The last one is where most public bios quietly go wrong. "Founder & CEO" of four companies is not a bold claim; under section 203 it is an impossible one.
+
+## The second constraint
+
+Section 165 adds a different ceiling: a person may hold at most twenty directorships, of which no more than ten may be public companies. That number is high enough that few people meet it, but it is the reason a sprawling board map is a matter of record rather than a matter of taste. The register is countable, and somebody will count it.
+
+## Offices that are not KMP offices
+
+A point that causes constant confusion: **a CTO is not a section 203 office.** Neither is a COO, a CIO or a Chief Revenue Officer. The five are fixed. So a person who is Managing Director of one company can hold a Chief Technology Officer title elsewhere without touching the one-office rule, because the second title is not a statutory key managerial office in the first place.
+
+Foreign entities sit outside the question entirely. A United States LLC is not a company under the Companies Act, so a role in one is neither a section 203 office nor a section 165 directorship. It should still be disclosed — but it should be disclosed as what it is, marked with its jurisdiction, rather than quietly counted alongside Indian directorships.
+
+## Why state it this precisely
+
+Because the alternative is worse. A biography that lists an impossible combination of offices is not impressive; it is a disclosure that nobody checked. Anyone who deals with Indian company law for a living — a banker, an acquirer, a regulator, a careful journalist — reads the designation before they read the achievement.
+
+> The designations are the cheapest part of the record to get right, and the most expensive part to get wrong.
+
+Stating a board map correctly costs nothing. It means writing *Promoter & Director* where there is no executive office, *Director* where there is a seat and no more, and reserving the one whole-time title for the single company that actually holds it. The result reads as less at first glance, and considerably more on the second.
+
+---
+
+# Start with one school
+
+Published: 2026-10-12
+Source: https://bollamrishithej.com/blog/start-with-one-school
+Author: Bollam Rishithej
+Tags: Education, Method
+
+How we enter an unorganised sector — find one partner willing to run it for real, build for their actual constraints, and only then call it a product. In education that partner is Deccan Springs Global School.
+
+The usual way to enter a sector is to study it, build what the study implies, and then look for someone to sell it to. I have watched that fail often enough to be suspicious of it.
+
+We do it the other way round. Find one partner who is willing to let you into their real operation. Build for their actual constraints. Deploy it properly, where it matters, where failure is embarrassing. Only once it survives that do you get to call it a product.
+
+In education, that partner is **Deccan Springs Global School** in Hyderabad. The pilot is deployed and the memorandum of understanding is signed.
+
+## Why a school, and why this one
+
+A school is a deceptively hard operating environment. It runs on a fixed calendar that cannot slip. Its users range from administrators to teachers to parents, with wildly different tolerance for software. The data is sensitive and concerns children. And the people doing the work are already overloaded — a teacher's time is the scarcest resource in the building, and any system that costs more of it than it returns will be quietly abandoned no matter what the contract says.
+
+That difficulty is exactly why it is a good first partner. A system that works in a live school, through a real term, with real parents asking real questions, has been tested against conditions you cannot simulate.
+
+What we are building there is a next-generation school management system with AI worked into the operational layer rather than bolted on as a feature — the administrative load that currently consumes a teacher's evenings, handled so the teaching gets the time instead.
+
+## What a pilot partner actually gives you
+
+It is easy to describe a pilot as a sales motion. It is not. A real pilot partner gives you three things you cannot buy:
+
+- **Truthful failure.** A customer tells you politely that they will think about it. A partner tells you the attendance module broke on the second Tuesday and here is why.
+- **Constraint discovery.** Every unorganised sector is held together by undocumented practice. You will not find it in research. You find it when someone says "we don't do it that way" and you ask why for the fourth time.
+- **Standing.** The second school is a far easier conversation when the first one is real, named, and willing to say so.
+
+In return they get a system built around how they actually work rather than how a product manager assumed they do, and they get it early enough to shape it. That exchange has to be genuinely fair or it is not a partnership, it is an unpaid trial.
+
+## The method generalises
+
+Education is one sector. The approach is the same everywhere we go:
+
+- Pick a sector where the work is real and the organisation is poor.
+- Find **one** partner who is credible in it and willing to be a genuine collaborator.
+- Build against their constraints until it survives live operation.
+- Only then generalise — and expect the second deployment to break in ways the first did not.
+
+We work the same way with academic institutions, which is why the collaborations with **BITS Pilani, Hyderabad** and **RV College of Engineering** matter to us. They are not logos for a slide. They are where the hard questions get asked early and where the people who will build the next version of this are currently sitting in a classroom.
+
+On the delivery side, **USM Business Systems** is our partner across both the United States and India — the infrastructure for taking something that works in one building and making it work in many.
+
+## Why this is slower, and why I prefer it
+
+You cannot announce much during this phase. One school is not a press release. For a year or more, the honest answer to "how is it going" is "we are in one building, and we are learning what we got wrong."
+
+The alternative is to launch broadly, collect a lot of trials, and discover the same lessons across forty customers at once while all of them are watching. I would rather learn in private with a partner who has agreed to learn alongside us.
+
+Organising an unorganised sector is not a campaign. It is one building, done properly, repeated.
+
+---
+
+# We don't have competitors
+
+Published: 2026-10-11
+Source: https://bollamrishithej.com/blog/we-do-not-have-competitors
+Author: Bollam Rishithej
+Tags: Philosophy, Collaboration
+
+The competitive frame is the default in Indian startup culture and I think it is largely a mistake. In an unorganised market the constraint is never the other company. It is that the sector does not work yet.
+
+I get asked who our competitors are, and I have stopped giving a satisfying answer, because I do not think the question describes the situation we are actually in.
+
+It is a reasonable question in a mature market. If a sector is fully formed, demand is roughly fixed and every customer one company wins is a customer another company lost. Zero sum. Compete hard.
+
+Almost nothing I work in looks like that.
+
+## What the constraint actually is
+
+Take any unorganised sector in India and list what is holding it back. You will find things like: no standard way of recording what happened, no reliable measurement, decisions made on memory and relationship rather than data, and a workforce doing skilled work with tools that make the skill harder to apply.
+
+Now notice what is *not* on that list: another company doing it slightly better than you.
+
+The binding constraint is that the sector does not yet function. In that situation a second serious company entering is not a threat. It is corroboration — evidence to every customer, every regulator, every bank, that this is a real category and not one vendor's enthusiasm. Categories get built by several people at once or they do not get built.
+
+> If a competitor's success damages you, you were probably fighting over a market. If a competitor's success helps you, you are building one.
+
+## What I would rather do with that energy
+
+Competitive thinking consumes an enormous amount of a founder's attention, and most of it produces nothing. Watching someone else's pricing page. Reacting to their launch. Building a feature because they have it rather than because anyone asked.
+
+The same hours spent on a partner produce something that compounds:
+
+- A **pilot partner** who lets you deploy into their real operation and tells you the truth about what broke.
+- An **academic collaboration** that gives you access to people who will interrogate your assumptions rather than flatter them.
+- A **distribution partner** already trusted in a market it would take you years to earn your way into.
+
+Every one of those is non-zero-sum. The partner is better off, we are better off, and the thing that gets built is better than either of us would have built alone.
+
+## This is not a soft position
+
+I want to be clear that this is not a sentiment about everyone being friends. It is a view about where leverage is.
+
+Collaboration is harder than competition, not easier. Competing requires only that you move fast. Collaborating requires that you be genuinely useful to someone who has their own priorities, their own constraints and no obligation to care about yours. You have to turn up repeatedly. You have to do what you said. You have to be the partner who makes their life easier, not the one who needs a case study.
+
+Most partnerships fail for that reason, not because the logic was wrong.
+
+## Collective growth is a strategy, not a slogan
+
+The phrase gets used loosely enough to have lost its meaning, so here is what I take it to mean concretely: **the ecosystem being stronger is worth more to us than our relative position within it.**
+
+If the sectors we work in become better organised, better measured and better served — including by people who are not us — then there is more work, more capital, more talent and more reason for anyone to build here at all. Our share of a functioning category beats our dominance of one that never forms.
+
+That is the bet. It is slower. I think it is correct.
+
+---

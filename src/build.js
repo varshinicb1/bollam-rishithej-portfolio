@@ -7,6 +7,7 @@ const { pages: dossier } = require('./extract');
 const { SITE, page, crumbJsonLd } = require('./shell');
 const { attrs, size } = require('./dims');
 const blogpages = require('./blogpages');
+const llms = require('./llms');
 const { VENTURES, detailFor, renderRegister } = require('./register');
 
 const OUT = path.join(__dirname, '..', 'dist');
@@ -411,5 +412,7 @@ write('contact.html', page({
 
 const blogStats = blogpages.build(write);
 console.log('blog: ' + blogStats.live + ' published, ' + blogStats.drafts + ' draft(s)');
+const llmStats = llms.build(write);
+console.log('llms: ' + llmStats.posts + ' posts, ' + llmStats.holdings + ' holdings indexed');
 console.log('generated ' + written.length + ' pages:');
 written.forEach(function (w) { console.log('   ' + w); });

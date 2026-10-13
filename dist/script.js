@@ -778,7 +778,22 @@
       f.src = "https://www.linkedin.com/embed/feed/update/" + urn;
       f.title = "The original announcement on LinkedIn";
       f.setAttribute("frameborder", "0");
-      f.setAttribute("allowfullscreen", "");
+      // This is the only third-party frame on the site, so it is the only
+      // place another origin runs code in a page of ours. It gets the
+      // narrowest sandbox the embed still works in: scripts and its own
+      // origin so it can render, popups so "view on LinkedIn" opens, and
+      // nothing else. Crucially absent are allow-forms and
+      // allow-top-navigation — without the latter the frame cannot
+      // redirect the page it sits in, which is the one thing a hijacked
+      // embed would want to do.
+      f.setAttribute(
+        "sandbox",
+        "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      );
+      // Do not leak which article the reader is on to LinkedIn's servers.
+      f.setAttribute("referrerpolicy", "no-referrer");
+      // allowfullscreen was set here and is not wanted: a feed post has no
+      // fullscreen mode, and the attribute only widens what the frame may do.
       f.width = 504; f.height = 1788;
       host.replaceChildren(f);
     };
