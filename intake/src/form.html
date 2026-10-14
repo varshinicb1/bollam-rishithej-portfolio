@@ -81,7 +81,7 @@
 <main id="app" class="wrap hidden">
   <div class="mono">Private &middot; for Bollam Rishithej</div>
   <h1>Profile details</h1>
-  <p class="lede">Everything here saves automatically as you type, and you can come back to this link any time to continue. Fill in what you can &mdash; a blank is better than a guess. Anything written here may become public, so leave out what you do not want published.</p>
+  <p class="lede">Everything saves automatically as you type, so you can stop at any point and come back to this link to carry on at your own pace. Anyone you share the link with can fill it in too, and their changes appear here automatically. Fill in what you can &mdash; a blank is better than a guess. Anything written here may become public, so leave out what you do not want published.</p>
   <div class="note warn"><strong>Please do not enter</strong> DIN, CIN, LLPIN, PAN, Aadhaar, passport numbers, bank details or any password. None of them are needed.</div>
 
   <!-- 01 -->
@@ -226,6 +226,8 @@
   const PART = 25 * 1024 * 1024;          // R2 multipart part size
   const PART_CONCURRENCY = 4;
   const SNAPSHOT_EVERY_MS = 10 * 60 * 1000;
+  const SYNC_MS = 15 * 1000;              // pull in other people's edits
+  const SAVE_DELAY_MS = 800;
 
   const COMPANIES = [
     ['ml-dynamic', 'ML Dynamic Solutions', 'Founder & Managing Director'],
@@ -246,16 +248,40 @@
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const human = (n) => { if (!(n >= 0)) return ''; const u = ['B','KB','MB','GB','TB']; let i = 0; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i ? n.toFixed(1) : n) + ' ' + u[i]; };
+  const hhmm = (iso) => new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   // ---- access key -------------------------------------------------------
-  const params = new URLSearchParams(location.search);
-  const KEY = params.get('k') || '';
+  const KEY = new URLSearchParams(location.search).get('k') || '';
   if (!KEY) { $('#gate').classList.remove('hidden'); return; }
   const api = (path, opts = {}) => fetch(path, { ...opts, headers: { 'x-intake-key': KEY, ...(opts.headers || {}) } });
 
   // ---- state ------------------------------------------------------------
+  // `pending` holds edits not yet confirmed by the server, one op per field.
+  // It is mirrored to localStorage, so closing the tab or losing the
+  // connection never loses typing: the next visit sends it.
   let data = {};
-  let dirty = false, saving = false, lastSnapshot = 0, coverageCount = 0;
+  const pending = new Map();
+  const LS = 'intake-pending-v1';
+  const lsLoad = () => { try { return JSON.parse(localStorage.getItem(LS) || '[]'); } catch { return []; } };
+  const lsSave = () => { try { pending.size ? localStorage.setItem(LS, JSON.stringify([...pending])) : localStorage.removeItem(LS); } catch {} };
+  let saving = false, lastSnapshot = 0, coverageCount = 0, uploading = 0, saveTimer, lastSavedAt = '';
+
+  const opKey = (op) => JSON.stringify('add' in op ? [...op.path, '+', op.add] : op.path);
+  const pathOf = (el) => el.dataset.k.split('.');
+  const isPending = (path) => pending.has(JSON.stringify(path));
+
+  function getPath(o, path) { return path.reduce((a, k) => (a == null ? undefined : a[k]), o); }
+  function applyOp(root, op) {           // mirrors the server's merge
+    let node = root;
+    for (let i = 0; i < op.path.length - 1; i++) {
+      const seg = op.path[i];
+      if (node[seg] === null || typeof node[seg] !== 'object') node[seg] = /^\d+$/.test(String(op.path[i + 1])) ? [] : {};
+      node = node[seg];
+    }
+    const last = op.path[op.path.length - 1];
+    if ('add' in op) { if (!Array.isArray(node[last])) node[last] = []; if (!node[last].includes(op.add)) node[last].push(op.add); }
+    else node[last] = op.value;
+  }
 
   // Tie each .field label to its control so screen readers announce it.
   let fieldIds = 0;
@@ -266,9 +292,6 @@
       if (l && c) { if (!c.id) c.id = 'f' + (++fieldIds); l.htmlFor = c.id; }
     });
   }
-
-  const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? undefined : a[k]), o);
-  const setPath = (o, p, v) => { const ks = p.split('.'); let a = o; ks.slice(0, -1).forEach((k) => { if (typeof a[k] !== 'object' || a[k] === null) a[k] = {}; a = a[k]; }); a[ks[ks.length - 1]] = v; };
 
   // ---- dynamic sections -------------------------------------------------
   function coverageRow(i) {
@@ -286,11 +309,10 @@
     return d;
   }
   function addCoverage() { const row = coverageRow(coverageCount++); $('#coverage').appendChild(row); linkLabels(row); }
-  $('#addCoverage').addEventListener('click', () => { addCoverage(); markDirty(); });
+  $('#addCoverage').addEventListener('click', addCoverage);
 
   function renderCompanies() {
-    const host = $('#companies');
-    host.innerHTML = COMPANIES.map(([slug, name, current]) => `
+    $('#companies').innerHTML = COMPANIES.map(([slug, name, current]) => `
       <div class="row">
         <div class="row-head"><span class="row-title">${esc(name)}</span><span class="row-sub">Portfolio says: ${esc(current)}</span></div>
         <div class="field"><label>Your exact title<span class="hint">Leave blank if the portfolio is right</span></label><input type="text" data-k="companies.${slug}.title"></div>
@@ -306,68 +328,148 @@
       </div>`).join('');
   }
 
-  // ---- serialise / fill -------------------------------------------------
-  function collect() {
-    const out = { files: data.files || {}, removedFiles: data.removedFiles || [], status: data.status || 'in-progress', submittedAt: data.submittedAt };
+  // ---- show stored answers ----------------------------------------------
+  // `respectEdits` leaves alone any field this person is typing in or has
+  // unsent changes for, so someone else's sync never overwrites their work.
+  function render(src, respectEdits) {
+    const cov = src.coverage;
+    const len = Array.isArray(cov) ? cov.length : cov && typeof cov === 'object' ? Math.max(0, ...Object.keys(cov).map(Number).filter(Number.isFinite)) + 1 : 0;
+    while (coverageCount < Math.max(5, len)) addCoverage();
+
+    const busyGroups = new Set();
+    if (respectEdits) {
+      document.querySelectorAll('input[type=radio][data-k]').forEach((r) => {
+        if (r === document.activeElement || isPending(pathOf(r))) busyGroups.add(r.name);
+      });
+    }
     document.querySelectorAll('[data-k]').forEach((el) => {
-      const k = el.dataset.k;
-      if (el.type === 'radio') { if (el.checked) setPath(out, k, el.value); else if (getPath(out, k) === undefined) setPath(out, k, ''); }
-      else if (el.type === 'checkbox') setPath(out, k, el.checked);
-      else setPath(out, k, el.value);
-    });
-    if (out.coverage && !Array.isArray(out.coverage)) out.coverage = Object.keys(out.coverage).sort((a, b) => a - b).map((i) => out.coverage[i]);
-    return out;
-  }
-  function fill() {
-    const n = Math.max(5, Array.isArray(data.coverage) ? data.coverage.length : 0);
-    while (coverageCount < n) addCoverage();
-    document.querySelectorAll('[data-k]').forEach((el) => {
-      const v = getPath(data, el.dataset.k);
-      if (v === undefined || v === null) return;
-      if (el.type === 'radio') el.checked = el.value === v;
+      const path = pathOf(el);
+      if (respectEdits) {
+        if (el.type === 'radio' ? busyGroups.has(el.name) : (el === document.activeElement || isPending(path))) return;
+      }
+      const v = getPath(src, path);
+      if (el.type === 'radio') el.checked = v != null && el.value === v;
       else if (el.type === 'checkbox') el.checked = !!v;
-      else el.value = v;
+      else { const s = v == null ? '' : String(v); if (el.value !== s) el.value = s; }
+    });
+
+    document.querySelectorAll('#files .file[data-key]').forEach((card) => {
+      const key = card.dataset.key;
+      if (!key) return;
+      if ((src.removedFiles || []).includes(key)) { card.remove(); return; }
+      card.querySelectorAll('[data-fk]').forEach((el) => {
+        const path = ['files', key, el.dataset.fk];
+        if (respectEdits && (el === document.activeElement || isPending(path))) return;
+        const v = getPath(src, path);
+        const s = v == null ? '' : String(v);
+        if (el.value !== s) el.value = s;
+      });
     });
   }
 
   // ---- saving -----------------------------------------------------------
-  let timer;
   const msg = (t, bad) => { const m = $('#saveMsg'); m.textContent = t; m.style.color = bad ? 'var(--bad)' : ''; };
-  function markDirty() { dirty = true; msg('Unsaved changes…'); clearTimeout(timer); timer = setTimeout(save, 1200); }
-  async function save(snapshot = false) {
-    if (saving) { clearTimeout(timer); timer = setTimeout(save, 600); return; }
-    saving = true; dirty = false;
-    const wantSnap = snapshot || Date.now() - lastSnapshot > SNAPSHOT_EVERY_MS;
-    const body = JSON.stringify(collect());
-    try {
-      const r = await api('/api/data' + (wantSnap ? '?snapshot=1' : ''), { method: 'PUT', headers: { 'content-type': 'application/json' }, body });
-      const j = await r.json();
-      if (!r.ok) throw new Error(j.error || r.status);
-      // Keep the live `data` object: replacing it would drop photo captions
-      // typed while this request was in flight.
-      data._savedAt = j.savedAt;
-      if (wantSnap) lastSnapshot = Date.now();
-      msg('Saved ' + new Date(j.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + (data.status === 'submitted' ? ' · submitted' : ''));
-    } catch (e) {
-      dirty = true; msg('Could not save — retrying. Check your connection.', true);
-      clearTimeout(timer); timer = setTimeout(save, 4000);
-    } finally { saving = false; }
+  function queue(op) {
+    pending.set(opKey(op), op);
+    applyOp(data, op);
+    lsSave();
+    msg('Saving…');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, SAVE_DELAY_MS);
   }
-  document.addEventListener('input', (e) => { if (e.target.closest('[data-k]') || e.target.dataset.fk) markDirty(); });
-  document.addEventListener('change', (e) => { if (e.target.closest('[data-k]') || e.target.dataset.fk) markDirty(); });
-  window.addEventListener('beforeunload', (e) => { if (dirty || uploading > 0) { e.preventDefault(); e.returnValue = ''; } });
+  async function save(snapshot = false) {
+    if (saving) { clearTimeout(saveTimer); saveTimer = setTimeout(save, 500); return; }
+    if (!pending.size) return;
+    saving = true;
+    let retryScheduled = false;
+    const batch = [...pending];
+    const wantSnap = snapshot || Date.now() - lastSnapshot > SNAPSHOT_EVERY_MS;
+    try {
+      const r = await api('/api/data' + (wantSnap ? '?snapshot=1' : ''), {
+        method: 'PATCH', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ops: batch.map(([, op]) => op) }),
+      });
+      const j = await r.json();
+      if (r.status === 409) {   // others saving at the same moment: just try again shortly
+        retryScheduled = true;
+        clearTimeout(saveTimer); saveTimer = setTimeout(save, 300 + Math.random() * 900);
+        return;
+      }
+      if (!r.ok) throw new Error(j.error || r.status);
+      // Drop only what was sent; anything typed meanwhile stays queued.
+      for (const [k, op] of batch) if (pending.get(k) === op) pending.delete(k);
+      lsSave();
+      if (wantSnap) lastSnapshot = Date.now();
+      lastSavedAt = j.savedAt;
+      data = j.data || data;
+      for (const op of pending.values()) applyOp(data, op);
+      render(data, true);
+      status();
+    } catch {
+      msg('Not saved yet — your changes are kept on this device and will be sent automatically.', true);
+      retryScheduled = true;
+      clearTimeout(saveTimer); saveTimer = setTimeout(save, 5000);
+    } finally {
+      saving = false;
+      // Edits made during the request go out next, unless a retry is already set.
+      if (pending.size && !retryScheduled) { clearTimeout(saveTimer); saveTimer = setTimeout(save, SAVE_DELAY_MS); }
+    }
+  }
+  function status() {
+    if (pending.size) return;
+    const when = lastSavedAt || data._savedAt;
+    msg((when ? 'All changes saved · ' + hhmm(when) : 'Nothing saved yet — start anywhere.') + (data.status === 'submitted' ? ' · submitted' : ''));
+  }
+
+  function onEdit(e) {
+    const el = e.target;
+    if (el.dataset.k) {
+      if (el.type === 'radio' && !el.checked) return;
+      queue({ path: pathOf(el), value: el.type === 'checkbox' ? el.checked : el.value });
+    } else if (el.dataset.fk) {
+      const key = el.closest('.file').dataset.key;
+      if (key) queue({ path: ['files', key, el.dataset.fk], value: el.value });
+    }
+  }
+  document.addEventListener('input', onEdit);
+  document.addEventListener('change', onEdit);
+  window.addEventListener('beforeunload', (e) => { if (uploading > 0) { e.preventDefault(); e.returnValue = ''; } });
 
   $('#submitBtn').addEventListener('click', async () => {
     if (uploading > 0 && !confirm('Some files are still uploading. Submit anyway? Keep this page open until they finish.')) return;
-    data.status = 'submitted'; data.submittedAt = new Date().toISOString();
+    queue({ path: ['status'], value: 'submitted' });
+    queue({ path: ['submittedAt'], value: new Date().toISOString() });
+    clearTimeout(saveTimer);
     await save(true);
-    msg('Submitted — thank you. You can still come back and edit.');
+    if (!pending.size) msg('Submitted — thank you. You or anyone with this link can still come back and edit.');
   });
 
-  // ---- files ------------------------------------------------------------
-  let uploading = 0;
-  const fileMeta = (key) => (data.files = data.files || {}, data.files[key] = data.files[key] || {});
+  // ---- live sync --------------------------------------------------------
+  let syncing = false;
+  async function sync() {
+    if (syncing || document.hidden) return;
+    syncing = true;
+    try {
+      const [dr, fr] = await Promise.all([api('/api/data'), api('/api/files')]);
+      if (dr.ok) {
+        data = await dr.json();
+        for (const op of pending.values()) applyOp(data, op);
+      }
+      if (fr.ok) {
+        const { files } = await fr.json();
+        const shown = new Set([...document.querySelectorAll('#files .file')].map((c) => c.dataset.key).filter(Boolean));
+        const removed = new Set(data.removedFiles || []);
+        (files || []).filter((f) => !shown.has(f.key) && !removed.has(f.key)).forEach((f) => fileCard(f));
+      }
+      render(data, true);
+      status();
+    } catch {} finally { syncing = false; }
+  }
+  setInterval(sync, SYNC_MS);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) { sync(); if (pending.size) save(); } });
+  window.addEventListener('online', () => { if (pending.size) save(); });
 
+  // ---- files ------------------------------------------------------------
   function fileCard(f, localFile) {
     const card = document.createElement('div');
     card.className = 'file';
@@ -395,27 +497,19 @@
     if (isImg) {
       const img = new Image(); img.alt = '';
       if (localFile) img.src = URL.createObjectURL(localFile);
-      else if (f.size < 40 * 1024 * 1024) api('/api/file?key=' + encodeURIComponent(f.key)).then((r) => (r.ok ? r.blob() : null)).then((b) => { if (b) img.src = URL.createObjectURL(b); });
+      else if (f.size < 40 * 1024 * 1024) api('/api/file?key=' + encodeURIComponent(f.key)).then((r) => (r.ok ? r.blob() : null)).then((b) => { if (b) img.src = URL.createObjectURL(b); }).catch(() => {});
       img.onerror = () => { card.querySelector('.thumb').textContent = 'Preview not available'; };
       card.querySelector('.thumb').appendChild(img);
     }
-    wireMeta(card);
+    if (f.key) card.querySelectorAll('[data-fk]').forEach((el) => { const v = getPath(data, ['files', f.key, el.dataset.fk]); if (v != null) el.value = v; });
+    card.querySelector('.remove').addEventListener('click', () => {
+      if (!confirm('Remove this file from the list? It is kept on file in case it was a mistake.')) return;
+      queue({ path: ['removedFiles'], add: card.dataset.key });
+      card.remove();
+    });
     $('#files').appendChild(card);
     linkLabels(card);
     return card;
-  }
-  function wireMeta(card) {
-    card.querySelectorAll('[data-fk]').forEach((el) => {
-      const key = () => card.dataset.key;
-      if (key()) { const m = fileMeta(key()); if (m[el.dataset.fk] != null) el.value = m[el.dataset.fk]; }
-      el.addEventListener('input', () => { if (key()) fileMeta(key())[el.dataset.fk] = el.value; });
-      el.addEventListener('change', () => { if (key()) fileMeta(key())[el.dataset.fk] = el.value; });
-    });
-    card.querySelector('.remove').addEventListener('click', () => {
-      if (!confirm('Remove this file from the list? It is kept on file in case it was a mistake.')) return;
-      data.removedFiles = [...new Set([...(data.removedFiles || []), card.dataset.key])];
-      card.remove(); markDirty();
-    });
   }
 
   function xhrPart(url, blob, onProgress) {
@@ -464,22 +558,21 @@
       card.querySelector('.bar').classList.add('hidden');
       card.querySelector('.meta-fields').classList.remove('hidden');
       state.textContent = 'Uploaded';
-      wireMetaValues(card);
-      fileMeta(key).name = file.name;
-      markDirty();
+      queue({ path: ['files', key, 'name'], value: file.name });
+      // Anything typed into the fields before the upload finished.
+      card.querySelectorAll('[data-fk]').forEach((el) => { if (el.value) queue({ path: ['files', key, el.dataset.fk], value: el.value }); });
     } catch (e) {
       state.textContent = 'Failed';
       err.textContent = 'Upload failed. Check your connection and choose the file again.';
       err.classList.remove('hidden');
-      if (key && uploadId) api('/api/upload/abort', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ key, uploadId }) });
+      if (key && uploadId) api('/api/upload/abort', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ key, uploadId }) }).catch(() => {});
     } finally { uploading--; }
   }
-  function wireMetaValues(card) { card.querySelectorAll('[data-fk]').forEach((el) => { const m = fileMeta(card.dataset.key); if (el.value) m[el.dataset.fk] = el.value; }); }
 
   // queue: two files at a time, the rest wait their turn
-  const queue = []; let active = 0;
-  function enqueue(files) { for (const f of files) queue.push(f); pump(); }
-  function pump() { while (active < 2 && queue.length) { active++; upload(queue.shift()).finally(() => { active--; pump(); }); } }
+  const uploadQueue = []; let active = 0;
+  function enqueue(files) { for (const f of files) uploadQueue.push(f); pump(); }
+  function pump() { while (active < 2 && uploadQueue.length) { active++; upload(uploadQueue.shift()).finally(() => { active--; pump(); }); } }
 
   const drop = $('#drop');
   $('#pick').addEventListener('click', () => $('#fileInput').click());
@@ -495,10 +588,12 @@
       if (r.status === 401) { $('#gate').classList.remove('hidden'); return; }
       data = await r.json();
     } catch { data = {}; }
+    // Re-apply anything typed on this device that never reached the server.
+    for (const [k, op] of lsLoad()) { pending.set(k, op); applyOp(data, op); }
     renderCompanies();
     $('#app').classList.remove('hidden');
     $('#statusBar').classList.remove('hidden');
-    fill();
+    render(data, false);
     linkLabels();
     try {
       const fr = await api('/api/files');
@@ -506,7 +601,8 @@
       const removed = new Set(data.removedFiles || []);
       (files || []).filter((f) => !removed.has(f.key)).forEach((f) => fileCard(f));
     } catch {}
-    msg(data._savedAt ? 'Last saved ' + new Date(data._savedAt).toLocaleString() + (data.status === 'submitted' ? ' · submitted' : '') : 'Nothing saved yet — start anywhere.');
+    if (pending.size) { msg('Sending changes saved on this device…'); save(); }
+    else status();
   })();
 })();
 </script>
