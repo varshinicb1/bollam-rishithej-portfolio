@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Profile Details</title>
+<style>
+  :root {
+    --paper:#f4f2ec; --card:#ffffff; --ink:#0b0d11; --muted:#5b5e66; --rule:#d9d6cc;
+    --accent:#46610d; --accent-soft:#eef3e2; --warn:#8a4b00; --warn-soft:#fbf1e3; --bad:#9b1c1c;
+    --focus:#2f5d9e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0b0d11; --card:#14171d; --ink:#ecebe6; --muted:#a3a6ad; --rule:#2a2e36;
+      --accent:#c6ff35; --accent-soft:#1d2410; --warn:#ffb35c; --warn-soft:#2a1f10; --bad:#ff8a8a; --focus:#8fb6ff;
+    }
+  }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif; font-size:16px; line-height:1.5; }
+  .wrap { max-width:880px; margin:0 auto; padding:24px 16px 120px; }
+  .mono { font-family:ui-monospace,'Cascadia Mono',Consolas,monospace; letter-spacing:.08em; text-transform:uppercase; font-size:12px; color:var(--muted); }
+  h1 { font-family:Georgia,'Times New Roman',serif; font-size:clamp(28px,6vw,40px); line-height:1.1; margin:8px 0 10px; letter-spacing:-.01em; }
+  h2 { font-family:Georgia,'Times New Roman',serif; font-size:22px; margin:0 0 4px; }
+  h2 .n { font-family:ui-monospace,Consolas,monospace; font-size:13px; color:var(--accent); margin-right:8px; vertical-align:2px; }
+  p { margin:0 0 10px; }
+  .lede { color:var(--muted); max-width:62ch; }
+  section { background:var(--card); border:1px solid var(--rule); border-radius:6px; padding:20px; margin:18px 0; }
+  .why { color:var(--muted); font-size:14px; max-width:68ch; margin-bottom:14px; }
+  .note { border-left:3px solid var(--accent); background:var(--accent-soft); padding:10px 12px; font-size:14px; border-radius:0 4px 4px 0; margin:12px 0; }
+  .note.warn { border-color:var(--warn); background:var(--warn-soft); }
+  label { display:block; font-size:14px; font-weight:600; margin:0 0 4px; }
+  .hint { display:block; font-weight:400; color:var(--muted); font-size:13px; margin-top:2px; }
+  input[type=text], input[type=url], input[type=date], textarea, select {
+    width:100%; font:inherit; font-size:15px; color:var(--ink); background:var(--paper);
+    border:1px solid var(--rule); border-radius:4px; padding:9px 10px; }
+  textarea { min-height:84px; resize:vertical; }
+  input:focus, textarea:focus, select:focus, button:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+  .field { margin:0 0 14px; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); }
+  .choices { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:15px; }
+  .choices label { display:flex; align-items:center; gap:6px; font-weight:400; margin:0; }
+  .row { border:1px solid var(--rule); border-radius:5px; padding:14px; margin:0 0 12px; }
+  .row-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:10px; }
+  .row-title { font-weight:700; }
+  .row-sub { color:var(--muted); font-size:13px; }
+  button { font:inherit; font-size:15px; border-radius:4px; cursor:pointer; padding:9px 14px; border:1px solid var(--ink); background:transparent; color:var(--ink); }
+  button.primary { background:var(--ink); color:var(--paper); }
+  button.link { border:none; padding:4px 0; color:var(--accent); text-decoration:underline; }
+  button:disabled { opacity:.5; cursor:default; }
+  .drop { border:2px dashed var(--rule); border-radius:6px; padding:26px 16px; text-align:center; color:var(--muted); }
+  .drop.over { border-color:var(--accent); background:var(--accent-soft); color:var(--ink); }
+  .drop strong { color:var(--ink); }
+  .file { display:grid; grid-template-columns:96px 1fr; gap:14px; border:1px solid var(--rule); border-radius:5px; padding:12px; margin:12px 0; }
+  .thumb { width:96px; height:96px; border-radius:4px; background:var(--paper); border:1px solid var(--rule); object-fit:cover; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--muted); text-align:center; overflow:hidden; }
+  .thumb img { width:100%; height:100%; object-fit:cover; }
+  .fname { font-weight:600; word-break:break-all; }
+  .fmeta { color:var(--muted); font-size:13px; margin-bottom:8px; }
+  .bar { height:6px; background:var(--rule); border-radius:3px; overflow:hidden; margin:6px 0 10px; }
+  .bar > i { display:block; height:100%; width:0; background:var(--accent); transition:width .2s; }
+  .err { color:var(--bad); font-size:14px; }
+  .status { position:fixed; left:0; right:0; bottom:0; background:var(--card); border-top:1px solid var(--rule); z-index:5; }
+  .status .in { max-width:880px; margin:0 auto; padding:10px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .status .msg { font-size:14px; color:var(--muted); }
+  .gate { max-width:520px; margin:12vh auto; padding:0 16px; }
+  .hidden { display:none !important; }
+  @media (max-width:520px) { .file { grid-template-columns:72px 1fr; } .thumb { width:72px; height:72px; } section { padding:16px; } }
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate hidden">
+  <div class="mono">Private form</div>
+  <h1>This link is not valid.</h1>
+  <p class="lede">The address needs to include its access key. Please use the full link exactly as it was sent to you.</p>
+</div>
+
+<main id="app" class="wrap hidden">
+  <div class="mono">Private &middot; for Bollam Rishithej</div>
+  <h1>Profile details</h1>
+  <p class="lede">Everything here saves automatically as you type, and you can come back to this link any time to continue. Fill in what you can &mdash; a blank is better than a guess. Anything written here may become public, so leave out what you do not want published.</p>
+  <div class="note warn"><strong>Please do not enter</strong> DIN, CIN, LLPIN, PAN, Aadhaar, passport numbers, bank details or any password. None of them are needed.</div>
+
+  <!-- 01 -->
+  <section>
+    <h2><span class="n">01</span>Independent coverage</h2>
+    <p class="why">The most important section. Wikipedia only accepts an article backed by sources written by people with no connection to you: news articles, interviews, university pages, government listings, conference programmes, award pages. Your own website, your companies&rsquo; websites, LinkedIn, press releases and paid placements do not count.</p>
+    <div id="coverage"></div>
+    <button type="button" class="link" id="addCoverage">+ Add another link</button>
+    <div class="field" style="margin-top:16px">
+      <label>Will you email the University of Leicester alumni office offering a graduate story?
+        <span class="hint">A page on le.ac.uk is the easiest strong source available.</span></label>
+      <div class="choices">
+        <label><input type="radio" name="leicesterEmail" data-k="coverageExtra.leicesterEmail" value="yes"> Yes</label>
+        <label><input type="radio" name="leicesterEmail" data-k="coverageExtra.leicesterEmail" value="already"> Already done</label>
+        <label><input type="radio" name="leicesterEmail" data-k="coverageExtra.leicesterEmail" value="no"> No</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <h2><span class="n">02</span>Confirm before it goes public</h2>
+    <p class="why">These will appear on Wikidata and Wikipedia, which anyone can read and copy.</p>
+    <div class="field">
+      <label>Date of birth: 22 September 1999 &mdash; may this be published?</label>
+      <div class="choices">
+        <label><input type="radio" name="dob" data-k="confirm.dobPublish" value="yes"> Yes</label>
+        <label><input type="radio" name="dob" data-k="confirm.dobPublish" value="no"> No, keep it private</label>
+        <label><input type="radio" name="dob" data-k="confirm.dobPublish" value="wrong"> The date is wrong</label>
+      </div>
+      <input type="text" data-k="confirm.dobCorrection" placeholder="Correct date, if wrong" style="margin-top:8px">
+    </div>
+    <div class="grid">
+      <div class="field"><label>Name as you want it shown<span class="hint">Currently: Bollam Rishithej</span></label><input type="text" data-k="confirm.displayName"></div>
+      <div class="field"><label>Name in Telugu script<span class="hint">Optional</span></label><input type="text" data-k="confirm.teluguName" lang="te"></div>
+    </div>
+    <div class="field"><label>Other spellings people use<span class="hint">Currently: Rishithej Bollam, Bollam Rishi Thej, B. Rishithej, Rishi Bollam</span></label><input type="text" data-k="confirm.otherSpellings"></div>
+    <div class="grid">
+      <div class="field"><label>City of birth<span class="hint">Optional</span></label><input type="text" data-k="confirm.birthCity"></div>
+      <div class="field"><label>City you live in now<span class="hint">Currently: Hyderabad</span></label><input type="text" data-k="confirm.residence"></div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <h2><span class="n">03</span>Education</h2>
+    <div class="field"><label>Degree and exact course title<span class="hint">Currently: MSc Entrepreneurship and Innovation Management, University of Leicester</span></label><input type="text" data-k="education.course"></div>
+    <div class="grid">
+      <div class="field"><label>Year started at Leicester</label><input type="text" data-k="education.start" inputmode="numeric"></div>
+      <div class="field"><label>Year completed</label><input type="text" data-k="education.end" inputmode="numeric"></div>
+      <div class="field"><label>Graduation ceremony date</label><input type="text" data-k="education.ceremony" placeholder="e.g. 19 January 2024"></div>
+    </div>
+    <div class="field"><label>Dissertation title</label><input type="text" data-k="education.dissertation"></div>
+    <div class="field"><label>Undergraduate degree, institution and year</label><input type="text" data-k="education.undergrad"></div>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <h2><span class="n">04</span>Your companies</h2>
+    <p class="why">One card per company. &ldquo;Your exact title&rdquo; matters most: some company websites currently show a different title from the one on your portfolio. Dates can be month and year.</p>
+    <div id="companies"></div>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <h2><span class="n">05</span>Things that currently contradict each other</h2>
+    <div class="row">
+      <div class="row-title">ML Dynamic Solutions &mdash; your title and who founded it</div>
+      <p class="row-sub" style="margin-top:6px">mldynamic.com lists Rani Madhura Aknapuram as Founder, you as CEO, and Billa Sai Saketh Reddy as Managing Director &amp; CFO. Your portfolio, and Emergera&rsquo;s website, say you are Founder &amp; Managing Director.</p>
+      <div class="choices" style="margin:8px 0">
+        <label><input type="radio" name="mldTitle" data-k="contradictions.mlDynamicTitle" value="ceo-as-company-site"> The company website is right (CEO)</label>
+        <label><input type="radio" name="mldTitle" data-k="contradictions.mlDynamicTitle" value="founder-md-as-portfolio"> The portfolio is right (Founder &amp; MD)</label>
+        <label><input type="radio" name="mldTitle" data-k="contradictions.mlDynamicTitle" value="other"> Neither / explain</label>
+      </div>
+      <textarea data-k="contradictions.mlDynamicTitleNote" placeholder="Explain, if needed"></textarea>
+    </div>
+    <div class="row">
+      <div class="row-title">ML Dynamic Solutions &mdash; what the company does</div>
+      <p class="row-sub" style="margin-top:6px">mldynamic.com says AI-powered healthcare revenue cycle management. The portfolio says enterprise AI and technology solutions, and lists DenyFix.ai as the healthcare revenue-cycle company.</p>
+      <textarea data-k="contradictions.mlDynamicWhat" placeholder="Which is correct?"></textarea>
+    </div>
+    <div class="row">
+      <div class="row-title">FirstSecure.ai &mdash; your title</div>
+      <p class="row-sub" style="margin-top:6px">firstsecure.ai lists you as Co-Founder &amp; Chief Marketing Officer. The portfolio says Co-Founder &amp; Director.</p>
+      <textarea data-k="contradictions.firstSecureTitle" placeholder="Which is correct? Do you hold a board seat as well?"></textarea>
+    </div>
+    <div class="row">
+      <div class="row-title">Two company websites</div>
+      <p class="row-sub" style="margin-top:6px">rsfoodproducts.com currently shows an unrelated gambling site, and adityatrading.in belongs to an unrelated stock broker. Do RS Food Products and Aditya Trading Company have real websites?</p>
+      <textarea data-k="contradictions.websites"></textarea>
+    </div>
+    <div class="row">
+      <div class="row-title">Instagram handle</div>
+      <p class="row-sub" style="margin-top:6px">The site links to @rishithej_bollam. One people-search site lists @bollam_rishithej. Which is yours, or both?</p>
+      <input type="text" data-k="contradictions.instagram">
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section>
+    <h2><span class="n">06</span>Photos and documents</h2>
+    <p class="why">Upload any photos you want used, plus anything that backs up the details above (certificates, letters, articles). Any file type, no size limit &mdash; large videos and full-resolution originals are fine. Uploads continue while you fill in the rest of the form; keep this page open until each one shows &ldquo;Uploaded&rdquo;.</p>
+    <div class="note"><strong>About Wikipedia.</strong> Wikipedia can only use a photo released under a free licence (CC BY-SA 4.0), which lets anyone reuse it, including commercially, permanently. The copyright belongs to whoever took the photo, so for a studio portrait the photographer has to agree.</div>
+    <div id="drop" class="drop">
+      <p><strong>Drag files here</strong> or</p>
+      <button type="button" class="primary" id="pick">Choose files</button>
+      <input type="file" id="fileInput" multiple class="hidden">
+    </div>
+    <div id="files"></div>
+  </section>
+
+  <!-- 07 -->
+  <section>
+    <h2><span class="n">07</span>Other public profiles</h2>
+    <div class="grid">
+      <div class="field"><label>LinkedIn<span class="hint">Currently: linkedin.com/in/rishithej-bollam-5b7638362</span></label><input type="text" data-k="profiles.linkedin" placeholder="Leave blank if correct"></div>
+      <div class="field"><label>X / Twitter</label><input type="text" data-k="profiles.x"></div>
+      <div class="field"><label>YouTube</label><input type="text" data-k="profiles.youtube"></div>
+      <div class="field"><label>Crunchbase</label><input type="text" data-k="profiles.crunchbase"></div>
+      <div class="field"><label>Google Scholar / ORCID / ResearchGate</label><input type="text" data-k="profiles.scholar"></div>
+      <div class="field"><label>Anything else</label><input type="text" data-k="profiles.other"></div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section>
+    <h2><span class="n">08</span>Anything else</h2>
+    <div class="field"><label>Corrections, things to remove, or anything we should know</label><textarea data-k="other.notes" style="min-height:120px"></textarea></div>
+  </section>
+</main>
+
+<div id="statusBar" class="status hidden">
+  <div class="in">
+    <span class="msg" id="saveMsg">Loading&hellip;</span>
+    <button type="button" class="primary" id="submitBtn">I&rsquo;m done &mdash; submit</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const PART = 25 * 1024 * 1024;          // R2 multipart part size
+  const PART_CONCURRENCY = 4;
+  const SNAPSHOT_EVERY_MS = 10 * 60 * 1000;
+
+  const COMPANIES = [
+    ['ml-dynamic', 'ML Dynamic Solutions', 'Founder & Managing Director'],
+    ['ml-group', 'ML Group of Companies', 'Promoter & Director'],
+    ['ml-capital', 'ML Capital', 'Director'],
+    ['vidyuthlabs', 'VidyuthLabs', 'Co-Founder & Director'],
+    ['predictera', 'Predictera', 'Co-Founder & Director'],
+    ['firstsecure', 'FirstSecure.ai', 'Co-Founder & Director'],
+    ['denyfix', 'DenyFix.ai', 'Co-Founder & Director'],
+    ['cxoera', 'CXOera', 'Director'],
+    ['emergera', 'Emergera.ai (United States LLC)', 'Co-Founder & Chief Technology Officer'],
+    ['akshara', 'Akshara Groups Bullion', 'Director'],
+    ['jenani', 'Jenani Infra', 'Director'],
+    ['aditya', 'Aditya Trading Company', 'Director'],
+    ['rsfoods', 'RS Food Products', 'Director'],
+  ];
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const human = (n) => { if (!(n >= 0)) return ''; const u = ['B','KB','MB','GB','TB']; let i = 0; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i ? n.toFixed(1) : n) + ' ' + u[i]; };
+
+  // ---- access key -------------------------------------------------------
+  const params = new URLSearchParams(location.search);
+  const KEY = params.get('k') || '';
+  if (!KEY) { $('#gate').classList.remove('hidden'); return; }
+  const api = (path, opts = {}) => fetch(path, { ...opts, headers: { 'x-intake-key': KEY, ...(opts.headers || {}) } });
+
+  // ---- state ------------------------------------------------------------
+  let data = {};
+  let dirty = false, saving = false, lastSnapshot = 0, coverageCount = 0;
+
+  // Tie each .field label to its control so screen readers announce it.
+  let fieldIds = 0;
+  function linkLabels(root = document) {
+    root.querySelectorAll('.field').forEach((f) => {
+      const l = f.querySelector(':scope > label');
+      const c = f.querySelector(':scope > input, :scope > textarea, :scope > select');
+      if (l && c) { if (!c.id) c.id = 'f' + (++fieldIds); l.htmlFor = c.id; }
+    });
+  }
+
+  const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? undefined : a[k]), o);
+  const setPath = (o, p, v) => { const ks = p.split('.'); let a = o; ks.slice(0, -1).forEach((k) => { if (typeof a[k] !== 'object' || a[k] === null) a[k] = {}; a = a[k]; }); a[ks[ks.length - 1]] = v; };
+
+  // ---- dynamic sections -------------------------------------------------
+  function coverageRow(i) {
+    const d = document.createElement('div');
+    d.className = 'row';
+    d.innerHTML = `
+      <div class="row-head"><span class="row-title">Source ${i + 1}</span></div>
+      <div class="grid">
+        <div class="field"><label>Publication or organisation</label><input type="text" data-k="coverage.${i}.publication"></div>
+        <div class="field"><label>Date published</label><input type="text" data-k="coverage.${i}.date"></div>
+      </div>
+      <div class="field"><label>Link (URL)</label><input type="url" data-k="coverage.${i}.url" placeholder="https://"></div>
+      <div class="field"><label>What it says about you</label><input type="text" data-k="coverage.${i}.summary"></div>
+      <div class="choices"><label><input type="checkbox" data-k="coverage.${i}.paid"> This was paid for, sponsored, or a press release</label></div>`;
+    return d;
+  }
+  function addCoverage() { const row = coverageRow(coverageCount++); $('#coverage').appendChild(row); linkLabels(row); }
+  $('#addCoverage').addEventListener('click', () => { addCoverage(); markDirty(); });
+
+  function renderCompanies() {
+    const host = $('#companies');
+    host.innerHTML = COMPANIES.map(([slug, name, current]) => `
+      <div class="row">
+        <div class="row-head"><span class="row-title">${esc(name)}</span><span class="row-sub">Portfolio says: ${esc(current)}</span></div>
+        <div class="field"><label>Your exact title<span class="hint">Leave blank if the portfolio is right</span></label><input type="text" data-k="companies.${slug}.title"></div>
+        <div class="grid">
+          <div class="field"><label>Founded</label><input type="text" data-k="companies.${slug}.founded" placeholder="Month Year"></div>
+          <div class="field"><label>Your role since</label><input type="text" data-k="companies.${slug}.since" placeholder="Month Year"></div>
+          <div class="field"><label>Head office city</label><input type="text" data-k="companies.${slug}.city"></div>
+          <div class="field"><label>DPIIT recognised?</label>
+            <select data-k="companies.${slug}.dpiit"><option value="">&mdash;</option><option value="yes">Yes</option><option value="no">No</option><option value="unsure">Not sure</option><option value="na">Not applicable</option></select></div>
+        </div>
+        <div class="field"><label>Website</label><input type="text" data-k="companies.${slug}.website"></div>
+        <div class="field"><label>What it does, in one plain line</label><input type="text" data-k="companies.${slug}.what"></div>
+      </div>`).join('');
+  }
+
+  // ---- serialise / fill -------------------------------------------------
+  function collect() {
+    const out = { files: data.files || {}, removedFiles: data.removedFiles || [], status: data.status || 'in-progress', submittedAt: data.submittedAt };
+    document.querySelectorAll('[data-k]').forEach((el) => {
+      const k = el.dataset.k;
+      if (el.type === 'radio') { if (el.checked) setPath(out, k, el.value); else if (getPath(out, k) === undefined) setPath(out, k, ''); }
+      else if (el.type === 'checkbox') setPath(out, k, el.checked);
+      else setPath(out, k, el.value);
+    });
+    if (out.coverage && !Array.isArray(out.coverage)) out.coverage = Object.keys(out.coverage).sort((a, b) => a - b).map((i) => out.coverage[i]);
+    return out;
+  }
+  function fill() {
+    const n = Math.max(5, Array.isArray(data.coverage) ? data.coverage.length : 0);
+    while (coverageCount < n) addCoverage();
+    document.querySelectorAll('[data-k]').forEach((el) => {
+      const v = getPath(data, el.dataset.k);
+      if (v === undefined || v === null) return;
+      if (el.type === 'radio') el.checked = el.value === v;
+      else if (el.type === 'checkbox') el.checked = !!v;
+      else el.value = v;
+    });
+  }
+
+  // ---- saving -----------------------------------------------------------
+  let timer;
+  const msg = (t, bad) => { const m = $('#saveMsg'); m.textContent = t; m.style.color = bad ? 'var(--bad)' : ''; };
+  function markDirty() { dirty = true; msg('Unsaved changes…'); clearTimeout(timer); timer = setTimeout(save, 1200); }
+  async function save(snapshot = false) {
+    if (saving) { clearTimeout(timer); timer = setTimeout(save, 600); return; }
+    saving = true; dirty = false;
+    const wantSnap = snapshot || Date.now() - lastSnapshot > SNAPSHOT_EVERY_MS;
+    const body = JSON.stringify(collect());
+    try {
+      const r = await api('/api/data' + (wantSnap ? '?snapshot=1' : ''), { method: 'PUT', headers: { 'content-type': 'application/json' }, body });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || r.status);
+      // Keep the live `data` object: replacing it would drop photo captions
+      // typed while this request was in flight.
+      data._savedAt = j.savedAt;
+      if (wantSnap) lastSnapshot = Date.now();
+      msg('Saved ' + new Date(j.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + (data.status === 'submitted' ? ' · submitted' : ''));
+    } catch (e) {
+      dirty = true; msg('Could not save — retrying. Check your connection.', true);
+      clearTimeout(timer); timer = setTimeout(save, 4000);
+    } finally { saving = false; }
+  }
+  document.addEventListener('input', (e) => { if (e.target.closest('[data-k]') || e.target.dataset.fk) markDirty(); });
+  document.addEventListener('change', (e) => { if (e.target.closest('[data-k]') || e.target.dataset.fk) markDirty(); });
+  window.addEventListener('beforeunload', (e) => { if (dirty || uploading > 0) { e.preventDefault(); e.returnValue = ''; } });
+
+  $('#submitBtn').addEventListener('click', async () => {
+    if (uploading > 0 && !confirm('Some files are still uploading. Submit anyway? Keep this page open until they finish.')) return;
+    data.status = 'submitted'; data.submittedAt = new Date().toISOString();
+    await save(true);
+    msg('Submitted — thank you. You can still come back and edit.');
+  });
+
+  // ---- files ------------------------------------------------------------
+  let uploading = 0;
+  const fileMeta = (key) => (data.files = data.files || {}, data.files[key] = data.files[key] || {});
+
+  function fileCard(f, localFile) {
+    const card = document.createElement('div');
+    card.className = 'file';
+    card.dataset.key = f.key || '';
+    const isImg = /^image\//.test(f.type || (localFile && localFile.type) || '');
+    card.innerHTML = `
+      <div class="thumb">${isImg ? '' : esc((f.name.split('.').pop() || 'file').toUpperCase())}</div>
+      <div>
+        <div class="fname">${esc(f.name)}</div>
+        <div class="fmeta"><span class="fsize">${human(f.size)}</span> &middot; <span class="fstate">${f.key ? 'Uploaded' : 'Waiting…'}</span></div>
+        <div class="bar ${f.key ? 'hidden' : ''}"><i></i></div>
+        <div class="err hidden"></div>
+        <div class="meta-fields ${f.key ? '' : 'hidden'}">
+          <div class="field"><label>Caption or description</label><input type="text" data-fk="caption"></div>
+          <div class="grid">
+            <div class="field"><label>Who took it</label><input type="text" data-fk="photographer"></div>
+            <div class="field"><label>Use on the portfolio website?</label>
+              <select data-fk="useOnSite"><option value="">&mdash;</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+            <div class="field"><label>Free licence for Wikipedia (CC BY-SA 4.0)?</label>
+              <select data-fk="ccbysa"><option value="">&mdash;</option><option value="yes">Yes, the photographer agrees</option><option value="self">Yes, I took it myself</option><option value="no">No</option><option value="unsure">Not sure</option></select></div>
+          </div>
+          <button type="button" class="link remove">Remove from this list</button>
+        </div>
+      </div>`;
+    if (isImg) {
+      const img = new Image(); img.alt = '';
+      if (localFile) img.src = URL.createObjectURL(localFile);
+      else if (f.size < 40 * 1024 * 1024) api('/api/file?key=' + encodeURIComponent(f.key)).then((r) => (r.ok ? r.blob() : null)).then((b) => { if (b) img.src = URL.createObjectURL(b); });
+      img.onerror = () => { card.querySelector('.thumb').textContent = 'Preview not available'; };
+      card.querySelector('.thumb').appendChild(img);
+    }
+    wireMeta(card);
+    $('#files').appendChild(card);
+    linkLabels(card);
+    return card;
+  }
+  function wireMeta(card) {
+    card.querySelectorAll('[data-fk]').forEach((el) => {
+      const key = () => card.dataset.key;
+      if (key()) { const m = fileMeta(key()); if (m[el.dataset.fk] != null) el.value = m[el.dataset.fk]; }
+      el.addEventListener('input', () => { if (key()) fileMeta(key())[el.dataset.fk] = el.value; });
+      el.addEventListener('change', () => { if (key()) fileMeta(key())[el.dataset.fk] = el.value; });
+    });
+    card.querySelector('.remove').addEventListener('click', () => {
+      if (!confirm('Remove this file from the list? It is kept on file in case it was a mistake.')) return;
+      data.removedFiles = [...new Set([...(data.removedFiles || []), card.dataset.key])];
+      card.remove(); markDirty();
+    });
+  }
+
+  function xhrPart(url, blob, onProgress) {
+    return new Promise((resolve, reject) => {
+      const x = new XMLHttpRequest();
+      x.open('PUT', url);
+      x.setRequestHeader('x-intake-key', KEY);
+      x.upload.onprogress = (e) => onProgress(e.loaded);
+      x.onload = () => { try { const j = JSON.parse(x.responseText); x.status < 300 ? resolve(j) : reject(new Error(j.error || x.status)); } catch { reject(new Error('HTTP ' + x.status)); } };
+      x.onerror = () => reject(new Error('network'));
+      x.send(blob);
+    });
+  }
+
+  async function upload(file) {
+    const card = fileCard({ name: file.name, size: file.size, type: file.type }, file);
+    const bar = card.querySelector('.bar > i'), state = card.querySelector('.fstate'), err = card.querySelector('.err');
+    uploading++;
+    let key, uploadId;
+    try {
+      state.textContent = 'Starting…';
+      const s = await api('/api/upload/start', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: file.name, type: file.type, size: file.size }) });
+      ({ key, uploadId } = await s.json());
+      if (!s.ok || !key) throw new Error('could not start');
+      const partSize = Math.max(PART, Math.ceil(file.size / 9500));
+      const total = Math.max(1, Math.ceil(file.size / partSize));
+      const loaded = new Array(total).fill(0);
+      const parts = [];
+      const show = () => { const sum = loaded.reduce((a, b) => a + b, 0); const pct = file.size ? Math.min(100, (sum / file.size) * 100) : 100; bar.style.width = pct.toFixed(1) + '%'; state.textContent = 'Uploading ' + pct.toFixed(0) + '%'; };
+      let next = 0;
+      const worker = async () => {
+        while (next < total) {
+          const i = next++;
+          const blob = file.slice(i * partSize, Math.min(file.size, (i + 1) * partSize));
+          const url = `/api/upload/part?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}&part=${i + 1}`;
+          for (let attempt = 1; ; attempt++) {
+            try { parts[i] = await xhrPart(url, blob, (b) => { loaded[i] = b; show(); }); loaded[i] = blob.size; show(); break; }
+            catch (e) { loaded[i] = 0; if (attempt >= 5) throw e; await new Promise((r) => setTimeout(r, 1500 * attempt)); }
+          }
+        }
+      };
+      await Promise.all(Array.from({ length: Math.min(PART_CONCURRENCY, total) }, worker));
+      const c = await api('/api/upload/complete', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ key, uploadId, parts }) });
+      if (!c.ok) throw new Error((await c.json()).error || 'could not finish');
+      card.dataset.key = key;
+      card.querySelector('.bar').classList.add('hidden');
+      card.querySelector('.meta-fields').classList.remove('hidden');
+      state.textContent = 'Uploaded';
+      wireMetaValues(card);
+      fileMeta(key).name = file.name;
+      markDirty();
+    } catch (e) {
+      state.textContent = 'Failed';
+      err.textContent = 'Upload failed. Check your connection and choose the file again.';
+      err.classList.remove('hidden');
+      if (key && uploadId) api('/api/upload/abort', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ key, uploadId }) });
+    } finally { uploading--; }
+  }
+  function wireMetaValues(card) { card.querySelectorAll('[data-fk]').forEach((el) => { const m = fileMeta(card.dataset.key); if (el.value) m[el.dataset.fk] = el.value; }); }
+
+  // queue: two files at a time, the rest wait their turn
+  const queue = []; let active = 0;
+  function enqueue(files) { for (const f of files) queue.push(f); pump(); }
+  function pump() { while (active < 2 && queue.length) { active++; upload(queue.shift()).finally(() => { active--; pump(); }); } }
+
+  const drop = $('#drop');
+  $('#pick').addEventListener('click', () => $('#fileInput').click());
+  $('#fileInput').addEventListener('change', (e) => { enqueue(e.target.files); e.target.value = ''; });
+  ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', (e) => enqueue(e.dataTransfer.files));
+
+  // ---- boot -------------------------------------------------------------
+  (async () => {
+    try {
+      const r = await api('/api/data');
+      if (r.status === 401) { $('#gate').classList.remove('hidden'); return; }
+      data = await r.json();
+    } catch { data = {}; }
+    renderCompanies();
+    $('#app').classList.remove('hidden');
+    $('#statusBar').classList.remove('hidden');
+    fill();
+    linkLabels();
+    try {
+      const fr = await api('/api/files');
+      const { files } = await fr.json();
+      const removed = new Set(data.removedFiles || []);
+      (files || []).filter((f) => !removed.has(f.key)).forEach((f) => fileCard(f));
+    } catch {}
+    msg(data._savedAt ? 'Last saved ' + new Date(data._savedAt).toLocaleString() + (data.status === 'submitted' ? ' · submitted' : '') : 'Nothing saved yet — start anywhere.');
+  })();
+})();
+</script>
+</body>
+</html>

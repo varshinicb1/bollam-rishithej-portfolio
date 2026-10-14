@@ -1,0 +1,21 @@
+# Private intake form for Bollam Rishithej's details and photographs.
+# Deliberately a separate Worker: the portfolio stays a static site under its
+# strict CSP, and this form never appears on bollamrishithej.com.
+name = "rishithej-intake"
+main = "src/worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+
+# The form page is bundled into the Worker as a text module.
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true
+
+# Answers (data/*.json) and uploaded files (uploads/*) both live here.
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "rishithej-intake"
+
+# ACCESS_KEY is a secret, set with `wrangler secret put ACCESS_KEY`.
+# Never put it in this file.
