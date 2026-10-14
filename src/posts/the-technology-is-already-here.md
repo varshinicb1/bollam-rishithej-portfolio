@@ -1,7 +1,7 @@
 ---
 title: Some of India's best technology is already here. It's sitting in a university lab
 description: A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS Pilani Hyderabad, and why VidyuthLabs would rather commercialise research that already exists than reinvent it.
-date: 2026-10-14
+date: 2026-09-28
 tags: Deep tech, VidyuthLabs, Research
 image: /assets/vidyuthlabs-bits-pilani-mmne-lab.jpg
 linkedin: https://www.linkedin.com/feed/update/urn:li:share:7509439269426417666

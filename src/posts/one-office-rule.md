@@ -1,7 +1,7 @@
 ---
 title: The one-office rule, and what it does to a founder's board map
 description: Section 203 of the Companies Act lets a person hold exactly one whole-time key managerial office. That single constraint shapes how a multi-company founder is allowed to sign.
-date: 2026-10-13
+date: 2026-08-17
 tags: Governance, Companies Act
 ---
 

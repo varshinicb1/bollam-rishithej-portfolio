@@ -1,7 +1,7 @@
 ---
 title: We don't have competitors
 description: The competitive frame is the default in Indian startup culture and I think it is largely a mistake. In an unorganised market the constraint is never the other company. It is that the sector does not work yet.
-date: 2026-10-11
+date: 2026-02-09
 tags: Philosophy, Collaboration
 ---
 

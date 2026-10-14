@@ -1,7 +1,7 @@
 ---
 title: Start with one school
 description: How we enter an unorganised sector — find one partner willing to run it for real, build for their actual constraints, and only then call it a product. In education that partner is Deccan Springs Global School.
-date: 2026-10-12
+date: 2026-07-13
 tags: Education, Method
 image: /assets/deccan-springs-pilot.jpg
 imageAlt: Deccan Springs Global School, Hyderabad — pilot partner for the AI school management system

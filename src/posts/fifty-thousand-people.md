@@ -1,7 +1,7 @@
 ---
 title: Fifty thousand people
 description: The number I care about is not valuation or revenue. It is how many families have a salary because something we built exists. The target is fifty thousand in ten years.
-date: 2026-10-13
+date: 2025-12-08
 tags: Vision, Employment
 ---
 

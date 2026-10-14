@@ -1,7 +1,7 @@
 ---
 title: A startup ecosystem is not a funding problem
 description: Every part India needs already exists — the research, the capital, the operators, the advisors, and an endless supply of unsolved problems. What is missing is that none of them are connected to each other.
-date: 2026-10-14
+date: 2026-05-11
 tags: Ecosystem, India, Philosophy
 ---
 

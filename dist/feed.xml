@@ -8,20 +8,6 @@
     <lastBuildDate>Wed, 14 Oct 2026 09:00:00 GMT</lastBuildDate>
     <atom:link href="https://bollamrishithej.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>A startup ecosystem is not a funding problem</title>
-      <link>https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem</link>
-      <guid isPermaLink="true">https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem</guid>
-      <pubDate>Wed, 14 Oct 2026 09:00:00 GMT</pubDate>
-      <description>Every part India needs already exists — the research, the capital, the operators, the advisors, and an endless supply of unsolved problems. What is missing is that none of them are connected to each other.</description>
-    </item>
-    <item>
-      <title>Some of India's best technology is already here. It's sitting in a university lab</title>
-      <link>https://bollamrishithej.com/blog/the-technology-is-already-here</link>
-      <guid isPermaLink="true">https://bollamrishithej.com/blog/the-technology-is-already-here</guid>
-      <pubDate>Wed, 14 Oct 2026 09:00:00 GMT</pubDate>
-      <description>A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS Pilani Hyderabad, and why VidyuthLabs would rather commercialise research that already exists than reinvent it.</description>
-    </item>
-    <item>
       <title>Why I am going to Guangzhou</title>
       <link>https://bollamrishithej.com/blog/why-i-am-going-to-guangzhou</link>
       <guid isPermaLink="true">https://bollamrishithej.com/blog/why-i-am-going-to-guangzhou</guid>
@@ -29,32 +15,46 @@
       <description>From 16 October I will be at the Canton Fair. Not to buy anything in particular — to close the gap between what we can design in India and what we actually know how to have made.</description>
     </item>
     <item>
-      <title>Fifty thousand people</title>
-      <link>https://bollamrishithej.com/blog/fifty-thousand-people</link>
-      <guid isPermaLink="true">https://bollamrishithej.com/blog/fifty-thousand-people</guid>
-      <pubDate>Tue, 13 Oct 2026 09:00:00 GMT</pubDate>
-      <description>The number I care about is not valuation or revenue. It is how many families have a salary because something we built exists. The target is fifty thousand in ten years.</description>
+      <title>Some of India's best technology is already here. It's sitting in a university lab</title>
+      <link>https://bollamrishithej.com/blog/the-technology-is-already-here</link>
+      <guid isPermaLink="true">https://bollamrishithej.com/blog/the-technology-is-already-here</guid>
+      <pubDate>Mon, 28 Sep 2026 09:00:00 GMT</pubDate>
+      <description>A visit to the MEMS, Microfluidics and Nanoelectronics Lab at BITS Pilani Hyderabad, and why VidyuthLabs would rather commercialise research that already exists than reinvent it.</description>
     </item>
     <item>
       <title>The one-office rule, and what it does to a founder's board map</title>
       <link>https://bollamrishithej.com/blog/one-office-rule</link>
       <guid isPermaLink="true">https://bollamrishithej.com/blog/one-office-rule</guid>
-      <pubDate>Tue, 13 Oct 2026 09:00:00 GMT</pubDate>
+      <pubDate>Mon, 17 Aug 2026 09:00:00 GMT</pubDate>
       <description>Section 203 of the Companies Act lets a person hold exactly one whole-time key managerial office. That single constraint shapes how a multi-company founder is allowed to sign.</description>
     </item>
     <item>
       <title>Start with one school</title>
       <link>https://bollamrishithej.com/blog/start-with-one-school</link>
       <guid isPermaLink="true">https://bollamrishithej.com/blog/start-with-one-school</guid>
-      <pubDate>Mon, 12 Oct 2026 09:00:00 GMT</pubDate>
+      <pubDate>Mon, 13 Jul 2026 09:00:00 GMT</pubDate>
       <description>How we enter an unorganised sector — find one partner willing to run it for real, build for their actual constraints, and only then call it a product. In education that partner is Deccan Springs Global School.</description>
+    </item>
+    <item>
+      <title>A startup ecosystem is not a funding problem</title>
+      <link>https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem</link>
+      <guid isPermaLink="true">https://bollamrishithej.com/blog/a-startup-ecosystem-is-not-a-funding-problem</guid>
+      <pubDate>Mon, 11 May 2026 09:00:00 GMT</pubDate>
+      <description>Every part India needs already exists — the research, the capital, the operators, the advisors, and an endless supply of unsolved problems. What is missing is that none of them are connected to each other.</description>
     </item>
     <item>
       <title>We don't have competitors</title>
       <link>https://bollamrishithej.com/blog/we-do-not-have-competitors</link>
       <guid isPermaLink="true">https://bollamrishithej.com/blog/we-do-not-have-competitors</guid>
-      <pubDate>Sun, 11 Oct 2026 09:00:00 GMT</pubDate>
+      <pubDate>Mon, 09 Feb 2026 09:00:00 GMT</pubDate>
       <description>The competitive frame is the default in Indian startup culture and I think it is largely a mistake. In an unorganised market the constraint is never the other company. It is that the sector does not work yet.</description>
+    </item>
+    <item>
+      <title>Fifty thousand people</title>
+      <link>https://bollamrishithej.com/blog/fifty-thousand-people</link>
+      <guid isPermaLink="true">https://bollamrishithej.com/blog/fifty-thousand-people</guid>
+      <pubDate>Mon, 08 Dec 2025 09:00:00 GMT</pubDate>
+      <description>The number I care about is not valuation or revenue. It is how many families have a salary because something we built exists. The target is fifty thousand in ten years.</description>
     </item>
   </channel>
 </rss>
