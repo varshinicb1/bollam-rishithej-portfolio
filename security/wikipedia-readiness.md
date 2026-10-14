@@ -9,7 +9,8 @@ intake.bollamrishithej.com. Nothing here gets submitted until the checker says s
 |---|---|---|
 | Wikipedia draft | `Draft:Rishithej_Bollam`, revision 1380249670 (DOB removed, neutral ML Dynamic wording), **not submitted** | `security/wikipedia-draft.txt` (identical to the live revision) |
 | Wikidata | `Q141734133`: label, description, 4 aliases, P31 / P21 / P27 / P106 ×2 / P856 / P6634, **no references** | — |
-| COI disclosure | `User:Varshinicb` declares the connection | live |
+| COI disclosure | `User:Varshinicb` declares the connection; `Draft talk:Rishithej_Bollam` carries `{{Connected contributor}}` (14 Oct 2026) | live |
+| Site ↔ Wikidata | Homepage Person `sameAs` includes Q141734133; Q141734133 P856 points to the site | live |
 | Intake form | Live and empty, waiting for him | `intake/` |
 | Independent sources | **None found** (see `reference-links.md`) | — |
 
