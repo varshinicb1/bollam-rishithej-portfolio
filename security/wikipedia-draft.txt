@@ -1,82 +1,45 @@
-{{AFC submission|t||ts=20261014000000|u=YOUR_USERNAME|ns=118}}
-{{Connected contributor|User1=YOUR_USERNAME|U1-declared=yes}}
+{{AFC submission|t||ts=20261014000000|u=Varshinicb|ns=118}}
 {{Short description|Indian company director and technology entrepreneur}}
 {{Infobox person
-| name          = Rishithej Bollam
-| birth_date    = {{birth date and age|1999|9|22}}
-| birth_place   = India
-| other_names   = Bollam Rishithej
-| alma_mater    = [[University of Leicester]] (MSc)
-| occupation    = Company director, entrepreneur
-| website       = {{URL|https://bollamrishithej.com/}}
+| name        = Rishithej Bollam
+| birth_date  = {{birth date and age|1999|9|22}}
+| birth_place = India
+| other_names = Bollam Rishithej
+| alma_mater  = [[University of Leicester]] (MSc)
+| occupation  = Company director, entrepreneur
+| website     = {{URL|https://bollamrishithej.com/}}
 }}
 
-'''Rishithej Bollam''' (born 22 September 1999), also written '''Bollam
-Rishithej''', is an Indian company director and technology entrepreneur based
-in [[Hyderabad]], [[Telangana]].<ref name="SOURCE-1" /> He is the founder and
-managing director of ML Dynamic Solutions and holds directorships across
-companies working in artificial intelligence, computer vision, electrochemical
-sensing and industrial operations.<ref name="SOURCE-1" />
+'''Rishithej Bollam''' (born 22 September 1999), also written '''Bollam Rishithej''', is an Indian company director and technology entrepreneur based in [[Hyderabad]], [[Telangana]].<ref name="SOURCE-1" /> He is the founder and managing director of ML Dynamic Solutions, and holds directorships across companies working in artificial intelligence, computer vision, electrochemical sensing and industrial operations.<ref name="SOURCE-1" />
 
 == Education ==
 
-Bollam holds a Master of Science in Entrepreneurship and Innovation Management
-from the [[University of Leicester]] in the United Kingdom. His postgraduate
-work addressed a business model for converting plastic waste into
-fuel.<ref name="SOURCE-2" />
+Bollam holds a Master of Science in Entrepreneurship and Innovation Management from the [[University of Leicester]] in the United Kingdom. His postgraduate work addressed a business model for converting plastic waste into fuel.<ref name="SOURCE-2" />
 
 == Career ==
 
-Bollam is the founder and managing director of ML Dynamic Solutions, a company
-working on artificial intelligence applied to healthcare revenue cycle
-management.<ref name="SOURCE-1" /> Under the Companies Act, 2013, a person may
-hold only one whole-time key managerial personnel office; his other holdings
-are held in a board or promoter capacity.<ref name="SOURCE-1" />
+Bollam is the founder and managing director of ML Dynamic Solutions, a company working on artificial intelligence applied to healthcare revenue cycle management.<ref name="SOURCE-1" />
 
-He is a co-founder and director of VidyuthLabs, which develops portable
-electrochemical sensing instruments, and of Predictera, a computer vision
-company. Several of the companies are recognised as startups under the Indian
-government's Department for Promotion of Industry and Internal Trade
-framework.<ref name="SOURCE-3" />
+He is a co-founder and director of VidyuthLabs, which develops portable electrochemical sensing instruments, and of Predictera, a computer vision company. Several of the companies are recognised as startups under the Indian government's Department for Promotion of Industry and Internal Trade framework.<ref name="SOURCE-3" />
 
-He is also a co-founder and chief technology officer of Emergera.ai, a company
-registered in the United States.<ref name="SOURCE-4" />
+He is also a co-founder and chief technology officer of Emergera.ai, a company registered in the United States.<ref name="SOURCE-4" />
 
 == References ==
 {{reflist|refs=
-
-<!-- ====================================================================
-     EVERY ONE OF THESE MUST BE REPLACED BEFORE SUBMITTING.
-
-     A reference is only useful here if it is:
-       - published by someone with no connection to him,
-       - editorially written, not a paid placement or a press release,
-       - and ABOUT him, not merely a passing mention.
-
-     His own website, his companies' websites, LinkedIn and any outlet that
-     sold the placement all count for nothing, and a reviewer will recognise
-     them immediately.
-
-     Likely candidates, in order of how easy they are to obtain:
-       1. A University of Leicester alumni feature (ac.uk).
-       2. Editorial trade coverage: Inc42, YourStory, The Hindu
-          BusinessLine, Telangana Today, Moneycontrol.
-       3. A conference programme or university news item naming him.
-       4. Government recognition records.
-     ==================================================================== -->
-
-<ref name="SOURCE-1">{{cite news |title= |url= |work= |date= |access-date=}}</ref>
-<ref name="SOURCE-2">{{cite news |title= |url= |work= |date= |access-date=}}</ref>
-<ref name="SOURCE-3">{{cite news |title= |url= |work= |date= |access-date=}}</ref>
-<ref name="SOURCE-4">{{cite news |title= |url= |work= |date= |access-date=}}</ref>
-
+<ref name="SOURCE-1">PLACEHOLDER - replace with an independent, editorially published source about the subject.</ref>
+<ref name="SOURCE-2">PLACEHOLDER - replace with an independent source; a University of Leicester alumni feature would serve.</ref>
+<ref name="SOURCE-3">PLACEHOLDER - replace with an independent source for the DPIIT recognitions.</ref>
+<ref name="SOURCE-4">PLACEHOLDER - replace with an independent source for the Emergera.ai role.</ref>
 }}
 
 == External links ==
 * {{Official website|https://bollamrishithej.com/}}
 
+<!-- Categories stay commented out until the draft is accepted, so the draft
+     does not appear in live article categories.
 [[Category:1999 births]]
 [[Category:Living people]]
 [[Category:Indian company founders]]
 [[Category:Businesspeople from Hyderabad, India]]
 [[Category:Alumni of the University of Leicester]]
+-->
