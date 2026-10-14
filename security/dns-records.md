@@ -120,3 +120,14 @@ subdomain for anything.
 3. **CAA on both.** Five minutes, removes a whole class of mis-issuance.
 4. **DNSSEC on `bollamrishithej.com`.**
 5. **HSTS preload submission**, once you have read the commitment above.
+
+---
+
+## Subdomains in use
+
+| Name | Serves | Managed by |
+|---|---|---|
+| `intake.bollamrishithej.com` | Private intake form (Worker `rishithej-intake`, source in `intake/`) | Workers custom domain. Cloudflare created the DNS record and certificate automatically; do not edit or delete it in the DNS tab. Removing the `routes` entry in `intake/wrangler.toml` and redeploying removes it. |
+
+It serves valid HTTPS, so it is compatible with the HSTS preload commitment
+above. It is `noindex` and disallowed in its own `robots.txt`.

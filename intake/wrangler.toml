@@ -1,10 +1,16 @@
 # Private intake form for Bollam Rishithej's details and photographs.
 # Deliberately a separate Worker: the portfolio stays a static site under its
-# strict CSP, and this form never appears on bollamrishithej.com.
+# strict CSP and is never linked from it. Served on intake.bollamrishithej.com.
 name = "rishithej-intake"
 main = "src/worker.js"
 compatibility_date = "2026-08-01"
-workers_dev = true
+# Served only on its own subdomain; the workers.dev address is switched off so
+# there is a single URL. Cloudflare creates the DNS record and certificate.
+workers_dev = false
+preview_urls = false
+routes = [
+  { pattern = "intake.bollamrishithej.com", custom_domain = true },
+]
 
 # The form page is bundled into the Worker as a text module.
 [[rules]]
