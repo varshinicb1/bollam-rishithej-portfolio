@@ -7,25 +7,24 @@ intake.bollamrishithej.com. Nothing here gets submitted until the checker says s
 
 | Piece | State | Copy of record |
 |---|---|---|
-| Wikipedia draft | `Draft:Rishithej_Bollam`, saved 14 Oct 2026 10:26 UTC, **not submitted** | `security/wikipedia-draft.txt` (identical to the live revision) |
-| Wikidata | `Q141734133`: label, description, 4 aliases, P31 / P21 / P569 / P27, **no references** | — |
+| Wikipedia draft | `Draft:Rishithej_Bollam`, revision 1380249670 (DOB removed, neutral ML Dynamic wording), **not submitted** | `security/wikipedia-draft.txt` (identical to the live revision) |
+| Wikidata | `Q141734133`: label, description, 4 aliases, P31 / P21 / P569 / P27 (P569 removal pending), **no references** | — |
 | COI disclosure | `User:Varshinicb` declares the connection | live |
 | Intake form | Live and empty, waiting for him | `intake/` |
 | Independent sources | **None found** (see `reference-links.md`) | — |
 
-## Live problems, pending a decision
+## Live fixes (approved 14 Oct 2026)
 
-These are public now. Fixing them needs the Wikipedia/Wikidata account, so
-they are not done without a go-ahead.
+| Fix | State |
+|---|---|
+| Draft: remove unsourced date of birth (infobox, lead, 1999 births category) | **Done** — revision 1380249670, 14 Oct 2026 |
+| Draft: "founder and managing director of ML Dynamic Solutions" -> "holds a leadership role at ML Dynamic Solutions" | **Done** — same revision |
+| Wikidata: remove P569 date of birth | **Pending** — save refused: the connection's IP range is globally blocked by Wikimedia as an open proxy/webhost |
+| Wikidata: add P106 entrepreneur, P106 company director, P856 website, P6634 LinkedIn | **Pending** — same block |
 
-1. **Date of birth with no source.** The draft's infobox and lead, and
-   Wikidata P569, give 22 September 1999. It is not published anywhere he
-   controls, and he has not yet agreed to publication. Wikipedia's rule for
-   living people is to leave it out unless reliable sources publish it or
-   the subject has published it himself.
-2. **Disputed title.** The draft says "founder and managing director of ML
-   Dynamic Solutions". mldynamic.com lists him as CEO and someone else as
-   Founder.
+The block applies to the network, not the account. Retry from a normal home or
+office connection with any VPN or proxy turned off. Do not try to route around
+it; that is itself a block-evasion problem on Wikimedia.
 
 ## The submission gates
 

@@ -1,8 +1,8 @@
 {{AFC submission|t||ts=20261014000000|u=Varshinicb|ns=118}}
 {{Short description|Indian company director and technology entrepreneur}}
+<!-- Date of birth withheld until the subject confirms it and a reliable source publishes it. -->
 {{Infobox person
 | name        = Rishithej Bollam
-| birth_date  = {{birth date and age|1999|9|22}}
 | birth_place = India
 | other_names = Bollam Rishithej
 | alma_mater  = [[University of Leicester]] (MSc)
@@ -10,7 +10,7 @@
 | website     = {{URL|https://bollamrishithej.com/}}
 }}
 
-'''Rishithej Bollam''' (born 22 September 1999), also written '''Bollam Rishithej''', is an Indian company director and technology entrepreneur based in [[Hyderabad]], [[Telangana]].<ref name="SOURCE-1" /> He is the founder and managing director of ML Dynamic Solutions, and holds directorships across companies working in artificial intelligence, computer vision, electrochemical sensing and industrial operations.<ref name="SOURCE-1" />
+'''Rishithej Bollam''', also written '''Bollam Rishithej''', is an Indian company director and technology entrepreneur based in [[Hyderabad]], [[Telangana]].<ref name="SOURCE-1" /> He holds a leadership role at ML Dynamic Solutions and directorships across companies working in artificial intelligence, computer vision, electrochemical sensing and industrial operations.<ref name="SOURCE-1" />
 
 == Education ==
 
@@ -18,7 +18,7 @@ Bollam holds a Master of Science in Entrepreneurship and Innovation Management f
 
 == Career ==
 
-Bollam is the founder and managing director of ML Dynamic Solutions, a company working on artificial intelligence applied to healthcare revenue cycle management.<ref name="SOURCE-1" />
+Bollam holds a leadership role at ML Dynamic Solutions, a company working on artificial intelligence applied to healthcare revenue cycle management.<ref name="SOURCE-1" />
 
 He is a co-founder and director of VidyuthLabs, which develops portable electrochemical sensing instruments, and of Predictera, a computer vision company. Several of the companies are recognised as startups under the Indian government's Department for Promotion of Industry and Internal Trade framework.<ref name="SOURCE-3" />
 
@@ -37,7 +37,6 @@ He is also a co-founder and chief technology officer of Emergera.ai, a company r
 
 <!-- Categories stay commented out until the draft is accepted, so the draft
      does not appear in live article categories.
-[[Category:1999 births]]
 [[Category:Living people]]
 [[Category:Indian company founders]]
 [[Category:Businesspeople from Hyderabad, India]]
