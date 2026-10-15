@@ -114,8 +114,23 @@ const all = [...new Set(routes(OUT, ''))].sort((a, b) => {
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+// Google indexes an image under a page only if that page really shows it. Some
+// pages serve a WebP size variant (name-1147.webp) instead of the JPEG, so list
+// the file the page actually uses, and fail the build if it shows neither.
+function onPage(route, file) {
+  // Only files the page displays: an <img src> or a <source srcset>. A name
+  // that appears just in og:image or JSON-LD does not count.
+  const html = fs.readFileSync(fileFor(route), 'utf8');
+  const shown = [...html.matchAll(/(?:src|srcset)="([^"]+)"/g)].map((m) => m[1]).join(' ');
+  if (shown.includes('/' + file)) return file;
+  const base = file.replace(/\.(jpg|png)$/, '');
+  const variant = shown.match(new RegExp(base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '-\\d+\\.webp'));
+  if (variant) return variant[0];
+  throw new Error('sitemap: ' + route + ' lists ' + file + ' but the page does not show it');
+}
+
 const body = all.map((r) => {
-  const imgs = (IMAGES[r] || []).map(([f, title, caption]) =>
+  const imgs = (IMAGES[r] || []).map(([f0, title, caption]) => [onPage(r, f0), title, caption]).map(([f, title, caption]) =>
 `    <image:image>
       <image:loc>${SITE}/assets/${f}</image:loc>
       <image:title>${esc(title)}</image:title>
