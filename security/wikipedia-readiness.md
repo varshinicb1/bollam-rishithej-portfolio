@@ -8,9 +8,9 @@ intake.bollamrishithej.com. Nothing here gets submitted until the checker says s
 | Piece | State | Copy of record |
 |---|---|---|
 | Wikipedia draft | `Draft:Rishithej_Bollam`, revision 1380249670 (DOB removed, neutral ML Dynamic wording), **not submitted** | `security/wikipedia-draft.txt` (identical to the live revision) |
-| Wikidata | `Q141734133`: label, description, 4 aliases, P31 / P21 / P27 / P106 ×2 / P856 / P6634, **no references** | — |
+| Wikidata | `Q141734133`: label, description, 4 aliases, P31 / P21 / P27 / P106 ×2 / P856 / P6634 / P496 (ORCID), **no references** | — |
 | COI disclosure | `User:Varshinicb` declares the connection; `Draft talk:Rishithej_Bollam` carries `{{Connected contributor}}` (14 Oct 2026) | live |
-| Site ↔ Wikidata | Homepage Person `sameAs` includes Q141734133; Q141734133 P856 points to the site | live |
+| Site ↔ Wikidata ↔ ORCID | Homepage Person `sameAs` lists Q141734133 and ORCID 0009-0003-6796-949X; Q141734133 has P856 (site) and P496 (ORCID) | live |
 | Intake form | Live and empty, waiting for him | `intake/` |
 | Independent sources | **None found** (see `reference-links.md`) | — |
 
