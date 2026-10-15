@@ -31,3 +31,6 @@ desktop.ini
 
 # Responsive audit output (screenshots, reports, pre-redesign backups)
 .audit/
+
+# Unpublished papers and PR material: never pushed to the public repo
+private-drafts/
