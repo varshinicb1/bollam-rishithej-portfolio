@@ -4,8 +4,8 @@ description: First day at the 140th Canton Fair in Guangzhou. A humanoid robot m
 date: 2026-10-15
 tags: Manufacturing, Robotics, Hardware
 image: /assets/bollam-rishithej-canton-fair-2026-ti5-robot-humanoid.jpg
-imageAlt: Bollam Rishithej at the TiS Robot booth at the 140th Canton Fair in Guangzhou, beside a humanoid robot with its arm raised
-imageCaption: At the TiS Robot booth, Canton Fair Phase 1, Guangzhou, 15 October 2026.
+imageAlt: Bollam Rishithej at the Ti5 Robot booth at the 140th Canton Fair in Guangzhou, beside a humanoid robot with its arm raised
+imageCaption: At the Ti5 Robot booth, Canton Fair Phase 1, Guangzhou, 15 October 2026.
 ---
 
 Today was the first day of the **140th Canton Fair** in Guangzhou, and I spent it in Phase 1: electronics, machinery, hardware and industrial components. I am here with a group from the Telugu states, and I wrote down [why I came](/blog/why-i-am-going-to-guangzhou) before leaving.
