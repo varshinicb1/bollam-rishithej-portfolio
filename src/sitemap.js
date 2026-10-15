@@ -4,7 +4,33 @@ const fs = require('fs');
 const path = require('path');
 const SITE = 'https://bollamrishithej.com';
 const OUT = path.join(__dirname, '..', 'dist');
+const { execFileSync } = require('child_process');
+const { loadPosts } = require('./blog');
 const today = new Date().toISOString().slice(0, 10);
+
+// The videos went up on 13 October 2026; a rebuild must not re-date them.
+const VIDEOS_PUBLISHED = '2026-10-13';
+
+// Blog posts carry their own date. Everything else is dated by the last commit
+// that changed its HTML, or today if it has uncommitted changes, so a rebuild
+// no longer tells crawlers that every page changed.
+const posts = loadPosts().filter((p) => !p.draft);
+const POST_DATE = Object.fromEntries(posts.map((p) => ['/blog/' + p.slug, p.meta.updated || p.meta.date]));
+if (posts.length) POST_DATE['/blog'] = posts.map((p) => p.meta.updated || p.meta.date).sort().pop();
+function fileFor(route) {
+  const a = path.join(OUT, route === '/' ? 'index.html' : route.slice(1) + '.html');
+  return fs.existsSync(a) ? a : path.join(OUT, route.slice(1), 'index.html');
+}
+function lastmod(route) {
+  if (POST_DATE[route]) return POST_DATE[route];
+  try {
+    const f = fileFor(route);
+    const dirty = execFileSync('git', ['status', '--porcelain', '--', f], { encoding: 'utf8' }).trim();
+    if (dirty) return today;
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', f], { encoding: 'utf8' }).trim() || today;
+  } catch { return today; }
+}
+
 
 const IMAGES = {
   '/': [
@@ -58,6 +84,13 @@ const VIDEOS = {
 
 const PRIORITY = { '/': '1.0', '/about': '0.9', '/ventures': '0.9', '/brochure': '0.8', '/contact': '0.7', '/journey': '0.7', '/media': '0.7' };
 
+// Blog photographs, lead and inline, straight from the posts, so a new post's
+// images reach Google Images without anyone editing this file.
+for (const p of posts) {
+  if (p.images.length) IMAGES['/blog/' + p.slug] = p.images.map((im) =>
+    [im.src.replace(/^\/assets\//, ''), im.alt, im.caption || im.alt]);
+}
+
 // Discover routes from the filesystem rather than a hand-kept list.
 function routes(dir, base) {
   let out = [];
@@ -97,11 +130,11 @@ const body = all.map((r) => {
       <video:duration>${secs}</video:duration>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
-      <video:publication_date>${today}</video:publication_date>
+      <video:publication_date>${VIDEOS_PUBLISHED}</video:publication_date>
     </video:video>`).join('\n');
   return `  <url>
     <loc>${SITE}${r}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod(r)}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${PRIORITY[r] || '0.6'}</priority>${imgs ? '\n' + imgs : ''}${vids ? '\n' + vids : ''}
   </url>`;

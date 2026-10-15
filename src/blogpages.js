@@ -1,8 +1,8 @@
 // Builds /blog, /blog/<slug> and /feed.xml from src/posts/*.md.
 // Called by src/build.js; nothing here is hand-edited in dist/.
-const { loadPosts, esc, human } = require('./blog');
+const { loadPosts, esc, human, figure } = require('./blog');
 const { SITE, page, crumbJsonLd } = require('./shell');
-const { attrs } = require('./dims');
+const { size } = require('./dims');
 
 const PERSON = { '@id': SITE + '/#person' };
 
@@ -73,7 +73,16 @@ function build(write) {
           author: PERSON, publisher: PERSON,
           inLanguage: 'en', isPartOf: { '@id': SITE + '/blog#blog' },
           mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-          image: p.meta.image ? SITE + p.meta.image : undefined,
+          // Every photograph, lead first, as an ImageObject: Google Images reads
+          // the caption, and the first entry is the article's representative
+          // image. No creator or copyright fields: who took each photo varies
+          // and is not recorded, and a wrong credit is worse than none.
+          image: p.images.length ? p.images.map((im) => {
+            const d = size(im.src);
+            return { '@type': 'ImageObject', url: SITE + im.src, contentUrl: SITE + im.src,
+              caption: im.caption || im.alt, description: im.alt,
+              width: d ? d[0] : undefined, height: d ? d[1] : undefined };
+          }) : undefined,
           keywords: p.tags.join(', ') || undefined,
           wordCount: p.body.split(/\s+/).filter(Boolean).length },
       ] },
@@ -89,17 +98,7 @@ function build(write) {
         // A post may carry a lead photograph. Served as WebP with a JPEG
         // fallback and intrinsic dimensions, like every other image here, so
         // it cannot shift layout while it loads.
-        (p.meta.image
-          ? '    <figure class="post-figure">\n' +
-            '      <picture>\n' +
-            '        <source type="image/webp" srcset="' + p.meta.image.replace(/\.jpg$/, '-768.webp') + ' 768w, ' +
-              p.meta.image.replace(/\.jpg$/, '-1280.webp') + ' 1280w" sizes="(max-width: 900px) 100vw, 68ch">\n' +
-            '        <img src="' + p.meta.image + '" alt="' + esc(p.meta.imageAlt || p.meta.title) + '"' +
-              attrs(p.meta.image.replace(/^\//, '')) + ' loading="lazy" decoding="async">\n' +
-            '      </picture>\n' +
-            (p.meta.imageCaption ? '      <figcaption>' + esc(p.meta.imageCaption) + '</figcaption>\n' : '') +
-            '    </figure>\n'
-          : '') +
+        (p.meta.image ? figure(p.meta.image, p.meta.imageAlt || p.meta.title, p.meta.imageCaption) + '\n' : '') +
         '    <article class="post-body">\n' + p.html + '\n    </article>\n' +
         // `linkedin: <share-id or full url>` embeds the original post as the
         // primary source.

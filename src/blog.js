@@ -17,10 +17,16 @@
 //   line paragraphs, - bullets, > blockquote, **bold**, *italic*, `code` and
 //   [text](url). No raw HTML — everything is escaped first, so a post can never
 //   break the page or inject markup.
+//
+//   A photograph is a block of its own:   ![alt text](/assets/name.jpg "Caption")
+//   The source must be a .jpg in /assets/. WebP siblings named <name>-<width>.webp
+//   are picked up automatically at their real widths.
 const fs = require('fs');
 const path = require('path');
+const { size, attrs } = require('./dims');
 
 const POSTS_DIR = path.join(__dirname, 'posts');
+const IMAGE_BLOCK = /^!\[([^\]]*)\]\((\/assets\/[a-z0-9-]+\.jpg)(?:\s+"([^"]*)")?\)$/;
 
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -58,6 +64,32 @@ function inline(s) {
   return t;
 }
 
+// --- Figures --------------------------------------------------------------
+// One writer for every post photograph, lead or inline: WebP sources listed at
+// their measured widths (never a width that does not exist), JPEG fallback,
+// intrinsic dimensions so nothing shifts while it loads.
+function figure(src, alt, caption, indent) {
+  const pad = indent || '    ';
+  const base = src.replace(/\.jpg$/, '');
+  const webp = [480, 768, 960, 1280, 1600]
+    .map((w) => base + '-' + w + '.webp')
+    .filter((f) => size(f.replace(/^\/assets\//, '')))
+    .map((f) => f + ' ' + size(f.replace(/^\/assets\//, ''))[0] + 'w');
+  return pad + '<figure class="post-figure">\n' +
+    pad + '  <picture>\n' +
+    (webp.length ? pad + '    <source type="image/webp" srcset="' + webp.join(', ') + '" sizes="(max-width: 900px) 100vw, 68ch">\n' : '') +
+    pad + '    <img src="' + src + '" alt="' + esc(alt) + '"' + attrs(src.replace(/^\//, '')) + ' loading="lazy" decoding="async">\n' +
+    pad + '  </picture>\n' +
+    (caption ? pad + '  <figcaption>' + esc(caption) + '</figcaption>\n' : '') +
+    pad + '</figure>';
+}
+
+// Every photograph in a post body, in order, for structured data and the sitemap.
+function bodyImages(src) {
+  return src.replace(/\r\n/g, '\n').split(/\n{2,}/).map((b) => b.trim().match(IMAGE_BLOCK))
+    .filter(Boolean).map((m) => ({ src: m[2], alt: m[1], caption: m[3] || '' }));
+}
+
 // --- Block Markdown -------------------------------------------------------
 function renderBody(src) {
   const out = [];
@@ -65,6 +97,13 @@ function renderBody(src) {
   for (const raw of blocks) {
     const block = raw.trim();
     if (!block) continue;
+
+    const img = block.match(IMAGE_BLOCK);
+    if (img) {
+      if (!size(img[2].replace(/^\/assets\//, ''))) throw new Error('image not found in dist: ' + img[2]);
+      out.push(figure(img[2], img[1], img[3], '        '));
+      continue;
+    }
 
     if (/^###\s+/.test(block)) { out.push('        <h3>' + inline(block.replace(/^###\s+/, '')) + '</h3>'); continue; }
     if (/^##\s+/.test(block))  { out.push('        <h2>' + inline(block.replace(/^##\s+/, '')) + '</h2>'); continue; }
@@ -120,11 +159,16 @@ function loadPosts() {
         draft: String(meta.draft).toLowerCase() === 'true',
         tags: meta.tags ? meta.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
         html: renderBody(body),
-        minutes: readingTime(body),
+        minutes: readingTime(body.replace(/^!\[.*$/gm, '')),
+        // Lead photograph first, then the inline ones.
+        images: [
+          ...(meta.image ? [{ src: meta.image, alt: meta.imageAlt || meta.title, caption: meta.imageCaption || '' }] : []),
+          ...bodyImages(body),
+        ],
       };
     })
     // newest first; stable by slug so two posts sharing a date keep an order
     .sort((a, b) => b.meta.date.localeCompare(a.meta.date) || a.slug.localeCompare(b.slug));
 }
 
-module.exports = { loadPosts, esc, human, renderBody, readingTime };
+module.exports = { loadPosts, esc, human, renderBody, readingTime, figure };

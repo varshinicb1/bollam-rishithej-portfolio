@@ -1,11 +1,11 @@
 ---
 title: Why I am going to Guangzhou
-description: From 16 October I will be at the Canton Fair. Not to buy anything in particular — to close the gap between what we can design in India and what we actually know how to have made.
+description: From 15 October I will be at the Canton Fair. Not to buy anything in particular — to close the gap between what we can design in India and what we actually know how to have made.
 date: 2026-10-14
 tags: Hardware, Manufacturing, India
 ---
 
-From 16 October I will be at the **Canton Fair** in Guangzhou, in the first phase — electronics, machinery, hardware, lighting, industrial components. The 140th session.
+From 15 October I will be at the **Canton Fair** in Guangzhou, in the first phase — electronics, machinery, hardware, lighting, industrial components. The 140th session.
 
 I want to write down why before I go, because the reason is not the obvious one and I would rather be honest about it now than come back with a tidy story.
 

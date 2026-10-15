@@ -5,14 +5,21 @@
     <link>https://bollamrishithej.com/blog</link>
     <description>Notes on deep technology, company building and corporate governance.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 14 Oct 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 09:00:00 GMT</lastBuildDate>
     <atom:link href="https://bollamrishithej.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Canton Fair, day one: the robots are already components</title>
+      <link>https://bollamrishithej.com/blog/canton-fair-day-one</link>
+      <guid isPermaLink="true">https://bollamrishithej.com/blog/canton-fair-day-one</guid>
+      <pubDate>Thu, 15 Oct 2026 09:00:00 GMT</pubDate>
+      <description>First day at the 140th Canton Fair in Guangzhou. A humanoid robot maker selling its joints as parts, a robot small enough to hold, and a coffee that printed my face.</description>
+    </item>
     <item>
       <title>Why I am going to Guangzhou</title>
       <link>https://bollamrishithej.com/blog/why-i-am-going-to-guangzhou</link>
       <guid isPermaLink="true">https://bollamrishithej.com/blog/why-i-am-going-to-guangzhou</guid>
       <pubDate>Wed, 14 Oct 2026 09:00:00 GMT</pubDate>
-      <description>From 16 October I will be at the Canton Fair. Not to buy anything in particular — to close the gap between what we can design in India and what we actually know how to have made.</description>
+      <description>From 15 October I will be at the Canton Fair. Not to buy anything in particular — to close the gap between what we can design in India and what we actually know how to have made.</description>
     </item>
     <item>
       <title>Some of India's best technology is already here. It's sitting in a university lab</title>
