@@ -129,6 +129,32 @@ const gate = (name, status, detail = [], actions = []) => gates.push({ name, sta
     ['Check each against that company\'s own site, then update src/register.js and the CLAUDE.md table together.']);
 }
 
+// 5b. Charity, awards and talks: optional article sections, each needing a source.
+{
+  const rows = (v) => (Array.isArray(v) ? v : v && typeof v === 'object' ? Object.values(v) : []).filter((r) => r && Object.values(r).some(has));
+  const charity = rows(a.charity);
+  if (charity.length) {
+    const ok = charity.filter((c) => c.public === 'yes');
+    const held = charity.filter((c) => c.public !== 'yes');
+    gate('Charity and community work', ok.length ? 'INFO' : 'WAITING',
+      [...ok.map((c) => `may be published: ${c.name || '?'} (${c.role || 'role?'}, since ${c.since || '?'}) — coverage: ${c.coverage || 'none'}`),
+       ...held.map((c) => `NOT to be published (${c.public || 'not answered'}): ${c.name || '?'}`)],
+      ok.length ? [
+        'Add a short "Philanthropy" paragraph to the draft only for entries that may be published AND have a source; cite the registration page for facts and news coverage for significance.',
+        'Do not call him a "philanthropist" unless an independent source does.',
+        ...ok.filter((c) => c.coverage && !connected(c.coverage)).map((c) => `Check as a possible independent source: ${c.coverage}`),
+      ] : ['Nothing cleared for publication yet.']);
+  }
+  const awards = rows(a.awards);
+  if (awards.length) gate('Awards and recognition', 'INFO',
+    awards.map((w) => `${w.name || '?'} — ${w.by || '?'}, ${w.year || '?'}${w.paid ? ' (PAID: cannot be used)' : ''}${w.url ? ' — ' + w.url : ' — no link'}`),
+    ['Use only unpaid awards from independent bodies, each cited to the awarding body’s own page or news coverage.']);
+  const talks = rows(a.talks);
+  if (talks.length) gate('Talks, panels and interviews', 'INFO',
+    talks.map((t) => `${t.event || '?'} (${t.type || '?'}), ${t.organiser || '?'}, ${t.date || '?'}${t.url ? ' — ' + t.url : ' — no link'}`),
+    ['Event pages verify facts but rarely show notability; an interview article written by a journalist can count as coverage.']);
+}
+
 // 6. Photographs for Wikimedia Commons.
 {
   const removed = new Set(a.removedFiles || []);

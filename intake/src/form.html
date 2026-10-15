@@ -208,7 +208,31 @@
 
   <!-- 08 -->
   <section>
-    <h2><span class="n">08</span>Anything else</h2>
+    <h2><span class="n">08</span>Charity and community work</h2>
+    <p class="why">Trusts, foundations, causes you support, volunteering, or social programmes run through your companies. Wikipedia can include this only where a source describes it, so links to the organisation&rsquo;s registration page and to any news coverage of it matter most. Some people prefer to keep their giving private: tell us for each one whether it may be mentioned at all.</p>
+    <div id="charity"></div>
+    <button type="button" class="link" data-add="charity">+ Add another</button>
+  </section>
+
+  <!-- 09 -->
+  <section>
+    <h2><span class="n">09</span>Awards and recognition</h2>
+    <p class="why">Awards from independent juries, fellowships, selections into programmes (for example T-Hub, NASSCOM, university or government schemes). Tick the box if it was paid to enter or paid for: those cannot be used.</p>
+    <div id="awards"></div>
+    <button type="button" class="link" data-add="awards">+ Add another</button>
+  </section>
+
+  <!-- 10 -->
+  <section>
+    <h2><span class="n">10</span>Talks, panels and interviews</h2>
+    <p class="why">Conference talks, panels, judging, guest lectures, podcasts, TV or radio. An event page or programme that names you is a useful independent mention.</p>
+    <div id="talks"></div>
+    <button type="button" class="link" data-add="talks">+ Add another</button>
+  </section>
+
+  <!-- 11 -->
+  <section>
+    <h2><span class="n">11</span>Anything else</h2>
     <div class="field"><label>Corrections, things to remove, or anything we should know</label><textarea data-k="other.notes" style="min-height:120px"></textarea></div>
   </section>
 </main>
@@ -311,6 +335,59 @@
   function addCoverage() { const row = coverageRow(coverageCount++); $('#coverage').appendChild(row); linkLabels(row); }
   $('#addCoverage').addEventListener('click', addCoverage);
 
+  // Repeatable groups (charity, awards, talks): each row's fields are saved
+  // under <group>.<index>.<field>, like coverage, so saving, live sync and
+  // offline recovery work without anything group-specific.
+  const sel = (k, opts) => `<select data-k="${k}"><option value="">&mdash;</option>${opts.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select>`;
+  const REPEAT = {
+    charity: { min: 2, title: 'Organisation or cause', html: (k) => `
+      <div class="grid">
+        <div class="field"><label>Name of the organisation or cause</label><input type="text" data-k="${k}.name"></div>
+        <div class="field"><label>Type</label>${sel(k + '.type', [['trust', 'Registered trust'], ['society', 'Registered society'], ['section8', 'Section 8 company'], ['csr', 'CSR programme of a company'], ['informal', 'Informal / personal giving'], ['other', 'Other']])}</div>
+      </div>
+      <div class="grid">
+        <div class="field"><label>Your role<span class="hint">e.g. founder, trustee, donor, volunteer</span></label><input type="text" data-k="${k}.role"></div>
+        <div class="field"><label>Since</label><input type="text" data-k="${k}.since" placeholder="Month Year"></div>
+        <div class="field"><label>City or area served</label><input type="text" data-k="${k}.area"></div>
+      </div>
+      <div class="field"><label>What it does, in one plain line</label><input type="text" data-k="${k}.what"></div>
+      <div class="field"><label>What you personally do for it</label><textarea data-k="${k}.contribution"></textarea></div>
+      <div class="grid">
+        <div class="field"><label>Website or registration page</label><input type="url" data-k="${k}.website" placeholder="https://"></div>
+        <div class="field"><label>News coverage of it, if any<span class="hint">Most useful for Wikipedia</span></label><input type="url" data-k="${k}.coverage" placeholder="https://"></div>
+      </div>
+      <div class="field"><label>May this be mentioned publicly?</label>${sel(k + '.public', [['yes', 'Yes'], ['ask', 'Ask me first'], ['no', 'No, keep it private']])}</div>` },
+    awards: { min: 2, title: 'Award or recognition', html: (k) => `
+      <div class="grid">
+        <div class="field"><label>Name of the award or programme</label><input type="text" data-k="${k}.name"></div>
+        <div class="field"><label>Given by</label><input type="text" data-k="${k}.by"></div>
+        <div class="field"><label>Year</label><input type="text" data-k="${k}.year" inputmode="numeric"></div>
+      </div>
+      <div class="field"><label>Link that confirms it</label><input type="url" data-k="${k}.url" placeholder="https://"></div>
+      <div class="choices"><label><input type="checkbox" data-k="${k}.paid"> It was paid to enter, or paid for</label></div>` },
+    talks: { min: 2, title: 'Talk, panel or interview', html: (k) => `
+      <div class="grid">
+        <div class="field"><label>Event or programme</label><input type="text" data-k="${k}.event"></div>
+        <div class="field"><label>Organiser</label><input type="text" data-k="${k}.organiser"></div>
+        <div class="field"><label>Date</label><input type="text" data-k="${k}.date" placeholder="Month Year"></div>
+      </div>
+      <div class="grid">
+        <div class="field"><label>Type</label>${sel(k + '.type', [['talk', 'Talk or keynote'], ['panel', 'Panel'], ['judge', 'Judge or mentor'], ['lecture', 'Guest lecture'], ['podcast', 'Podcast'], ['tv', 'TV or radio'], ['other', 'Other']])}</div>
+        <div class="field"><label>Link that names you</label><input type="url" data-k="${k}.url" placeholder="https://"></div>
+      </div>` },
+  };
+  const repeatCount = { charity: 0, awards: 0, talks: 0 };
+  function addRepeat(group) {
+    const i = repeatCount[group]++;
+    const d = document.createElement('div');
+    d.className = 'row';
+    d.innerHTML = `<div class="row-head"><span class="row-title">${REPEAT[group].title} ${i + 1}</span></div>` + REPEAT[group].html(`${group}.${i}`);
+    $('#' + group).appendChild(d);
+    linkLabels(d);
+  }
+  document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => addRepeat(b.dataset.add)));
+  const storedLength = (v) => Array.isArray(v) ? v.length : v && typeof v === 'object' ? Math.max(0, ...Object.keys(v).map(Number).filter(Number.isFinite)) + 1 : 0;
+
   function renderCompanies() {
     $('#companies').innerHTML = COMPANIES.map(([slug, name, current]) => `
       <div class="row">
@@ -335,6 +412,9 @@
     const cov = src.coverage;
     const len = Array.isArray(cov) ? cov.length : cov && typeof cov === 'object' ? Math.max(0, ...Object.keys(cov).map(Number).filter(Number.isFinite)) + 1 : 0;
     while (coverageCount < Math.max(5, len)) addCoverage();
+    for (const g of Object.keys(REPEAT)) {
+      while (repeatCount[g] < Math.max(REPEAT[g].min, storedLength(src[g]))) addRepeat(g);
+    }
 
     const busyGroups = new Set();
     if (respectEdits) {
