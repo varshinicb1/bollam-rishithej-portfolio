@@ -66,16 +66,15 @@ const gate = (name, status, detail = [], actions = []) => gates.push({ name, sta
 // 2. Date of birth: only publishable if he agrees AND a reliable source or his own publication carries it.
 {
   const v = g('confirm.dobPublish');
-  if (!v) gate('Date of birth (currently on the draft AND on Wikidata P569)', 'WAITING', ['no answer yet'],
-    ['Until he answers, the DOB is unsourced personal data on two public pages.']);
+  if (!v) gate('Date of birth (removed from the draft and Wikidata on 14 Oct 2026)', 'WAITING', ['no answer yet'],
+    ['Leave it off both until he agrees AND a source publishes it.']);
   else if (v === 'no') gate('Date of birth', 'BLOCKED', ['he does not want it published'],
-    ['Remove birth_date and "(born 22 September 1999)" from the draft; keep [[Category:Living people]], drop 1999 births.',
-     'Remove P569 from Wikidata Q141734133.']);
+    ['Already removed from the draft and Wikidata. Ask a Wikimedia administrator to hide the old revisions that show it (revision deletion, privacy of a living person).']);
   else if (v === 'wrong') gate('Date of birth', 'BLOCKED', [`correction given: ${g('confirm.dobCorrection') || '(none typed)'}`],
-    ['Correct or remove P569 on Wikidata and the draft infobox and lead.']);
+    ['It is already off both pages; add the corrected date back only once a source carries it.']);
   else gate('Date of birth', 'INFO', ['he agrees to publication'],
-    ['Wikipedia still needs a source: cite one that prints it, or publish it on bollamrishithej.com/about first and cite that.',
-     'Add a reference to Wikidata P569 for the same reason.']);
+    ['Re-add only with a source: one that prints it, or bollamrishithej.com/about once he publishes it there.',
+     'Then restore birth_date in the draft infobox and P569 on Wikidata, each with that reference.']);
 }
 
 // 3. Titles, where company sites contradict the portfolio.
